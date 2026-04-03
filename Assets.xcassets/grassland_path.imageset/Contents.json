@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "lucid-origin_top-down_fantasy_game_map_background_winding_dirt_pathway_running_vertically_thr-0.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

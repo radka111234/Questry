@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "Default_fantasy_game_reward_icon_golden_avatar_frame_ornate_gl_0_f52d93d7-416c-4df3-aeff-ce75635daa21_0.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

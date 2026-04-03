@@ -1,0 +1,29 @@
+# Xcode
+build/
+DerivedData/
+*.xcuserdata/
+xcuserdata/
+*.xcuserdatad/
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Swift Package Manager
+.swiftpm/
+.build/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Claude Code memory (personal, machine-specific)
+.claude/
+
+# Scratch files
+File.swift
+File.txt

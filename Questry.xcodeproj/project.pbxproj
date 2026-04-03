@@ -6,6 +6,148 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8B1B2C512F580AD8001864CD /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B2C502F580AD8001864CD /* NotificationsViewController.swift */; };
+		8B1B2C532F580B12001864CD /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B2C522F580B12001864CD /* SubscriptionViewController.swift */; };
+		8B1B2C552F580B47001864CD /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B2C542F580B47001864CD /* PrivacyViewController.swift */; };
+		8B1B2C5D2F5859AE001864CD /* GradientBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B2C5C2F5859AE001864CD /* GradientBackgroundViewController.swift */; };
+		8B1B2C5F2F586F2A001864CD /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B2C5E2F586F2A001864CD /* TermsViewController.swift */; };
+		8B1B2C612F586F55001864CD /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B2C602F586F55001864CD /* PrivacyPolicyViewController.swift */; };
+		8B1B2C6C2F59943B001864CD /* WorldProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B2C6B2F59943B001864CD /* WorldProgressCell.swift */; };
+		8B1B2C6E2F599D8C001864CD /* BadgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B2C6D2F599D8C001864CD /* BadgeCell.swift */; };
+		8B2E574D2F61A1500022D547 /* MathViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E574C2F61A1500022D547 /* MathViewController.swift */; };
+		8B2E574F2F61A1730022D547 /* EnglishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E574E2F61A1730022D547 /* EnglishViewController.swift */; };
+		8B2E57512F61A19B0022D547 /* GeographyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E57502F61A19B0022D547 /* GeographyViewController.swift */; };
+		8B2E57532F61A1D00022D547 /* ScienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E57522F61A1D00022D547 /* ScienceViewController.swift */; };
+		8B2E57572F61A2110022D547 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E57562F61A2110022D547 /* HistoryViewController.swift */; };
+		8B627D772F631CB500022835 /* TopicIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B627D762F631CB500022835 /* TopicIntroViewController.swift */; };
+		8B627D7C2F6323DE00022835 /* ExamQuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B627D7B2F6323DE00022835 /* ExamQuestViewController.swift */; };
+		8B627D7E2F6470DD00022835 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B627D7D2F6470DD00022835 /* PassthroughView.swift */; };
+		8B796DAC2F5728FE00A2ECC7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796DA72F5728FE00A2ECC7 /* LoginViewController.swift */; };
+		8B796DAD2F5728FE00A2ECC7 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796DA12F5728FE00A2ECC7 /* CurrentUser.swift */; };
+		8B796DAE2F5728FE00A2ECC7 /* HelpCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796DA42F5728FE00A2ECC7 /* HelpCenterViewController.swift */; };
+		8B796DAF2F5728FE00A2ECC7 /* AvatarStudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796D9F2F5728FE00A2ECC7 /* AvatarStudioViewController.swift */; };
+		8B796DB02F5728FE00A2ECC7 /* AuthState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796D9E2F5728FE00A2ECC7 /* AuthState.swift */; };
+		8B796DB12F5728FE00A2ECC7 /* AcknowledgementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796D9B2F5728FE00A2ECC7 /* AcknowledgementsViewController.swift */; };
+		8B796DB22F5728FE00A2ECC7 /* BadgesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796DA02F5728FE00A2ECC7 /* BadgesViewController.swift */; };
+		26E9FC5521324BF09CD3EC83 /* BadgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90863B9D4E9649EDA7027674 /* BadgeManager.swift */; };
+		CC1234567890ABCDEF012345 /* StreakManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1234567890ABCDEF012345 /* StreakManager.swift */; };
+		EE1234567890ABCDEF012345 /* DailyQuestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1234567890ABCDEF012345 /* DailyQuestManager.swift */; };
+		8B796DB32F5728FE00A2ECC7 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796D9C2F5728FE00A2ECC7 /* AppRouter.swift */; };
+		8B796DB42F5728FE00A2ECC7 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796DA22F5728FE00A2ECC7 /* FeedbackViewController.swift */; };
+		8B796DB52F5728FE00A2ECC7 /* File.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B796DA32F5728FE00A2ECC7 /* File.txt */; };
+		8B796DB82F5728FE00A2ECC7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B796DA62F5728FE00A2ECC7 /* LaunchScreen.storyboard */; };
+		8B796DB92F5728FE00A2ECC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B796D9D2F5728FE00A2ECC7 /* Assets.xcassets */; };
+		8B796DBC2F57295400A2ECC7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796DBB2F57295400A2ECC7 /* MainTabBarController.swift */; };
+		8B796DBE2F57296B00A2ECC7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796DBD2F57296B00A2ECC7 /* SignUpViewController.swift */; };
+		8B796DC02F57298100A2ECC7 /* SignUpDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796DBF2F57298100A2ECC7 /* SignUpDetailsViewController.swift */; };
+		QA000000000000000000000001 /* QuestryAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = QA000000000000000000000002 /* QuestryAudioPlayer.swift */; };
+		8B796DC22F57299400A2ECC7 /* SupabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796DC12F57299400A2ECC7 /* SupabaseManager.swift */; };
+		8B796DC52F5729DE00A2ECC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796DC32F5729DE00A2ECC7 /* AppDelegate.swift */; };
+		8B796DC62F5729DE00A2ECC7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796DC42F5729DE00A2ECC7 /* SceneDelegate.swift */; };
+		8BD6996B2F572FDD00E53D1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BD6996A2F572FDD00E53D1D /* Main.storyboard */; };
+		8BD6996D2F57315200E53D1D /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD6996C2F57315200E53D1D /* MainScreenViewController.swift */; };
+		8BD699702F57317B00E53D1D /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD6996E2F57317B00E53D1D /* PreferencesViewController.swift */; };
+		8BD699712F57317B00E53D1D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD6996F2F57317B00E53D1D /* ProfileViewController.swift */; };
+		8BD699762F5731AD00E53D1D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD699722F5731AD00E53D1D /* SettingsViewController.swift */; };
+		8BD699772F5731AD00E53D1D /* SignUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD699732F5731AD00E53D1D /* SignUpData.swift */; };
+		8BD699782F5731AD00E53D1D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD699742F5731AD00E53D1D /* ViewController.swift */; };
+		8BD699792F5731AD00E53D1D /* WorldProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD699752F5731AD00E53D1D /* WorldProgressViewController.swift */; };
+		8BF5CD6D2F61C17800CF9080 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF5CD6C2F61C17800CF9080 /* QuestionViewController.swift */; };
+		8BF5CD6F2F61E68800CF9080 /* InteractiveQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF5CD6E2F61E68800CF9080 /* InteractiveQuestionViewController.swift */; };
+		8BF5CD702F620A0000CF9080 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF5CD712F620A0000CF9080 /* Question.swift */; };
+		8BF5CD722F620A0000CF9080 /* DraggableObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF5CD732F620A0000CF9080 /* DraggableObjectView.swift */; };
+		8BF5CD7D2F62E81100CF9080 /* MathGameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF5CD7C2F62E81100CF9080 /* MathGameData.swift */; };
+		8BF5CD7F2F62EAEB00CF9080 /* DiagnosticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF5CD7E2F62EAEB00CF9080 /* DiagnosticViewController.swift */; };
+		8BFC34752F59C6AE00C2AA55 /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFC34742F59C6AE00C2AA55 /* AvatarCell.swift */; };
+		8BFC34772F5ACAA300C2AA55 /* DailyQuestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFC34762F5ACAA300C2AA55 /* DailyQuestsViewController.swift */; };
+		8BFC347C2F5AF77200C2AA55 /* RewardsShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFC347B2F5AF77200C2AA55 /* RewardsShopViewController.swift */; };
+		8BFC34802F5BFF0000C2AA55 /* SpinWheelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFC347F2F5BFF0000C2AA55 /* SpinWheelViewController.swift */; };
+		CF1A2B3C4D5E6F7A8B9C0D1A /* ShopEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1A2B3C4D5E6F7A8B9C0D1B /* ShopEffects.swift */; };
+		CF2A2B3C4D5E6F7A8B9C0D2A /* GeoDiagnosticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2A2B3C4D5E6F7A8B9C0D2B /* GeoDiagnosticViewController.swift */; };
+		CF3A2B3C4D5E6F7A8B9C0D3A /* GeoInteractiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3A2B3C4D5E6F7A8B9C0D3B /* GeoInteractiveViewController.swift */; };
+		CF4A2B3C4D5E6F7A8B9C0D4A /* GeographyGameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A2B3C4D5E6F7A8B9C0D4B /* GeographyGameData.swift */; };
+		CFA12B3C4D5E6F7A8B9C0DAB /* ScienceGameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScienceGameData.swift; sourceTree = "<group>"; };
+		CFB12B3C4D5E6F7A8B9C0DBB /* HistoryGameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryGameData.swift; sourceTree = "<group>"; };
+		CFA12B3C4D5E6F7A8B9C0DAA /* ScienceGameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA12B3C4D5E6F7A8B9C0DAB /* ScienceGameData.swift */; };
+		CFB12B3C4D5E6F7A8B9C0DBA /* HistoryGameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB12B3C4D5E6F7A8B9C0DBB /* HistoryGameData.swift */; };
+		CF5A2B3C4D5E6F7A8B9C0D5A /* RewardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5A2B3C4D5E6F7A8B9C0D5B /* RewardCell.swift */; };
+		CF6A2B3C4D5E6F7A8B9C0D6A /* EnglishGameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6A2B3C4D5E6F7A8B9C0D6B /* EnglishGameData.swift */; };
+		CF7A2B3C4D5E6F7A8B9C0D7A /* EngDiagnosticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A2B3C4D5E6F7A8B9C0D7B /* EngDiagnosticViewController.swift */; };
+		CF8A2B3C4D5E6F7A8B9C0D8A /* EngInteractiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8A2B3C4D5E6F7A8B9C0D8B /* EngInteractiveViewController.swift */; };
+		CFC12B3C4D5E6F7A8B9C0DCA /* SciDiagnosticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC12B3C4D5E6F7A8B9C0DCB /* SciDiagnosticViewController.swift */; };
+		CFD12B3C4D5E6F7A8B9C0DDA /* SciInteractiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD12B3C4D5E6F7A8B9C0DDB /* SciInteractiveViewController.swift */; };
+		CFE12B3C4D5E6F7A8B9C0DEA /* HisDiagnosticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE12B3C4D5E6F7A8B9C0DEB /* HisDiagnosticViewController.swift */; };
+		CFF12B3C4D5E6F7A8B9C0DFA /* HisInteractiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF12B3C4D5E6F7A8B9C0DFB /* HisInteractiveViewController.swift */; };
+		CF011B3C4D5E6F7A8B9C0D0A /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF011B3C4D5E6F7A8B9C0D0B /* LanguageManager.swift */; };
+		CF021B3C4D5E6F7A8B9C0D2A /* LanguagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF021B3C4D5E6F7A8B9C0D2B /* LanguagePickerViewController.swift */; };
+		CF031B3C4D5E6F7A8B9C0D3A /* EnglishTeachingLangPromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF031B3C4D5E6F7A8B9C0D3B /* EnglishTeachingLangPromptViewController.swift */; };
+		CF041B3C4D5E6F7A8B9C0D4A /* EnglishTeaching_es_A.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF041B3C4D5E6F7A8B9C0D4B /* EnglishTeaching_es_A.swift */; };
+		CF051B3C4D5E6F7A8B9C0D5A /* EnglishTeaching_es_B.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF051B3C4D5E6F7A8B9C0D5B /* EnglishTeaching_es_B.swift */; };
+		CF061B3C4D5E6F7A8B9C0D6A /* EnglishTeaching_fr_A.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF061B3C4D5E6F7A8B9C0D6B /* EnglishTeaching_fr_A.swift */; };
+		CF071B3C4D5E6F7A8B9C0D7A /* EnglishTeaching_fr_B.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF071B3C4D5E6F7A8B9C0D7B /* EnglishTeaching_fr_B.swift */; };
+		CF081B3C4D5E6F7A8B9C0D8A /* EnglishTeaching_de_A.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF081B3C4D5E6F7A8B9C0D8B /* EnglishTeaching_de_A.swift */; };
+		CF091B3C4D5E6F7A8B9C0D9A /* EnglishTeaching_de_B.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF091B3C4D5E6F7A8B9C0D9B /* EnglishTeaching_de_B.swift */; };
+		CF101B3C4D5E6F7A8B9C1D0A /* EnglishTeaching_cs_A.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF101B3C4D5E6F7A8B9C1D0B /* EnglishTeaching_cs_A.swift */; };
+		CF111B3C4D5E6F7A8B9C1D1A /* EnglishTeaching_cs_B.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF111B3C4D5E6F7A8B9C1D1B /* EnglishTeaching_cs_B.swift */; };
+		CF121B3C4D5E6F7A8B9C1D2A /* EnglishTeaching_ar_A.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF121B3C4D5E6F7A8B9C1D2B /* EnglishTeaching_ar_A.swift */; };
+		CF131B3C4D5E6F7A8B9C1D3A /* EnglishTeaching_ar_B.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF131B3C4D5E6F7A8B9C1D3B /* EnglishTeaching_ar_B.swift */; };
+		CF141B3C4D5E6F7A8B9C1D4A /* EnglishTeachingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF141B3C4D5E6F7A8B9C1D4B /* EnglishTeachingData.swift */; };
+		CF151B3C4D5E6F7A8B9C1D5A /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF151B3C4D5E6F7A8B9C1D5B /* OnboardingViewController.swift */; };
+		CF161B3C4D5E6F7A8B9C1D6A /* DragonVoiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF161B3C4D5E6F7A8B9C1D6B /* DragonVoiceManager.swift */; };
+		AU000000000000000000000001 /* Pengu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000001 /* Pengu.mp3 */; };
+		AU000000000000000000000002 /* onboarding_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000002 /* onboarding_1.mp3 */; };
+		AU000000000000000000000003 /* onboarding_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000003 /* onboarding_2.mp3 */; };
+		AU000000000000000000000004 /* onboarding_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000004 /* onboarding_3.mp3 */; };
+		AU000000000000000000000005 /* onboarding_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000005 /* onboarding_4.mp3 */; };
+		AU000000000000000000000006 /* onboarding_5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000006 /* onboarding_5.mp3 */; };
+		AU000000000000000000000007 /* math_topic_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000007 /* math_topic_1.mp3 */; };
+		AU000000000000000000000008 /* math_topic_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000008 /* math_topic_2.mp3 */; };
+		AU000000000000000000000009 /* math_topic_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000009 /* math_topic_3.mp3 */; };
+		AU00000000000000000000000A /* math_topic_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000000A /* math_topic_4.mp3 */; };
+		AU00000000000000000000000B /* math_topic_5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000000B /* math_topic_5.mp3 */; };
+		AU00000000000000000000000C /* math_topic_6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000000C /* math_topic_6.mp3 */; };
+		AU00000000000000000000000D /* math_topic_7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000000D /* math_topic_7.mp3 */; };
+		AU00000000000000000000000E /* math_topic_8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000000E /* math_topic_8.mp3 */; };
+		AU00000000000000000000000F /* math_topic_9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000000F /* math_topic_9.mp3 */; };
+		AU000000000000000000000010 /* math_topic_10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000010 /* math_topic_10.mp3 */; };
+		AU000000000000000000000011 /* math_topic_11.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000011 /* math_topic_11.mp3 */; };
+		AU000000000000000000000012 /* math_topic_12.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000012 /* math_topic_12.mp3 */; };
+		AU000000000000000000000013 /* sci_topic_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000013 /* sci_topic_1.mp3 */; };
+		AU000000000000000000000014 /* sci_topic_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000014 /* sci_topic_2.mp3 */; };
+		AU000000000000000000000015 /* sci_topic_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000015 /* sci_topic_3.mp3 */; };
+		AU000000000000000000000016 /* sci_topic_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000016 /* sci_topic_4.mp3 */; };
+		AU000000000000000000000017 /* sci_topic_5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000017 /* sci_topic_5.mp3 */; };
+		AU000000000000000000000018 /* sci_topic_6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000018 /* sci_topic_6.mp3 */; };
+		AU000000000000000000000019 /* sci_topic_7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000019 /* sci_topic_7.mp3 */; };
+		AU00000000000000000000001A /* sci_topic_8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000001A /* sci_topic_8.mp3 */; };
+		AU00000000000000000000001B /* sci_topic_9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000001B /* sci_topic_9.mp3 */; };
+		AU00000000000000000000001C /* sci_topic_10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000001C /* sci_topic_10.mp3 */; };
+		AU00000000000000000000001D /* sci_topic_11.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000001D /* sci_topic_11.mp3 */; };
+		AU00000000000000000000001E /* geo_topic_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000001E /* geo_topic_1.mp3 */; };
+		AU00000000000000000000001F /* geo_topic_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000001F /* geo_topic_2.mp3 */; };
+		AU000000000000000000000020 /* geo_topic_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000020 /* geo_topic_3.mp3 */; };
+		AU000000000000000000000021 /* geo_topic_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000021 /* geo_topic_4.mp3 */; };
+		AU000000000000000000000022 /* geo_topic_5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000022 /* geo_topic_5.mp3 */; };
+		AU000000000000000000000023 /* geo_topic_6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000023 /* geo_topic_6.mp3 */; };
+		AU000000000000000000000024 /* geo_topic_7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000024 /* geo_topic_7.mp3 */; };
+		AU000000000000000000000025 /* geo_topic_8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000025 /* geo_topic_8.mp3 */; };
+		AU000000000000000000000026 /* eng_topic_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000026 /* eng_topic_1.mp3 */; };
+		AU000000000000000000000027 /* eng_topic_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000027 /* eng_topic_2.mp3 */; };
+		AU000000000000000000000028 /* eng_topic_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000028 /* eng_topic_3.mp3 */; };
+		AU000000000000000000000029 /* eng_topic_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000029 /* eng_topic_4.mp3 */; };
+		AU00000000000000000000002A /* eng_topic_5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000002A /* eng_topic_5.mp3 */; };
+		AU00000000000000000000002B /* eng_topic_6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000002B /* eng_topic_6.mp3 */; };
+		AU00000000000000000000002C /* his_topic_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000002C /* his_topic_1.mp3 */; };
+		AU00000000000000000000002D /* his_topic_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000002D /* his_topic_2.mp3 */; };
+		AU00000000000000000000002E /* his_topic_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000002E /* his_topic_3.mp3 */; };
+		AU00000000000000000000002F /* his_topic_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF00000000000000000000002F /* his_topic_4.mp3 */; };
+		AU000000000000000000000030 /* his_topic_5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000030 /* his_topic_5.mp3 */; };
+		AU000000000000000000000031 /* his_topic_6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000031 /* his_topic_6.mp3 */; };
+		AU000000000000000000000032 /* his_topic_7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000032 /* his_topic_7.mp3 */; };
+		AU000000000000000000000033 /* his_topic_8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000033 /* his_topic_8.mp3 */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		8B8045B72F4B0D96002D0DBF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,13 +166,150 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8B8045A02F4B0D93002D0DBF /* Questry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Questry.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B8045B62F4B0D96002D0DBF /* QuestryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuestryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B8045C02F4B0D96002D0DBF /* QuestryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuestryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B1B2C502F580AD8001864CD /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		8B1B2C522F580B12001864CD /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
+		8B1B2C542F580B47001864CD /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
+		8B1B2C5C2F5859AE001864CD /* GradientBackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundViewController.swift; sourceTree = "<group>"; };
+		8B1B2C5E2F586F2A001864CD /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		8B1B2C602F586F55001864CD /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		8B1B2C6B2F59943B001864CD /* WorldProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldProgressCell.swift; sourceTree = "<group>"; };
+		8B1B2C6D2F599D8C001864CD /* BadgeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeCell.swift; sourceTree = "<group>"; };
+		8B2E574C2F61A1500022D547 /* MathViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathViewController.swift; sourceTree = "<group>"; };
+		8B2E574E2F61A1730022D547 /* EnglishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishViewController.swift; sourceTree = "<group>"; };
+		8B2E57502F61A19B0022D547 /* GeographyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeographyViewController.swift; sourceTree = "<group>"; };
+		8B2E57522F61A1D00022D547 /* ScienceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScienceViewController.swift; sourceTree = "<group>"; };
+		8B2E57562F61A2110022D547 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		8B627D762F631CB500022835 /* TopicIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicIntroViewController.swift; sourceTree = "<group>"; };
+		8B627D7B2F6323DE00022835 /* ExamQuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamQuestViewController.swift; sourceTree = "<group>"; };
+		8B627D7D2F6470DD00022835 /* PassthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
+		8B796D982F5728DE00A2ECC7 /* Questry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Questry.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B796D992F5728DE00A2ECC7 /* QuestryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuestryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B796D9A2F5728DE00A2ECC7 /* QuestryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuestryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B796D9B2F5728FE00A2ECC7 /* AcknowledgementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsViewController.swift; sourceTree = "<group>"; };
+		8B796D9C2F5728FE00A2ECC7 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		8B796D9D2F5728FE00A2ECC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8B796D9E2F5728FE00A2ECC7 /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
+		8B796D9F2F5728FE00A2ECC7 /* AvatarStudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarStudioViewController.swift; sourceTree = "<group>"; };
+		8B796DA02F5728FE00A2ECC7 /* BadgesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesViewController.swift; sourceTree = "<group>"; };
+		90863B9D4E9649EDA7027674 /* BadgeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeManager.swift; sourceTree = "<group>"; };
+		DD1234567890ABCDEF012345 /* StreakManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakManager.swift; sourceTree = "<group>"; };
+		FF1234567890ABCDEF012345 /* DailyQuestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyQuestManager.swift; sourceTree = "<group>"; };
+		8B796DA12F5728FE00A2ECC7 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
+		8B796DA22F5728FE00A2ECC7 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		8B796DA32F5728FE00A2ECC7 /* File.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = File.txt; sourceTree = "<group>"; };
+		8B796DA42F5728FE00A2ECC7 /* HelpCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCenterViewController.swift; sourceTree = "<group>"; };
+		8B796DA62F5728FE00A2ECC7 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8B796DA72F5728FE00A2ECC7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8B796DA92F5728FE00A2ECC7 /* Questry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Questry.xcodeproj; sourceTree = "<group>"; };
+		8B796DBA2F57290800A2ECC7 /* Questry-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Questry-Bridging-Header.h"; sourceTree = "<group>"; };
+		8B796DBB2F57295400A2ECC7 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		8B796DBD2F57296B00A2ECC7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		8B796DBF2F57298100A2ECC7 /* SignUpDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDetailsViewController.swift; sourceTree = "<group>"; };
+		QA000000000000000000000002 /* QuestryAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestryAudioPlayer.swift; sourceTree = "<group>"; };
+		8B796DC12F57299400A2ECC7 /* SupabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseManager.swift; sourceTree = "<group>"; };
+		8B796DC32F5729DE00A2ECC7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8B796DC42F5729DE00A2ECC7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		8BD6996A2F572FDD00E53D1D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8BD6996C2F57315200E53D1D /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
+		8BD6996E2F57317B00E53D1D /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		8BD6996F2F57317B00E53D1D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8BD699722F5731AD00E53D1D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8BD699732F5731AD00E53D1D /* SignUpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpData.swift; sourceTree = "<group>"; };
+		8BD699742F5731AD00E53D1D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8BD699752F5731AD00E53D1D /* WorldProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldProgressViewController.swift; sourceTree = "<group>"; };
+		8BF5CD6C2F61C17800CF9080 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		8BF5CD6E2F61E68800CF9080 /* InteractiveQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveQuestionViewController.swift; sourceTree = "<group>"; };
+		8BF5CD712F620A0000CF9080 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		8BF5CD732F620A0000CF9080 /* DraggableObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableObjectView.swift; sourceTree = "<group>"; };
+		8BF5CD7C2F62E81100CF9080 /* MathGameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathGameData.swift; sourceTree = "<group>"; };
+		8BF5CD7E2F62EAEB00CF9080 /* DiagnosticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosticViewController.swift; sourceTree = "<group>"; };
+		8BFC34742F59C6AE00C2AA55 /* AvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
+		8BFC34762F5ACAA300C2AA55 /* DailyQuestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyQuestsViewController.swift; sourceTree = "<group>"; };
+		8BFC347B2F5AF77200C2AA55 /* RewardsShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsShopViewController.swift; sourceTree = "<group>"; };
+		8BFC347F2F5BFF0000C2AA55 /* SpinWheelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinWheelViewController.swift; sourceTree = "<group>"; };
+		CF1A2B3C4D5E6F7A8B9C0D1B /* ShopEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopEffects.swift; sourceTree = "<group>"; };
+		CF2A2B3C4D5E6F7A8B9C0D2B /* GeoDiagnosticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoDiagnosticViewController.swift; sourceTree = "<group>"; };
+		CF3A2B3C4D5E6F7A8B9C0D3B /* GeoInteractiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoInteractiveViewController.swift; sourceTree = "<group>"; };
+		CF4A2B3C4D5E6F7A8B9C0D4B /* GeographyGameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeographyGameData.swift; sourceTree = "<group>"; };
+		CF5A2B3C4D5E6F7A8B9C0D5B /* RewardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardCell.swift; sourceTree = "<group>"; };
+		CF6A2B3C4D5E6F7A8B9C0D6B /* EnglishGameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishGameData.swift; sourceTree = "<group>"; };
+		CF7A2B3C4D5E6F7A8B9C0D7B /* EngDiagnosticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngDiagnosticViewController.swift; sourceTree = "<group>"; };
+		CF8A2B3C4D5E6F7A8B9C0D8B /* EngInteractiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngInteractiveViewController.swift; sourceTree = "<group>"; };
+		CFC12B3C4D5E6F7A8B9C0DCB /* SciDiagnosticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SciDiagnosticViewController.swift; sourceTree = "<group>"; };
+		CFD12B3C4D5E6F7A8B9C0DDB /* SciInteractiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SciInteractiveViewController.swift; sourceTree = "<group>"; };
+		CFE12B3C4D5E6F7A8B9C0DEB /* HisDiagnosticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HisDiagnosticViewController.swift; sourceTree = "<group>"; };
+		CFF12B3C4D5E6F7A8B9C0DFB /* HisInteractiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HisInteractiveViewController.swift; sourceTree = "<group>"; };
+		CF011B3C4D5E6F7A8B9C0D0B /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		CF021B3C4D5E6F7A8B9C0D2B /* LanguagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerViewController.swift; sourceTree = "<group>"; };
+		CF031B3C4D5E6F7A8B9C0D3B /* EnglishTeachingLangPromptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishTeachingLangPromptViewController.swift; sourceTree = "<group>"; };
+		CF041B3C4D5E6F7A8B9C0D4B /* EnglishTeaching_es_A.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishTeaching_es_A.swift; sourceTree = "<group>"; };
+		CF051B3C4D5E6F7A8B9C0D5B /* EnglishTeaching_es_B.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishTeaching_es_B.swift; sourceTree = "<group>"; };
+		CF061B3C4D5E6F7A8B9C0D6B /* EnglishTeaching_fr_A.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishTeaching_fr_A.swift; sourceTree = "<group>"; };
+		CF071B3C4D5E6F7A8B9C0D7B /* EnglishTeaching_fr_B.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishTeaching_fr_B.swift; sourceTree = "<group>"; };
+		CF081B3C4D5E6F7A8B9C0D8B /* EnglishTeaching_de_A.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishTeaching_de_A.swift; sourceTree = "<group>"; };
+		CF091B3C4D5E6F7A8B9C0D9B /* EnglishTeaching_de_B.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishTeaching_de_B.swift; sourceTree = "<group>"; };
+		CF101B3C4D5E6F7A8B9C1D0B /* EnglishTeaching_cs_A.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishTeaching_cs_A.swift; sourceTree = "<group>"; };
+		CF111B3C4D5E6F7A8B9C1D1B /* EnglishTeaching_cs_B.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishTeaching_cs_B.swift; sourceTree = "<group>"; };
+		CF121B3C4D5E6F7A8B9C1D2B /* EnglishTeaching_ar_A.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishTeaching_ar_A.swift; sourceTree = "<group>"; };
+		CF131B3C4D5E6F7A8B9C1D3B /* EnglishTeaching_ar_B.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishTeaching_ar_B.swift; sourceTree = "<group>"; };
+		CF141B3C4D5E6F7A8B9C1D4B /* EnglishTeachingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishTeachingData.swift; sourceTree = "<group>"; };
+		CF151B3C4D5E6F7A8B9C1D5B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		CF161B3C4D5E6F7A8B9C1D6B /* DragonVoiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonVoiceManager.swift; sourceTree = "<group>"; };
+		AF000000000000000000000001 /* Pengu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Pengu.mp3; path = Pengu.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000002 /* onboarding_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = onboarding_1.mp3; path = onboarding_1.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000003 /* onboarding_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = onboarding_2.mp3; path = onboarding_2.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000004 /* onboarding_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = onboarding_3.mp3; path = onboarding_3.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000005 /* onboarding_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = onboarding_4.mp3; path = onboarding_4.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000006 /* onboarding_5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = onboarding_5.mp3; path = onboarding_5.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000007 /* math_topic_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = math_topic_1.mp3; path = math_topic_1.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000008 /* math_topic_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = math_topic_2.mp3; path = math_topic_2.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000009 /* math_topic_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = math_topic_3.mp3; path = math_topic_3.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000000A /* math_topic_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = math_topic_4.mp3; path = math_topic_4.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000000B /* math_topic_5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = math_topic_5.mp3; path = math_topic_5.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000000C /* math_topic_6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = math_topic_6.mp3; path = math_topic_6.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000000D /* math_topic_7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = math_topic_7.mp3; path = math_topic_7.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000000E /* math_topic_8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = math_topic_8.mp3; path = math_topic_8.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000000F /* math_topic_9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = math_topic_9.mp3; path = math_topic_9.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000010 /* math_topic_10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = math_topic_10.mp3; path = math_topic_10.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000011 /* math_topic_11.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = math_topic_11.mp3; path = math_topic_11.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000012 /* math_topic_12.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = math_topic_12.mp3; path = math_topic_12.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000013 /* sci_topic_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sci_topic_1.mp3; path = sci_topic_1.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000014 /* sci_topic_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sci_topic_2.mp3; path = sci_topic_2.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000015 /* sci_topic_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sci_topic_3.mp3; path = sci_topic_3.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000016 /* sci_topic_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sci_topic_4.mp3; path = sci_topic_4.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000017 /* sci_topic_5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sci_topic_5.mp3; path = sci_topic_5.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000018 /* sci_topic_6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sci_topic_6.mp3; path = sci_topic_6.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000019 /* sci_topic_7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sci_topic_7.mp3; path = sci_topic_7.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000001A /* sci_topic_8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sci_topic_8.mp3; path = sci_topic_8.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000001B /* sci_topic_9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sci_topic_9.mp3; path = sci_topic_9.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000001C /* sci_topic_10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sci_topic_10.mp3; path = sci_topic_10.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000001D /* sci_topic_11.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sci_topic_11.mp3; path = sci_topic_11.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000001E /* geo_topic_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = geo_topic_1.mp3; path = geo_topic_1.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000001F /* geo_topic_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = geo_topic_2.mp3; path = geo_topic_2.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000020 /* geo_topic_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = geo_topic_3.mp3; path = geo_topic_3.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000021 /* geo_topic_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = geo_topic_4.mp3; path = geo_topic_4.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000022 /* geo_topic_5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = geo_topic_5.mp3; path = geo_topic_5.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000023 /* geo_topic_6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = geo_topic_6.mp3; path = geo_topic_6.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000024 /* geo_topic_7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = geo_topic_7.mp3; path = geo_topic_7.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000025 /* geo_topic_8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = geo_topic_8.mp3; path = geo_topic_8.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000026 /* eng_topic_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = eng_topic_1.mp3; path = eng_topic_1.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000027 /* eng_topic_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = eng_topic_2.mp3; path = eng_topic_2.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000028 /* eng_topic_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = eng_topic_3.mp3; path = eng_topic_3.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000029 /* eng_topic_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = eng_topic_4.mp3; path = eng_topic_4.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000002A /* eng_topic_5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = eng_topic_5.mp3; path = eng_topic_5.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000002B /* eng_topic_6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = eng_topic_6.mp3; path = eng_topic_6.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000002C /* his_topic_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = his_topic_1.mp3; path = his_topic_1.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000002D /* his_topic_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = his_topic_2.mp3; path = his_topic_2.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000002E /* his_topic_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = his_topic_3.mp3; path = his_topic_3.mp3; sourceTree = "<group>"; };
+		AF00000000000000000000002F /* his_topic_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = his_topic_4.mp3; path = his_topic_4.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000030 /* his_topic_5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = his_topic_5.mp3; path = his_topic_5.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000031 /* his_topic_6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = his_topic_6.mp3; path = his_topic_6.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000032 /* his_topic_7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = his_topic_7.mp3; path = his_topic_7.mp3; sourceTree = "<group>"; };
+		AF000000000000000000000033 /* his_topic_8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = his_topic_8.mp3; path = his_topic_8.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		8B8045C82F4B0D96002D0DBF /* Exceptions for "Questry" folder in "Questry" target */ = {
+		8BD699692F572DA700E53D1D /* Exceptions for "Questry" folder in "Questry" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -40,22 +319,12 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		8B8045A22F4B0D93002D0DBF /* Questry */ = {
+		8BD699682F572D9C00E53D1D /* Questry */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				8B8045C82F4B0D96002D0DBF /* Exceptions for "Questry" folder in "Questry" target */,
+				8BD699692F572DA700E53D1D /* Exceptions for "Questry" folder in "Questry" target */,
 			);
 			path = Questry;
-			sourceTree = "<group>";
-		};
-		8B8045B92F4B0D96002D0DBF /* QuestryTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = QuestryTests;
-			sourceTree = "<group>";
-		};
-		8B8045C32F4B0D96002D0DBF /* QuestryUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = QuestryUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -85,24 +354,167 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B796DAA2F5728FE00A2ECC7 /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADAUDIO0000000000000000001 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				AF000000000000000000000001 /* Pengu.mp3 */,
+				AF000000000000000000000002 /* onboarding_1.mp3 */,
+				AF000000000000000000000003 /* onboarding_2.mp3 */,
+				AF000000000000000000000004 /* onboarding_3.mp3 */,
+				AF000000000000000000000005 /* onboarding_4.mp3 */,
+				AF000000000000000000000006 /* onboarding_5.mp3 */,
+				AF000000000000000000000007 /* math_topic_1.mp3 */,
+				AF000000000000000000000008 /* math_topic_2.mp3 */,
+				AF000000000000000000000009 /* math_topic_3.mp3 */,
+				AF00000000000000000000000A /* math_topic_4.mp3 */,
+				AF00000000000000000000000B /* math_topic_5.mp3 */,
+				AF00000000000000000000000C /* math_topic_6.mp3 */,
+				AF00000000000000000000000D /* math_topic_7.mp3 */,
+				AF00000000000000000000000E /* math_topic_8.mp3 */,
+				AF00000000000000000000000F /* math_topic_9.mp3 */,
+				AF000000000000000000000010 /* math_topic_10.mp3 */,
+				AF000000000000000000000011 /* math_topic_11.mp3 */,
+				AF000000000000000000000012 /* math_topic_12.mp3 */,
+				AF000000000000000000000013 /* sci_topic_1.mp3 */,
+				AF000000000000000000000014 /* sci_topic_2.mp3 */,
+				AF000000000000000000000015 /* sci_topic_3.mp3 */,
+				AF000000000000000000000016 /* sci_topic_4.mp3 */,
+				AF000000000000000000000017 /* sci_topic_5.mp3 */,
+				AF000000000000000000000018 /* sci_topic_6.mp3 */,
+				AF000000000000000000000019 /* sci_topic_7.mp3 */,
+				AF00000000000000000000001A /* sci_topic_8.mp3 */,
+				AF00000000000000000000001B /* sci_topic_9.mp3 */,
+				AF00000000000000000000001C /* sci_topic_10.mp3 */,
+				AF00000000000000000000001D /* sci_topic_11.mp3 */,
+				AF00000000000000000000001E /* geo_topic_1.mp3 */,
+				AF00000000000000000000001F /* geo_topic_2.mp3 */,
+				AF000000000000000000000020 /* geo_topic_3.mp3 */,
+				AF000000000000000000000021 /* geo_topic_4.mp3 */,
+				AF000000000000000000000022 /* geo_topic_5.mp3 */,
+				AF000000000000000000000023 /* geo_topic_6.mp3 */,
+				AF000000000000000000000024 /* geo_topic_7.mp3 */,
+				AF000000000000000000000025 /* geo_topic_8.mp3 */,
+				AF000000000000000000000026 /* eng_topic_1.mp3 */,
+				AF000000000000000000000027 /* eng_topic_2.mp3 */,
+				AF000000000000000000000028 /* eng_topic_3.mp3 */,
+				AF000000000000000000000029 /* eng_topic_4.mp3 */,
+				AF00000000000000000000002A /* eng_topic_5.mp3 */,
+				AF00000000000000000000002B /* eng_topic_6.mp3 */,
+				AF00000000000000000000002C /* his_topic_1.mp3 */,
+				AF00000000000000000000002D /* his_topic_2.mp3 */,
+				AF00000000000000000000002E /* his_topic_3.mp3 */,
+				AF00000000000000000000002F /* his_topic_4.mp3 */,
+				AF000000000000000000000030 /* his_topic_5.mp3 */,
+				AF000000000000000000000031 /* his_topic_6.mp3 */,
+				AF000000000000000000000032 /* his_topic_7.mp3 */,
+				AF000000000000000000000033 /* his_topic_8.mp3 */,
+			);
+			name = Audio;
+			path = Audio;
+			sourceTree = "<group>";
+		};
 		8B8045972F4B0D93002D0DBF = {
 			isa = PBXGroup;
 			children = (
-				8B8045A22F4B0D93002D0DBF /* Questry */,
-				8B8045B92F4B0D96002D0DBF /* QuestryTests */,
-				8B8045C32F4B0D96002D0DBF /* QuestryUITests */,
-				8B8045A12F4B0D93002D0DBF /* Products */,
+				ADAUDIO0000000000000000001 /* Audio */,
+				8BD699682F572D9C00E53D1D /* Questry */,
+				8B796D982F5728DE00A2ECC7 /* Questry.app */,
+				8B627D7D2F6470DD00022835 /* PassthroughView.swift */,
+				8B627D7B2F6323DE00022835 /* ExamQuestViewController.swift */,
+				8B627D762F631CB500022835 /* TopicIntroViewController.swift */,
+				8BF5CD7E2F62EAEB00CF9080 /* DiagnosticViewController.swift */,
+				8BF5CD7C2F62E81100CF9080 /* MathGameData.swift */,
+				8BF5CD6E2F61E68800CF9080 /* InteractiveQuestionViewController.swift */,
+				8BF5CD6C2F61C17800CF9080 /* QuestionViewController.swift */,
+				8BF5CD712F620A0000CF9080 /* Question.swift */,
+				8BF5CD732F620A0000CF9080 /* DraggableObjectView.swift */,
+				8B2E57562F61A2110022D547 /* HistoryViewController.swift */,
+				8B2E57522F61A1D00022D547 /* ScienceViewController.swift */,
+				8B2E57502F61A19B0022D547 /* GeographyViewController.swift */,
+				8B2E574E2F61A1730022D547 /* EnglishViewController.swift */,
+				8B2E574C2F61A1500022D547 /* MathViewController.swift */,
+				8BFC347B2F5AF77200C2AA55 /* RewardsShopViewController.swift */,
+				8BFC347F2F5BFF0000C2AA55 /* SpinWheelViewController.swift */,
+				8BFC34762F5ACAA300C2AA55 /* DailyQuestsViewController.swift */,
+				8BFC34742F59C6AE00C2AA55 /* AvatarCell.swift */,
+				8B1B2C6D2F599D8C001864CD /* BadgeCell.swift */,
+				8B1B2C6B2F59943B001864CD /* WorldProgressCell.swift */,
+				8B1B2C602F586F55001864CD /* PrivacyPolicyViewController.swift */,
+				8B1B2C5E2F586F2A001864CD /* TermsViewController.swift */,
+				8B1B2C5C2F5859AE001864CD /* GradientBackgroundViewController.swift */,
+				8B1B2C542F580B47001864CD /* PrivacyViewController.swift */,
+				8B796D992F5728DE00A2ECC7 /* QuestryTests.xctest */,
+				8B796D9A2F5728DE00A2ECC7 /* QuestryUITests.xctest */,
+				8B796D9B2F5728FE00A2ECC7 /* AcknowledgementsViewController.swift */,
+				8B796D9C2F5728FE00A2ECC7 /* AppRouter.swift */,
+				8B796D9D2F5728FE00A2ECC7 /* Assets.xcassets */,
+				8B796D9E2F5728FE00A2ECC7 /* AuthState.swift */,
+				8B796D9F2F5728FE00A2ECC7 /* AvatarStudioViewController.swift */,
+				8B796DA02F5728FE00A2ECC7 /* BadgesViewController.swift */,
+				90863B9D4E9649EDA7027674 /* BadgeManager.swift */,
+				DD1234567890ABCDEF012345 /* StreakManager.swift */,
+				FF1234567890ABCDEF012345 /* DailyQuestManager.swift */,
+				8B796DA12F5728FE00A2ECC7 /* CurrentUser.swift */,
+				8B796DA22F5728FE00A2ECC7 /* FeedbackViewController.swift */,
+				8B796DA32F5728FE00A2ECC7 /* File.txt */,
+				8B796DA42F5728FE00A2ECC7 /* HelpCenterViewController.swift */,
+				8B796DA62F5728FE00A2ECC7 /* LaunchScreen.storyboard */,
+				8B796DA72F5728FE00A2ECC7 /* LoginViewController.swift */,
+				8B796DA92F5728FE00A2ECC7 /* Questry.xcodeproj */,
+				8B796DBA2F57290800A2ECC7 /* Questry-Bridging-Header.h */,
+				8B796DBB2F57295400A2ECC7 /* MainTabBarController.swift */,
+				8B796DBD2F57296B00A2ECC7 /* SignUpViewController.swift */,
+				8B796DBF2F57298100A2ECC7 /* SignUpDetailsViewController.swift */,
+				QA000000000000000000000002 /* QuestryAudioPlayer.swift */,
+				8B796DC12F57299400A2ECC7 /* SupabaseManager.swift */,
+				8B796DC32F5729DE00A2ECC7 /* AppDelegate.swift */,
+				8B796DC42F5729DE00A2ECC7 /* SceneDelegate.swift */,
+				8BD6996A2F572FDD00E53D1D /* Main.storyboard */,
+				8BD6996C2F57315200E53D1D /* MainScreenViewController.swift */,
+				8B1B2C502F580AD8001864CD /* NotificationsViewController.swift */,
+				8BD6996E2F57317B00E53D1D /* PreferencesViewController.swift */,
+				8BD6996F2F57317B00E53D1D /* ProfileViewController.swift */,
+				8BD699722F5731AD00E53D1D /* SettingsViewController.swift */,
+				8BD699732F5731AD00E53D1D /* SignUpData.swift */,
+				8B1B2C522F580B12001864CD /* SubscriptionViewController.swift */,
+				8BD699742F5731AD00E53D1D /* ViewController.swift */,
+				8BD699752F5731AD00E53D1D /* WorldProgressViewController.swift */,
+				CF1A2B3C4D5E6F7A8B9C0D1B /* ShopEffects.swift */,
+				CF2A2B3C4D5E6F7A8B9C0D2B /* GeoDiagnosticViewController.swift */,
+				CF3A2B3C4D5E6F7A8B9C0D3B /* GeoInteractiveViewController.swift */,
+				CF4A2B3C4D5E6F7A8B9C0D4B /* GeographyGameData.swift */,
+				CFA12B3C4D5E6F7A8B9C0DAB /* ScienceGameData.swift */,
+				CFB12B3C4D5E6F7A8B9C0DBB /* HistoryGameData.swift */,
+				CF5A2B3C4D5E6F7A8B9C0D5B /* RewardCell.swift */,
+				CF6A2B3C4D5E6F7A8B9C0D6B /* EnglishGameData.swift */,
+				CF7A2B3C4D5E6F7A8B9C0D7B /* EngDiagnosticViewController.swift */,
+				CF8A2B3C4D5E6F7A8B9C0D8B /* EngInteractiveViewController.swift */,
+			CFC12B3C4D5E6F7A8B9C0DCB /* SciDiagnosticViewController.swift */,
+			CFD12B3C4D5E6F7A8B9C0DDB /* SciInteractiveViewController.swift */,
+			CFE12B3C4D5E6F7A8B9C0DEB /* HisDiagnosticViewController.swift */,
+			CFF12B3C4D5E6F7A8B9C0DFB /* HisInteractiveViewController.swift */,
+			CF011B3C4D5E6F7A8B9C0D0B /* LanguageManager.swift */,
+			CF021B3C4D5E6F7A8B9C0D2B /* LanguagePickerViewController.swift */,
+			CF031B3C4D5E6F7A8B9C0D3B /* EnglishTeachingLangPromptViewController.swift */,
+			CF041B3C4D5E6F7A8B9C0D4B /* EnglishTeaching_es_A.swift */,
+			CF051B3C4D5E6F7A8B9C0D5B /* EnglishTeaching_es_B.swift */,
+			CF061B3C4D5E6F7A8B9C0D6B /* EnglishTeaching_fr_A.swift */,
+			CF071B3C4D5E6F7A8B9C0D7B /* EnglishTeaching_fr_B.swift */,
+			CF081B3C4D5E6F7A8B9C0D8B /* EnglishTeaching_de_A.swift */,
+			CF091B3C4D5E6F7A8B9C0D9B /* EnglishTeaching_de_B.swift */,
+			CF101B3C4D5E6F7A8B9C1D0B /* EnglishTeaching_cs_A.swift */,
+			CF111B3C4D5E6F7A8B9C1D1B /* EnglishTeaching_cs_B.swift */,
+			CF121B3C4D5E6F7A8B9C1D2B /* EnglishTeaching_ar_A.swift */,
+			CF131B3C4D5E6F7A8B9C1D3B /* EnglishTeaching_ar_B.swift */,
+			CF141B3C4D5E6F7A8B9C1D4B /* EnglishTeachingData.swift */,
+			CF151B3C4D5E6F7A8B9C1D5B /* OnboardingViewController.swift */,
+			CF161B3C4D5E6F7A8B9C1D6B /* DragonVoiceManager.swift */,
 			);
-			sourceTree = "<group>";
-		};
-		8B8045A12F4B0D93002D0DBF /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8B8045A02F4B0D93002D0DBF /* Questry.app */,
-				8B8045B62F4B0D96002D0DBF /* QuestryTests.xctest */,
-				8B8045C02F4B0D96002D0DBF /* QuestryUITests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -121,13 +533,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				8B8045A22F4B0D93002D0DBF /* Questry */,
+				8BD699682F572D9C00E53D1D /* Questry */,
 			);
 			name = Questry;
 			packageProductDependencies = (
 			);
 			productName = Questry;
-			productReference = 8B8045A02F4B0D93002D0DBF /* Questry.app */;
+			productReference = 8B796D982F5728DE00A2ECC7 /* Questry.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8B8045B52F4B0D96002D0DBF /* QuestryTests */ = {
@@ -143,14 +555,11 @@
 			dependencies = (
 				8B8045B82F4B0D96002D0DBF /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				8B8045B92F4B0D96002D0DBF /* QuestryTests */,
-			);
 			name = QuestryTests;
 			packageProductDependencies = (
 			);
 			productName = QuestryTests;
-			productReference = 8B8045B62F4B0D96002D0DBF /* QuestryTests.xctest */;
+			productReference = 8B796D992F5728DE00A2ECC7 /* QuestryTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		8B8045BF2F4B0D96002D0DBF /* QuestryUITests */ = {
@@ -166,14 +575,11 @@
 			dependencies = (
 				8B8045C22F4B0D96002D0DBF /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				8B8045C32F4B0D96002D0DBF /* QuestryUITests */,
-			);
 			name = QuestryUITests;
 			packageProductDependencies = (
 			);
 			productName = QuestryUITests;
-			productReference = 8B8045C02F4B0D96002D0DBF /* QuestryUITests.xctest */;
+			productReference = 8B796D9A2F5728DE00A2ECC7 /* QuestryUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -188,6 +594,7 @@
 				TargetAttributes = {
 					8B80459F2F4B0D93002D0DBF = {
 						CreatedOnToolsVersion = 26.2;
+						LastSwiftMigration = 2620;
 					};
 					8B8045B52F4B0D96002D0DBF = {
 						CreatedOnToolsVersion = 26.2;
@@ -209,8 +616,14 @@
 			mainGroup = 8B8045972F4B0D93002D0DBF;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 8B8045A12F4B0D93002D0DBF /* Products */;
+			productRefGroup = 8B8045972F4B0D93002D0DBF;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 8B796DAA2F5728FE00A2ECC7 /* Products */;
+					ProjectRef = 8B796DA92F5728FE00A2ECC7 /* Questry.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8B80459F2F4B0D93002D0DBF /* Questry */,
@@ -225,6 +638,61 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B796DB52F5728FE00A2ECC7 /* File.txt in Resources */,
+				8BD6996B2F572FDD00E53D1D /* Main.storyboard in Resources */,
+				8B796DB82F5728FE00A2ECC7 /* LaunchScreen.storyboard in Resources */,
+				8B796DB92F5728FE00A2ECC7 /* Assets.xcassets in Resources */,
+				AU000000000000000000000001 /* Pengu.mp3 in Resources */,
+				AU000000000000000000000002 /* onboarding_1.mp3 in Resources */,
+				AU000000000000000000000003 /* onboarding_2.mp3 in Resources */,
+				AU000000000000000000000004 /* onboarding_3.mp3 in Resources */,
+				AU000000000000000000000005 /* onboarding_4.mp3 in Resources */,
+				AU000000000000000000000006 /* onboarding_5.mp3 in Resources */,
+				AU000000000000000000000007 /* math_topic_1.mp3 in Resources */,
+				AU000000000000000000000008 /* math_topic_2.mp3 in Resources */,
+				AU000000000000000000000009 /* math_topic_3.mp3 in Resources */,
+				AU00000000000000000000000A /* math_topic_4.mp3 in Resources */,
+				AU00000000000000000000000B /* math_topic_5.mp3 in Resources */,
+				AU00000000000000000000000C /* math_topic_6.mp3 in Resources */,
+				AU00000000000000000000000D /* math_topic_7.mp3 in Resources */,
+				AU00000000000000000000000E /* math_topic_8.mp3 in Resources */,
+				AU00000000000000000000000F /* math_topic_9.mp3 in Resources */,
+				AU000000000000000000000010 /* math_topic_10.mp3 in Resources */,
+				AU000000000000000000000011 /* math_topic_11.mp3 in Resources */,
+				AU000000000000000000000012 /* math_topic_12.mp3 in Resources */,
+				AU000000000000000000000013 /* sci_topic_1.mp3 in Resources */,
+				AU000000000000000000000014 /* sci_topic_2.mp3 in Resources */,
+				AU000000000000000000000015 /* sci_topic_3.mp3 in Resources */,
+				AU000000000000000000000016 /* sci_topic_4.mp3 in Resources */,
+				AU000000000000000000000017 /* sci_topic_5.mp3 in Resources */,
+				AU000000000000000000000018 /* sci_topic_6.mp3 in Resources */,
+				AU000000000000000000000019 /* sci_topic_7.mp3 in Resources */,
+				AU00000000000000000000001A /* sci_topic_8.mp3 in Resources */,
+				AU00000000000000000000001B /* sci_topic_9.mp3 in Resources */,
+				AU00000000000000000000001C /* sci_topic_10.mp3 in Resources */,
+				AU00000000000000000000001D /* sci_topic_11.mp3 in Resources */,
+				AU00000000000000000000001E /* geo_topic_1.mp3 in Resources */,
+				AU00000000000000000000001F /* geo_topic_2.mp3 in Resources */,
+				AU000000000000000000000020 /* geo_topic_3.mp3 in Resources */,
+				AU000000000000000000000021 /* geo_topic_4.mp3 in Resources */,
+				AU000000000000000000000022 /* geo_topic_5.mp3 in Resources */,
+				AU000000000000000000000023 /* geo_topic_6.mp3 in Resources */,
+				AU000000000000000000000024 /* geo_topic_7.mp3 in Resources */,
+				AU000000000000000000000025 /* geo_topic_8.mp3 in Resources */,
+				AU000000000000000000000026 /* eng_topic_1.mp3 in Resources */,
+				AU000000000000000000000027 /* eng_topic_2.mp3 in Resources */,
+				AU000000000000000000000028 /* eng_topic_3.mp3 in Resources */,
+				AU000000000000000000000029 /* eng_topic_4.mp3 in Resources */,
+				AU00000000000000000000002A /* eng_topic_5.mp3 in Resources */,
+				AU00000000000000000000002B /* eng_topic_6.mp3 in Resources */,
+				AU00000000000000000000002C /* his_topic_1.mp3 in Resources */,
+				AU00000000000000000000002D /* his_topic_2.mp3 in Resources */,
+				AU00000000000000000000002E /* his_topic_3.mp3 in Resources */,
+				AU00000000000000000000002F /* his_topic_4.mp3 in Resources */,
+				AU000000000000000000000030 /* his_topic_5.mp3 in Resources */,
+				AU000000000000000000000031 /* his_topic_6.mp3 in Resources */,
+				AU000000000000000000000032 /* his_topic_7.mp3 in Resources */,
+				AU000000000000000000000033 /* his_topic_8.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +717,88 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B796DBE2F57296B00A2ECC7 /* SignUpViewController.swift in Sources */,
+				8B796DAC2F5728FE00A2ECC7 /* LoginViewController.swift in Sources */,
+				8BF5CD7F2F62EAEB00CF9080 /* DiagnosticViewController.swift in Sources */,
+				8B796DAD2F5728FE00A2ECC7 /* CurrentUser.swift in Sources */,
+				8B796DBC2F57295400A2ECC7 /* MainTabBarController.swift in Sources */,
+				8B1B2C5F2F586F2A001864CD /* TermsViewController.swift in Sources */,
+				8B796DC22F57299400A2ECC7 /* SupabaseManager.swift in Sources */,
+				8BF5CD6D2F61C17800CF9080 /* QuestionViewController.swift in Sources */,
+				8BF5CD7D2F62E81100CF9080 /* MathGameData.swift in Sources */,
+				8B796DC52F5729DE00A2ECC7 /* AppDelegate.swift in Sources */,
+				8B1B2C532F580B12001864CD /* SubscriptionViewController.swift in Sources */,
+				8BF5CD6F2F61E68800CF9080 /* InteractiveQuestionViewController.swift in Sources */,
+				8BF5CD702F620A0000CF9080 /* Question.swift in Sources */,
+				8BF5CD722F620A0000CF9080 /* DraggableObjectView.swift in Sources */,
+				8B796DC62F5729DE00A2ECC7 /* SceneDelegate.swift in Sources */,
+				8BD699702F57317B00E53D1D /* PreferencesViewController.swift in Sources */,
+				8BD699712F57317B00E53D1D /* ProfileViewController.swift in Sources */,
+				8BD699762F5731AD00E53D1D /* SettingsViewController.swift in Sources */,
+				8B2E57512F61A19B0022D547 /* GeographyViewController.swift in Sources */,
+				8B627D7E2F6470DD00022835 /* PassthroughView.swift in Sources */,
+				8B1B2C6C2F59943B001864CD /* WorldProgressCell.swift in Sources */,
+				8BD699772F5731AD00E53D1D /* SignUpData.swift in Sources */,
+				8BD699782F5731AD00E53D1D /* ViewController.swift in Sources */,
+				8B2E574F2F61A1730022D547 /* EnglishViewController.swift in Sources */,
+				8BD699792F5731AD00E53D1D /* WorldProgressViewController.swift in Sources */,
+				8BFC34752F59C6AE00C2AA55 /* AvatarCell.swift in Sources */,
+				8BFC34772F5ACAA300C2AA55 /* DailyQuestsViewController.swift in Sources */,
+				8B1B2C612F586F55001864CD /* PrivacyPolicyViewController.swift in Sources */,
+				8B796DAE2F5728FE00A2ECC7 /* HelpCenterViewController.swift in Sources */,
+				8B796DAF2F5728FE00A2ECC7 /* AvatarStudioViewController.swift in Sources */,
+				8B627D772F631CB500022835 /* TopicIntroViewController.swift in Sources */,
+				8B2E574D2F61A1500022D547 /* MathViewController.swift in Sources */,
+				8B1B2C6E2F599D8C001864CD /* BadgeCell.swift in Sources */,
+				8B796DB02F5728FE00A2ECC7 /* AuthState.swift in Sources */,
+				8B1B2C552F580B47001864CD /* PrivacyViewController.swift in Sources */,
+				8B796DB12F5728FE00A2ECC7 /* AcknowledgementsViewController.swift in Sources */,
+				8B1B2C512F580AD8001864CD /* NotificationsViewController.swift in Sources */,
+				8B2E57532F61A1D00022D547 /* ScienceViewController.swift in Sources */,
+				8B2E57572F61A2110022D547 /* HistoryViewController.swift in Sources */,
+				8B796DB22F5728FE00A2ECC7 /* BadgesViewController.swift in Sources */,
+				26E9FC5521324BF09CD3EC83 /* BadgeManager.swift in Sources */,
+				CC1234567890ABCDEF012345 /* StreakManager.swift in Sources */,
+				EE1234567890ABCDEF012345 /* DailyQuestManager.swift in Sources */,
+				8B796DC02F57298100A2ECC7 /* SignUpDetailsViewController.swift in Sources */,
+				QA000000000000000000000001 /* QuestryAudioPlayer.swift in Sources */,
+				8B1B2C5D2F5859AE001864CD /* GradientBackgroundViewController.swift in Sources */,
+				8BFC347C2F5AF77200C2AA55 /* RewardsShopViewController.swift in Sources */,
+				8BFC34802F5BFF0000C2AA55 /* SpinWheelViewController.swift in Sources */,
+				8B627D7C2F6323DE00022835 /* ExamQuestViewController.swift in Sources */,
+				8BD6996D2F57315200E53D1D /* MainScreenViewController.swift in Sources */,
+				8B796DB32F5728FE00A2ECC7 /* AppRouter.swift in Sources */,
+				8B796DB42F5728FE00A2ECC7 /* FeedbackViewController.swift in Sources */,
+				CF1A2B3C4D5E6F7A8B9C0D1A /* ShopEffects.swift in Sources */,
+				CF2A2B3C4D5E6F7A8B9C0D2A /* GeoDiagnosticViewController.swift in Sources */,
+				CF3A2B3C4D5E6F7A8B9C0D3A /* GeoInteractiveViewController.swift in Sources */,
+				CF4A2B3C4D5E6F7A8B9C0D4A /* GeographyGameData.swift in Sources */,
+				CFA12B3C4D5E6F7A8B9C0DAA /* ScienceGameData.swift in Sources */,
+				CFB12B3C4D5E6F7A8B9C0DBA /* HistoryGameData.swift in Sources */,
+				CF5A2B3C4D5E6F7A8B9C0D5A /* RewardCell.swift in Sources */,
+				CF6A2B3C4D5E6F7A8B9C0D6A /* EnglishGameData.swift in Sources */,
+				CF7A2B3C4D5E6F7A8B9C0D7A /* EngDiagnosticViewController.swift in Sources */,
+				CF8A2B3C4D5E6F7A8B9C0D8A /* EngInteractiveViewController.swift in Sources */,
+			CFC12B3C4D5E6F7A8B9C0DCA /* SciDiagnosticViewController.swift in Sources */,
+			CFD12B3C4D5E6F7A8B9C0DDA /* SciInteractiveViewController.swift in Sources */,
+			CFE12B3C4D5E6F7A8B9C0DEA /* HisDiagnosticViewController.swift in Sources */,
+			CFF12B3C4D5E6F7A8B9C0DFA /* HisInteractiveViewController.swift in Sources */,
+			CF011B3C4D5E6F7A8B9C0D0A /* LanguageManager.swift in Sources */,
+			CF021B3C4D5E6F7A8B9C0D2A /* LanguagePickerViewController.swift in Sources */,
+			CF031B3C4D5E6F7A8B9C0D3A /* EnglishTeachingLangPromptViewController.swift in Sources */,
+			CF041B3C4D5E6F7A8B9C0D4A /* EnglishTeaching_es_A.swift in Sources */,
+			CF051B3C4D5E6F7A8B9C0D5A /* EnglishTeaching_es_B.swift in Sources */,
+			CF061B3C4D5E6F7A8B9C0D6A /* EnglishTeaching_fr_A.swift in Sources */,
+			CF071B3C4D5E6F7A8B9C0D7A /* EnglishTeaching_fr_B.swift in Sources */,
+			CF081B3C4D5E6F7A8B9C0D8A /* EnglishTeaching_de_A.swift in Sources */,
+			CF091B3C4D5E6F7A8B9C0D9A /* EnglishTeaching_de_B.swift in Sources */,
+			CF101B3C4D5E6F7A8B9C1D0A /* EnglishTeaching_cs_A.swift in Sources */,
+			CF111B3C4D5E6F7A8B9C1D1A /* EnglishTeaching_cs_B.swift in Sources */,
+			CF121B3C4D5E6F7A8B9C1D2A /* EnglishTeaching_ar_A.swift in Sources */,
+			CF131B3C4D5E6F7A8B9C1D3A /* EnglishTeaching_ar_B.swift in Sources */,
+			CF141B3C4D5E6F7A8B9C1D4A /* EnglishTeachingData.swift in Sources */,
+			CF151B3C4D5E6F7A8B9C1D5A /* OnboardingViewController.swift in Sources */,
+			CF161B3C4D5E6F7A8B9C1D6A /* DragonVoiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,26 +837,32 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Questry/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Questry;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.radkar.Questry;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radkarudova.Questry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Questry-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -318,26 +874,31 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Questry/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Questry;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.radkar.Questry;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radkarudova.Questry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Questry-Bridging-Header.h";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "Default_fantasy_game_reward_icon_treasure_pack_of_rare_badges_0_554d8fdb-2b70-42c8-a189-83243004e356_0.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

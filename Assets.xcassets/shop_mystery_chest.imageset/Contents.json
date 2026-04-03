@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "Default_fantasy_game_reward_icon_enchanted_mystery_chest_glowi_0_106a1eb9-636c-4438-a5ab-e06206e77c59_0.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
