@@ -165,7 +165,8 @@ final class ScienceViewController: UIViewController {
         // Completed topics (shown above the quest nodes, scrollable upward)
         let completedIds = completedTopicIdsSorted()
         let completedTopics = completedIds.compactMap { ScienceGameData.topic(for: $0) }
-        completedSectionHeight = 0
+        completedSectionHeight = completedTopics.isEmpty ? 0 :
+            (42 + CGFloat(completedTopics.count) * (cardH + 10) + 16)
 
         // Upcoming "Coming Soon" topics (next 5 after current)
         let lockedTopics = Array(ScienceGameData.topics.filter { $0.id > currentTid }.prefix(5))
@@ -206,10 +207,23 @@ final class ScienceViewController: UIViewController {
                                    topics: lockedTopics, cardH: cardH)
         }
 
+        if !completedTopics.isEmpty {
+            addCompletedTopicsSection(to: cv, startY: 0,
+                                      topics: completedTopics, topicIds: completedIds,
+                                      cardH: cardH)
+        }
+
         scrollView.addSubview(cv)
         scrollView.contentSize = CGSize(width: view.bounds.width, height: totalH)
         programmaticContentView = cv
 
+        // Scroll to show active quest nodes (completed topics are scrollable above)
+        if completedSectionHeight > 0 {
+            DispatchQueue.main.async {
+                self.scrollView.setContentOffset(
+                    CGPoint(x: 0, y: self.completedSectionHeight), animated: false)
+            }
+        }
     }
 
     // MARK: - Completed topics section

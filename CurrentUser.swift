@@ -112,7 +112,9 @@ final class Session {
             "dq_sci", "dq_his", "dq_answers", "dq_avatar", "dq_progress", "dq_unlock",
             // Diagnostic flags
             "math_diagnostic_done", "eng_diagnostic_done", "geo_diagnostic_done",
-            "sci_diagnostic_done",  "his_diagnostic_done"
+            "sci_diagnostic_done",  "his_diagnostic_done",
+            // Badge state
+            "earned_badge_ids", "badge_total_quests_completed"
         ] {
             d.removeObject(forKey: key)
         }
