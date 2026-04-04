@@ -330,10 +330,11 @@ final class ProfileViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alert.addAction(UIAlertAction(title: "Log out", style: .destructive) { _ in
             AuthState.isLoggedIn = false
+            // Clear the active-session marker so SceneDelegate won't auto-restore
+            // but keep per-user XP keys (session_xp_<username>) so they're
+            // available as fallback on next login if Supabase PATCH was failing
+            UserDefaults.standard.removeObject(forKey: "session_username")
             Session.shared.currentUser = nil
-            // Clear local session cache
-            ["session_username","session_xp","session_level","session_avatarIndex","session_age"]
-                .forEach { UserDefaults.standard.removeObject(forKey: $0) }
             AppRouter.showLogin()
         })
         present(alert, animated: true)

@@ -200,9 +200,8 @@ final class DailyQuestsViewController: UIViewController, UITableViewDataSource, 
 
         NSLayoutConstraint.activate([
             streakBadge.topAnchor.constraint(equalTo: xpProgressView.bottomAnchor, constant: 8),
-            streakBadge.leadingAnchor.constraint(equalTo: xpProgressView.leadingAnchor),
-            streakBadge.trailingAnchor.constraint(lessThanOrEqualTo: xpProgressView.trailingAnchor),
-            streakBadge.heightAnchor.constraint(equalToConstant: 24)
+            streakBadge.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            streakBadge.heightAnchor.constraint(equalToConstant: 28)
         ])
         view.bringSubviewToFront(streakBadge)
         tableView.contentInset = UIEdgeInsets(top: 36, left: 0, bottom: 0, right: 0)

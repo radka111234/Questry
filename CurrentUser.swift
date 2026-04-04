@@ -28,14 +28,16 @@ final class Session {
     }
 
     /// Save the current session to UserDefaults so it survives app restarts.
+    /// XP and level are stored per-username so they survive logout and re-login.
     func save() {
         guard let user = currentUser else { return }
         let d = UserDefaults.standard
         d.set(user.username,    forKey: Key.username)
         d.set(user.avatarIndex, forKey: Key.avatarIndex)
-        d.set(user.level,       forKey: Key.level)
-        d.set(user.xp,          forKey: Key.xp)
         d.set(user.age,         forKey: Key.age)
+        // Per-user keys — survive logout so fallback works on re-login
+        d.set(user.xp,   forKey: "session_xp_\(user.username)")
+        d.set(user.level, forKey: "session_level_\(user.username)")
     }
 
     /// Restore session from UserDefaults on app launch. Returns true if successful.
@@ -43,11 +45,13 @@ final class Session {
     func restoreFromDefaults() -> Bool {
         let d = UserDefaults.standard
         guard let username = d.string(forKey: Key.username), !username.isEmpty else { return false }
+        let xp    = d.integer(forKey: "session_xp_\(username)")
+        let level = d.integer(forKey: "session_level_\(username)")
         currentUser = CurrentUser(
             username:    username,
             avatarIndex: d.integer(forKey: Key.avatarIndex),
-            level:       max(1, d.integer(forKey: Key.level)),
-            xp:          max(0, d.integer(forKey: Key.xp)),
+            level:       max(1, level),
+            xp:          max(0, xp),
             age:         d.integer(forKey: Key.age)
         )
         return true

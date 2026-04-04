@@ -31,9 +31,9 @@ final class LoginViewController: UIViewController {
                 // Logged in
                 AuthState.isLoggedIn = true
 
-                // Update session — prefer the higher XP between Supabase and local
-                // (guards against Supabase PATCH having silently failed before)
-                let localXP    = UserDefaults.standard.integer(forKey: "session_xp")
+                // Update session — prefer the higher XP between Supabase and local.
+                // Local key is per-username so it survives logout and re-login.
+                let localXP    = UserDefaults.standard.integer(forKey: "session_xp_\(profile.username)")
                 let bestXP     = max(profile.xp, localXP)
                 let bestLevel  = max(1, (bestXP / 500) + 1)
 

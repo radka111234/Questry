@@ -171,7 +171,7 @@ final class EngInteractiveViewController: UIViewController {
         questionNumLabel.text = "Question 1 of 5"
         questionNumLabel.font = UIFont.systemFont(ofSize: 13)
         questionNumLabel.textColor = UIColor.white.withAlphaComponent(0.70)
-        questionNumLabel.textAlignment = .right
+        questionNumLabel.textAlignment = .left
 
         view.addSubview(progressView)
         view.addSubview(questionNumLabel)
@@ -183,7 +183,7 @@ final class EngInteractiveViewController: UIViewController {
             progressView.heightAnchor.constraint(equalToConstant: 6),
 
             questionNumLabel.topAnchor.constraint(equalTo: progressView.bottomAnchor, constant: 5),
-            questionNumLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24)
+            questionNumLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24)
         ])
     }
 
