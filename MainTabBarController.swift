@@ -224,9 +224,9 @@ extension MainTabBarController: OnboardingPageDelegate {
         switch page {
         case 0: selectedIndex = 0   // Welcome  → Home (world map)
         case 1: selectedIndex = 0   // Quest Map → Home (world map)
-        case 2: selectedIndex = 2   // XP/Level  → Profile
+        case 2: selectedIndex = 0   // XP/Level  → Home (world map)
         case 3: selectedIndex = 1   // Daily Quests → Daily Quests tab
-        case 4: selectedIndex = 2   // Badges & Rewards → Profile
+        case 4: selectedIndex = 0   // Badges & Rewards → Home (world map)
         default: break
         }
     }

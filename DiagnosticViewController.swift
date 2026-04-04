@@ -123,7 +123,7 @@ final class DiagnosticViewController: UIViewController {
         questionInfoLabel.textColor = .black
         questionPercentLabel.textColor = .black
 
-        questionCountLabel.textColor = UIColor.black.withAlphaComponent(0.72)
+        questionCountLabel?.textColor = UIColor.black.withAlphaComponent(0.72)
         questionLabel.textColor = .black
         questionLabel.numberOfLines = 0
 
@@ -179,7 +179,7 @@ final class DiagnosticViewController: UIViewController {
         let question = diagnosticQuestions[currentQuestionIndex]
         selectedAnswerIndex = nil
 
-        questionCountLabel.text = "Question \(currentQuestionIndex + 1) of \(diagnosticQuestions.count)"
+        questionCountLabel?.text = "Question \(currentQuestionIndex + 1) of \(diagnosticQuestions.count)"
         questionLabel.text = question.prompt
 
         questionInfoLabel.text = "Question \(currentQuestionIndex + 1) of \(diagnosticQuestions.count)"

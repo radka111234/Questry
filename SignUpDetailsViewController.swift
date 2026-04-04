@@ -98,6 +98,7 @@ final class SignUpDetailsViewController: UIViewController, UIPickerViewDataSourc
             xp: 0,
             age: signUpData.age
         )
+        Session.shared.save()   // persist so session survives restarts
 
         // Insert into Supabase, then proceed
         SupabaseManager.shared.insertProfile(

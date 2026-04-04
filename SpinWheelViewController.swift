@@ -29,6 +29,7 @@ final class SpinWheelViewController: UIViewController {
     // MARK: State
     private var isSpinning = false
     private var currentAngle: CGFloat = 0      // total rotation so far (radians)
+    private var spinButtonWidthConstraint: NSLayoutConstraint?
 
     private var canSpinToday: Bool {
         guard let last = UserDefaults.standard.object(forKey: "last_spin_date") as? Date else { return true }
@@ -59,6 +60,7 @@ final class SpinWheelViewController: UIViewController {
             spinButton.alpha = 0.5
             spinButton.setTitle("Come back tomorrow 🌙", for: .normal)
             subtitleLabel.text = "You've already spun today. See you tomorrow!"
+            spinButtonWidthConstraint?.constant = 260
         }
     }
 
@@ -166,9 +168,12 @@ final class SpinWheelViewController: UIViewController {
             // Spin button below wheel
             spinButton.topAnchor.constraint(equalTo: wheelView.bottomAnchor, constant: 32),
             spinButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            spinButton.widthAnchor.constraint(equalToConstant: 180),
             spinButton.heightAnchor.constraint(equalToConstant: 58),
         ])
+
+        let widthConstraint = spinButton.widthAnchor.constraint(equalToConstant: 180)
+        widthConstraint.isActive = true
+        spinButtonWidthConstraint = widthConstraint
     }
 
     // MARK: - Pointer image
@@ -235,6 +240,7 @@ final class SpinWheelViewController: UIViewController {
             self.spinButton.isEnabled = false
             self.spinButton.alpha = 0.5
             self.spinButton.setTitle("Come back tomorrow! 🌙", for: .normal)
+            self.spinButtonWidthConstraint?.constant = 260
             self.showResult(prize: self.prizes[winnerIndex])
         }
 
