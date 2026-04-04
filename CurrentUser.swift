@@ -87,6 +87,29 @@ final class Session {
         )
     }
 
+    /// Clear all device-wide progress keys so a new user or logged-out user
+    /// starts completely fresh. Called on logout and on new-account creation.
+    func clearLocalProgress() {
+        let d = UserDefaults.standard
+        for key in [
+            // World topic completion
+            "math_completed_topic_ids", "eng_completed_topic_ids",
+            "geo_completed_topic_ids",  "sci_completed_topic_ids", "his_completed_topic_ids",
+            // Quest counters
+            "total_quests_completed",
+            // Streak
+            "math_streak_count", "math_streak_last_date",
+            // Daily-quest state
+            "dq_date", "dq_login", "dq_math", "dq_geo", "dq_eng",
+            "dq_sci", "dq_his", "dq_answers", "dq_avatar", "dq_progress", "dq_unlock",
+            // Diagnostic flags
+            "math_diagnostic_done", "eng_diagnostic_done", "geo_diagnostic_done",
+            "sci_diagnostic_done",  "his_diagnostic_done"
+        ] {
+            d.removeObject(forKey: key)
+        }
+    }
+
     /// Subtract XP (for shop purchases). Returns true if successful (had enough XP).
     @discardableResult
     func spendXP(_ amount: Int) -> Bool {

@@ -221,9 +221,12 @@ final class ProfileViewController: UIViewController {
         if var cfg = button.configuration {
             cfg.baseForegroundColor = color
             cfg.background.backgroundColor = .clear
+            cfg.titleAlignment = .leading
+            cfg.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             button.configuration = cfg
         } else {
             button.setTitleColor(color, for: .normal)
+            button.contentHorizontalAlignment = .leading
         }
         button.titleLabel?.font = UIFont.systemFont(ofSize: size, weight: .semibold)
     }
@@ -330,10 +333,12 @@ final class ProfileViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alert.addAction(UIAlertAction(title: "Log out", style: .destructive) { _ in
             AuthState.isLoggedIn = false
-            // Clear the active-session marker so SceneDelegate won't auto-restore
-            // but keep per-user XP keys (session_xp_<username>) so they're
-            // available as fallback on next login if Supabase PATCH was failing
+            // Clear the active-session marker and all device-wide progress so
+            // the next user (or this user after re-login) starts fresh.
+            // Per-user XP keys (session_xp_<username>) are intentionally kept
+            // as a fallback if Supabase sync was failing.
             UserDefaults.standard.removeObject(forKey: "session_username")
+            Session.shared.clearLocalProgress()
             Session.shared.currentUser = nil
             AppRouter.showLogin()
         })

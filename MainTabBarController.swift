@@ -221,12 +221,28 @@ final class MainTabBarController: UITabBarController {
 extension MainTabBarController: OnboardingPageDelegate {
     /// Switch to the relevant tab so users see the real screen behind the blur overlay.
     func onboarding(_ vc: OnboardingViewController, didChangeTo page: Int) {
+        // When leaving page 4, pop the badges screen that was pushed behind the overlay
+        if page != 4 {
+            if let profileNav = viewControllers?[2] as? UINavigationController,
+               profileNav.topViewController is BadgesViewController {
+                profileNav.popViewController(animated: false)
+            }
+        }
+
         switch page {
-        case 0: selectedIndex = 0   // Welcome  → Home (world map)
+        case 0: selectedIndex = 0   // Welcome → Home (world map)
         case 1: selectedIndex = 0   // Quest Map → Home (world map)
-        case 2: selectedIndex = 0   // XP/Level  → Home (world map)
-        case 3: selectedIndex = 1   // Daily Quests → Daily Quests tab
-        case 4: selectedIndex = 0   // Badges & Rewards → Home (world map)
+        case 2: selectedIndex = 0   // XP/Level → Home (world map)
+        case 3: selectedIndex = 1   // Daily Quests → Quests tab
+        case 4:
+            // Show Badges screen behind the overlay
+            selectedIndex = 2
+            if let profileNav = viewControllers?[2] as? UINavigationController,
+               !(profileNav.topViewController is BadgesViewController) {
+                let badgesVC = UIStoryboard(name: "Main", bundle: nil)
+                    .instantiateViewController(withIdentifier: "BadgesViewController")
+                profileNav.pushViewController(badgesVC, animated: false)
+            }
         default: break
         }
     }

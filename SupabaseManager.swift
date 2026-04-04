@@ -160,14 +160,23 @@ final class SupabaseManager {
         request.setValue(apiKey, forHTTPHeaderField: "apikey")
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("return=minimal", forHTTPHeaderField: "Prefer")
+        // Use representation so we can verify at least one row was actually updated
+        request.setValue("return=representation", forHTTPHeaderField: "Prefer")
 
         let body: [String: Any] = ["username": newUsername]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
-        URLSession.shared.dataTask(with: request) { _, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil else { completion(false); return }
             let status = (response as? HTTPURLResponse)?.statusCode ?? -1
-            completion(error == nil && (status == 200 || status == 204))
+            guard status == 200 || status == 201 else { completion(false); return }
+            // An empty array means no rows matched — update was silently blocked (e.g. RLS)
+            if let data = data,
+               let json = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]] {
+                completion(!json.isEmpty)
+            } else {
+                completion(false)
+            }
         }.resume()
     }
 
@@ -188,14 +197,23 @@ final class SupabaseManager {
         request.setValue(apiKey, forHTTPHeaderField: "apikey")
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("return=minimal", forHTTPHeaderField: "Prefer")
+        // Use representation so we can verify at least one row was actually updated
+        request.setValue("return=representation", forHTTPHeaderField: "Prefer")
 
         let body: [String: Any] = ["password": hashPassword(newPassword)]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
-        URLSession.shared.dataTask(with: request) { _, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil else { completion(false); return }
             let status = (response as? HTTPURLResponse)?.statusCode ?? -1
-            completion(error == nil && (status == 200 || status == 204))
+            guard status == 200 || status == 201 else { completion(false); return }
+            // An empty array means no rows matched — update was silently blocked (e.g. RLS)
+            if let data = data,
+               let json = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]] {
+                completion(!json.isEmpty)
+            } else {
+                completion(false)
+            }
         }.resume()
     }
 
