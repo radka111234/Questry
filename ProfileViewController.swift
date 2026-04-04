@@ -196,11 +196,11 @@ final class ProfileViewController: UIViewController {
         }
 
         // "Change avatar" — plain text link
-        styleLinkButton(changePictureButton, color: white70, size: 14)
+        styleLinkButton(changePictureButton, title: "Change avatar", color: white70, size: 14)
 
         // "Change username" / "Change password" — subtle text links
-        styleLinkButton(changeUsernameButton, color: white92, size: 14)
-        styleLinkButton(changePasswordButton, color: white92, size: 14)
+        styleLinkButton(changeUsernameButton, title: "Change username", color: white92, size: 14)
+        styleLinkButton(changePasswordButton, title: "Change password", color: white92, size: 14)
 
         // Navigation buttons — teal pill
         styleTealButton(worldProgressButton, title: "World Progress")
@@ -216,16 +216,18 @@ final class ProfileViewController: UIViewController {
         avatarImageView?.layer.masksToBounds = false
     }
 
-    private func styleLinkButton(_ button: UIButton?, color: UIColor, size: CGFloat) {
+    private func styleLinkButton(_ button: UIButton?, title: String, color: UIColor, size: CGFloat) {
         guard let button else { return }
-        // Replace whatever storyboard configuration exists with a fresh plain config
-        // so contentInsets = .zero takes full effect and title aligns with labels above.
+        // Replace storyboard configuration with a fresh plain config so that
+        // contentInsets = .zero takes full effect and text aligns with labels above.
+        // Title is passed explicitly because button.currentTitle can be nil when
+        // the storyboard button stores the title inside a UIButton.Configuration.
         var cfg = UIButton.Configuration.plain()
         cfg.baseForegroundColor = color
         cfg.background.backgroundColor = .clear
         cfg.titleAlignment = .leading
         cfg.contentInsets = .zero
-        cfg.title = button.currentTitle
+        cfg.title = title
         button.configuration = cfg
         button.titleLabel?.font = UIFont.systemFont(ofSize: size, weight: .semibold)
     }
