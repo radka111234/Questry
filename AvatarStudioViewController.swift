@@ -69,6 +69,7 @@ final class AvatarStudioViewController: GradientBackgroundViewController,
 
     @IBAction func didTapSelectHero(_ sender: UIButton) {
         UserDefaults.standard.set(selectedAvatarName, forKey: "selected_avatar_name")
+        Session.shared.save()   // persists avatar_name_<username> so it doesn't leak to other accounts
         DailyQuestManager.shared.recordAvatarVisit()
         navigationController?.popViewController(animated: true)
     }

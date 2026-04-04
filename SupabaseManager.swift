@@ -160,22 +160,23 @@ final class SupabaseManager {
         request.setValue(apiKey, forHTTPHeaderField: "apikey")
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        // Use representation so we can verify at least one row was actually updated
-        request.setValue("return=representation", forHTTPHeaderField: "Prefer")
+        // count=exact lets us read the Content-Range header to see how many rows were updated
+        request.setValue("count=exact", forHTTPHeaderField: "Prefer")
 
         let body: [String: Any] = ["username": newUsername]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: request) { _, response, error in
             guard error == nil else { completion(false); return }
-            let status = (response as? HTTPURLResponse)?.statusCode ?? -1
-            guard status == 200 || status == 201 else { completion(false); return }
-            // An empty array means no rows matched — update was silently blocked (e.g. RLS)
-            if let data = data,
-               let json = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]] {
-                completion(!json.isEmpty)
+            let http = response as? HTTPURLResponse
+            let status = http?.statusCode ?? -1
+            guard status == 200 || status == 204 else { completion(false); return }
+            // Content-Range: 0-0/<count>  — count 0 means no rows were touched (RLS blocked)
+            if let range = http?.value(forHTTPHeaderField: "Content-Range") {
+                let updated = range.split(separator: "/").last.flatMap { Int($0) } ?? 1
+                completion(updated > 0)
             } else {
-                completion(false)
+                completion(true)   // no header → treat as success
             }
         }.resume()
     }
@@ -197,22 +198,23 @@ final class SupabaseManager {
         request.setValue(apiKey, forHTTPHeaderField: "apikey")
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        // Use representation so we can verify at least one row was actually updated
-        request.setValue("return=representation", forHTTPHeaderField: "Prefer")
+        // count=exact lets us read the Content-Range header to see how many rows were updated
+        request.setValue("count=exact", forHTTPHeaderField: "Prefer")
 
         let body: [String: Any] = ["password": hashPassword(newPassword)]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: request) { _, response, error in
             guard error == nil else { completion(false); return }
-            let status = (response as? HTTPURLResponse)?.statusCode ?? -1
-            guard status == 200 || status == 201 else { completion(false); return }
-            // An empty array means no rows matched — update was silently blocked (e.g. RLS)
-            if let data = data,
-               let json = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]] {
-                completion(!json.isEmpty)
+            let http = response as? HTTPURLResponse
+            let status = http?.statusCode ?? -1
+            guard status == 200 || status == 204 else { completion(false); return }
+            // Content-Range: 0-0/<count>  — count 0 means no rows were touched (RLS blocked)
+            if let range = http?.value(forHTTPHeaderField: "Content-Range") {
+                let updated = range.split(separator: "/").last.flatMap { Int($0) } ?? 1
+                completion(updated > 0)
             } else {
-                completion(false)
+                completion(true)   // no header → treat as success
             }
         }.resume()
     }

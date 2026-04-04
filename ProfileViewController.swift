@@ -104,11 +104,11 @@ final class ProfileViewController: UIViewController {
         let left: CGFloat = 28
         let width   = view.bounds.width - left * 2
         let centerX = view.bounds.midX
-        var y: CGFloat = safe + 6
+        var y: CGFloat = safe + 2
 
         // ── "Profile" title ──────────────────────────────────────────
-        profileTitleLabel.frame = CGRect(x: left, y: y, width: width, height: 40)
-        y += 46
+        profileTitleLabel.frame = CGRect(x: left, y: y, width: width, height: 44)
+        y += 48
 
         // ── Avatar ───────────────────────────────────────────────────
         let avSize: CGFloat = 110
@@ -174,7 +174,7 @@ final class ProfileViewController: UIViewController {
         // Title
         profileTitleLabel.text      = "Profile"
         profileTitleLabel.textColor = .white
-        profileTitleLabel.font      = UIFont.systemFont(ofSize: 28, weight: .bold)
+        profileTitleLabel.font      = UIFont.systemFont(ofSize: 34, weight: .bold)
         profileTitleLabel.textAlignment = .center
 
         // Section headers
@@ -218,16 +218,15 @@ final class ProfileViewController: UIViewController {
 
     private func styleLinkButton(_ button: UIButton?, color: UIColor, size: CGFloat) {
         guard let button else { return }
-        if var cfg = button.configuration {
-            cfg.baseForegroundColor = color
-            cfg.background.backgroundColor = .clear
-            cfg.titleAlignment = .leading
-            cfg.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-            button.configuration = cfg
-        } else {
-            button.setTitleColor(color, for: .normal)
-            button.contentHorizontalAlignment = .leading
-        }
+        // Replace whatever storyboard configuration exists with a fresh plain config
+        // so contentInsets = .zero takes full effect and title aligns with labels above.
+        var cfg = UIButton.Configuration.plain()
+        cfg.baseForegroundColor = color
+        cfg.background.backgroundColor = .clear
+        cfg.titleAlignment = .leading
+        cfg.contentInsets = .zero
+        cfg.title = button.currentTitle
+        button.configuration = cfg
         button.titleLabel?.font = UIFont.systemFont(ofSize: size, weight: .semibold)
     }
 

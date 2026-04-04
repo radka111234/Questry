@@ -28,7 +28,7 @@ final class Session {
     }
 
     /// Save the current session to UserDefaults so it survives app restarts.
-    /// XP and level are stored per-username so they survive logout and re-login.
+    /// XP, level and avatar name are stored per-username so they survive logout and re-login.
     func save() {
         guard let user = currentUser else { return }
         let d = UserDefaults.standard
@@ -38,6 +38,10 @@ final class Session {
         // Per-user keys — survive logout so fallback works on re-login
         d.set(user.xp,   forKey: "session_xp_\(user.username)")
         d.set(user.level, forKey: "session_level_\(user.username)")
+        // Per-user avatar name — prevents avatar leaking to other accounts
+        if let avatarName = d.string(forKey: "selected_avatar_name") {
+            d.set(avatarName, forKey: "avatar_name_\(user.username)")
+        }
     }
 
     /// Restore session from UserDefaults on app launch. Returns true if successful.
@@ -54,6 +58,10 @@ final class Session {
             xp:          max(0, xp),
             age:         d.integer(forKey: Key.age)
         )
+        // Restore this user's avatar name so no other account's avatar leaks in
+        if let avatarName = d.string(forKey: "avatar_name_\(username)") {
+            d.set(avatarName, forKey: "selected_avatar_name")
+        }
         return true
     }
 

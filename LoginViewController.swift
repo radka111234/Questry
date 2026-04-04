@@ -46,18 +46,21 @@ final class LoginViewController: UIViewController {
                 )
                 Session.shared.save()   // persist so session survives restarts
 
-                // Ensure avatar name is in UserDefaults (needed for display everywhere)
-                if UserDefaults.standard.string(forKey: "selected_avatar_name") == nil {
-                    let allAvatarNames = [
-                        "avatar_warrior_1", "avatar_warrior_2", "avatar_warrior_3",
-                        "avatar_cowboy_1",  "avatar_cowboy_2",  "avatar_cowboy_3",
-                        "avatar_princess_1","avatar_princess_2","avatar_princess_3",
-                        "avatar_mage_1",    "avatar_mage_2",    "avatar_mage_3",
-                        "avatar0", "avatar1", "avatar2", "avatar3"
-                    ]
+                // Restore this user's avatar — always override so no other account's avatar leaks in
+                let allAvatarNames = [
+                    "avatar_warrior_1", "avatar_warrior_2", "avatar_warrior_3",
+                    "avatar_cowboy_1",  "avatar_cowboy_2",  "avatar_cowboy_3",
+                    "avatar_princess_1","avatar_princess_2","avatar_princess_3",
+                    "avatar_mage_1",    "avatar_mage_2",    "avatar_mage_3",
+                    "avatar0", "avatar1", "avatar2", "avatar3"
+                ]
+                // Prefer the per-user saved name (set via AvatarStudio), fall back to Supabase index
+                let perUserName = UserDefaults.standard.string(forKey: "avatar_name_\(profile.username)")
+                let avatarName = perUserName ?? {
                     let idx = max(0, min(profile.avatar, allAvatarNames.count - 1))
-                    UserDefaults.standard.set(allAvatarNames[idx], forKey: "selected_avatar_name")
-                }
+                    return allAvatarNames[idx]
+                }()
+                UserDefaults.standard.set(avatarName, forKey: "selected_avatar_name")
 
                 // Show TAB BAR controller
                 let tab = MainTabBarController()
