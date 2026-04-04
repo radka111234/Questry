@@ -31,14 +31,20 @@ final class LoginViewController: UIViewController {
                 // Logged in
                 AuthState.isLoggedIn = true
 
-                // Update session so header values work
+                // Update session — prefer the higher XP between Supabase and local
+                // (guards against Supabase PATCH having silently failed before)
+                let localXP    = UserDefaults.standard.integer(forKey: "session_xp")
+                let bestXP     = max(profile.xp, localXP)
+                let bestLevel  = max(1, (bestXP / 500) + 1)
+
                 Session.shared.currentUser = CurrentUser(
                     username: profile.username,
                     avatarIndex: profile.avatar,
-                    level: profile.level,
-                    xp: profile.xp,
+                    level: bestLevel,
+                    xp: bestXP,
                     age: profile.age
                 )
+                Session.shared.save()   // persist so session survives restarts
 
                 // Ensure avatar name is in UserDefaults (needed for display everywhere)
                 if UserDefaults.standard.string(forKey: "selected_avatar_name") == nil {

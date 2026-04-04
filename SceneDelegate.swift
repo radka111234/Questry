@@ -12,6 +12,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: windowScene)
 
+        // Restore session from UserDefaults so XP/level are available immediately
+        // even before the user reaches LoginViewController
+        if AuthState.isLoggedIn {
+            Session.shared.restoreFromDefaults()
+        }
+
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         window.rootViewController = storyboard.instantiateInitialViewController()
 

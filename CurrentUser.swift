@@ -18,6 +18,41 @@ final class Session {
 
     var currentUser: CurrentUser?
 
+    // MARK: - UserDefaults persistence keys
+    private enum Key {
+        static let username    = "session_username"
+        static let avatarIndex = "session_avatarIndex"
+        static let level       = "session_level"
+        static let xp          = "session_xp"
+        static let age         = "session_age"
+    }
+
+    /// Save the current session to UserDefaults so it survives app restarts.
+    func save() {
+        guard let user = currentUser else { return }
+        let d = UserDefaults.standard
+        d.set(user.username,    forKey: Key.username)
+        d.set(user.avatarIndex, forKey: Key.avatarIndex)
+        d.set(user.level,       forKey: Key.level)
+        d.set(user.xp,          forKey: Key.xp)
+        d.set(user.age,         forKey: Key.age)
+    }
+
+    /// Restore session from UserDefaults on app launch. Returns true if successful.
+    @discardableResult
+    func restoreFromDefaults() -> Bool {
+        let d = UserDefaults.standard
+        guard let username = d.string(forKey: Key.username), !username.isEmpty else { return false }
+        currentUser = CurrentUser(
+            username:    username,
+            avatarIndex: d.integer(forKey: Key.avatarIndex),
+            level:       max(1, d.integer(forKey: Key.level)),
+            xp:          max(0, d.integer(forKey: Key.xp)),
+            age:         d.integer(forKey: Key.age)
+        )
+        return true
+    }
+
     /// Add XP to the in-memory session, recalculate level, and sync to Supabase.
     /// If the XP booster item is owned, the amount is doubled.
     /// Posts `.didLevelUp` notification when the level increases.
@@ -28,6 +63,7 @@ final class Session {
         user.xp += boosted
         user.level = max(1, (user.xp / 500) + 1)
         currentUser = user
+        save()  // persist locally immediately
 
         if user.level > oldLevel {
             NotificationCenter.default.post(
@@ -55,6 +91,7 @@ final class Session {
         user.xp -= amount
         user.level = max(1, (user.xp / 500) + 1)
         currentUser = user
+        save()  // persist locally immediately
         SupabaseManager.shared.updateProgress(
             username: user.username,
             xp: user.xp,
