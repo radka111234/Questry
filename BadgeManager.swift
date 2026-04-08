@@ -103,10 +103,12 @@ struct BadgeDefinition {
         BadgeDefinition(
             id: "badge_all_worlds",
             name: "All Worlds Explorer",
-            description: "500 XP and 15 quests done  -  you've mastered every world!",
+            description: "Passed exams in Math, English and Geography. True explorer!",
             imageName: "badge_all_worlds"
         ) { event in
-            event.totalXP >= 500 && event.totalQuestsCompleted >= 15
+            event.passedExamSubjects.contains("Math") &&
+            event.passedExamSubjects.contains("English") &&
+            event.passedExamSubjects.contains("Geography")
         }
     ]
 }
@@ -118,6 +120,8 @@ struct BadgeEvent {
     let totalXP: Int
     let passedExam: Bool
     let subject: String
+    /// All subjects for which the user has ever passed an exam (persisted by BadgeManager).
+    let passedExamSubjects: Set<String>
 }
 
 // MARK: - Badge Manager
@@ -127,17 +131,31 @@ final class BadgeManager {
     static let shared = BadgeManager()
     private init() {}
 
-    private let earnedKey = "earned_badge_ids"
-    private let totalQuestsKey = "badge_total_quests_completed"
+    private let earnedKey          = "earned_badge_ids"
+    private let totalQuestsKey     = "badge_total_quests_completed"
+    private let passedSubjectsKey  = "badge_passed_exam_subjects"
 
     var earnedBadgeIds: Set<String> {
         get { Set(UserDefaults.standard.stringArray(forKey: earnedKey) ?? []) }
         set { UserDefaults.standard.set(Array(newValue), forKey: earnedKey) }
     }
 
+    /// All subjects for which the user has passed at least one exam.
+    var passedExamSubjects: Set<String> {
+        get { Set(UserDefaults.standard.stringArray(forKey: passedSubjectsKey) ?? []) }
+        set { UserDefaults.standard.set(Array(newValue), forKey: passedSubjectsKey) }
+    }
+
     func incrementQuestCount() {
         let current = UserDefaults.standard.integer(forKey: totalQuestsKey)
         UserDefaults.standard.set(current + 1, forKey: totalQuestsKey)
+    }
+
+    /// Record a passed exam for a subject. Call before checkAndAward.
+    func recordExamPass(subject: String) {
+        var subjects = passedExamSubjects
+        subjects.insert(subject)
+        passedExamSubjects = subjects
     }
 
     var totalQuestsCompleted: Int {

@@ -307,7 +307,7 @@ final class ExamQuestViewController: UIViewController {
                 cfg.titleAlignment = .leading
                 cfg.titleLineBreakMode = .byWordWrapping
                 cfg.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrs in
-                    var a = attrs; a.font = UIFont.boldSystemFont(ofSize: 16); return a
+                    var a = attrs; a.font = UIFont.boldSystemFont(ofSize: 18); return a
                 }
                 btn.configuration = cfg
             } else {
@@ -319,7 +319,7 @@ final class ExamQuestViewController: UIViewController {
             btn.titleLabel?.lineBreakMode = .byWordWrapping
             // Remove the storyboard fixed-height constraint so the button can grow
             btn.constraints.filter { $0.firstAttribute == .height && $0.relation == .equal }.forEach { $0.isActive = false }
-            btn.heightAnchor.constraint(greaterThanOrEqualToConstant: 72).isActive = true
+            btn.heightAnchor.constraint(greaterThanOrEqualToConstant: 90).isActive = true
             btn.layer.cornerRadius = 16
             btn.layer.shadowColor   = UIColor.black.cgColor
             btn.layer.shadowOpacity = 0.28
@@ -454,6 +454,7 @@ final class ExamQuestViewController: UIViewController {
         minCardHeight.priority = .defaultHigh
         minCardHeight.isActive = true
 
+        questionCountLabel.isHidden = true
         questionCountLabel.textColor = UIColor.white.withAlphaComponent(0.72)
         questionLabel.textColor = .white
         questionLabel.numberOfLines = 0
@@ -760,13 +761,14 @@ final class ExamQuestViewController: UIViewController {
         if correctAnswers >= needed {
             saveExamPass()
 
-            // Check badges on exam pass
-            let totalXP = Session.shared.currentUser?.xp ?? 0
+            // Record exam pass for this subject, then check badges
+            BadgeManager.shared.recordExamPass(subject: subject)
             let event = BadgeEvent(
                 totalQuestsCompleted: BadgeManager.shared.totalQuestsCompleted,
-                totalXP: totalXP,
+                totalXP: Session.shared.currentUser?.xp ?? 0,
                 passedExam: true,
-                subject: subject
+                subject: subject,
+                passedExamSubjects: BadgeManager.shared.passedExamSubjects
             )
             let newBadges = BadgeManager.shared.checkAndAward(event: event)
 
@@ -896,13 +898,12 @@ final class ExamQuestViewController: UIViewController {
 
         // Badge check
         BadgeManager.shared.incrementQuestCount()
-        let totalXP = (Session.shared.currentUser?.xp ?? 0) +
-                      UserDefaults.standard.integer(forKey: worldXPKey)
         let event = BadgeEvent(
             totalQuestsCompleted: BadgeManager.shared.totalQuestsCompleted,
-            totalXP: totalXP,
+            totalXP: Session.shared.currentUser?.xp ?? 0,
             passedExam: false,
-            subject: subject
+            subject: subject,
+            passedExamSubjects: BadgeManager.shared.passedExamSubjects
         )
         let newBadges = BadgeManager.shared.checkAndAward(event: event)
 

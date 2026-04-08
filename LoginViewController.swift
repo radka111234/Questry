@@ -44,9 +44,10 @@ final class LoginViewController: UIViewController {
                     xp: bestXP,
                     age: profile.age
                 )
-                Session.shared.save()   // persist so session survives restarts
 
-                // Restore this user's avatar — always override so no other account's avatar leaks in
+                // Restore this user's avatar BEFORE calling save() so save() captures
+                // the correct avatar name under avatar_name_<username>.
+                // Always override selected_avatar_name so no other account's avatar leaks in.
                 let allAvatarNames = [
                     "avatar_warrior_1", "avatar_warrior_2", "avatar_warrior_3",
                     "avatar_cowboy_1",  "avatar_cowboy_2",  "avatar_cowboy_3",
@@ -62,6 +63,8 @@ final class LoginViewController: UIViewController {
                 }()
                 UserDefaults.standard.set(avatarName, forKey: "selected_avatar_name")
 
+                Session.shared.save()   // persist — now reads the correct avatar for this user
+
                 // Show TAB BAR controller
                 let tab = MainTabBarController()
                 tab.modalPresentationStyle = .fullScreen
@@ -71,40 +74,86 @@ final class LoginViewController: UIViewController {
     }
 
     @IBAction func didTapForgotPassword(_ sender: UIButton) {
-        let alert = UIAlertController(
+        // Step 1: ask for username and verify it exists
+        let step1 = UIAlertController(
             title: "Forgot password?",
-            message: "Enter your username and we'll reset your password to a temporary one you can change after logging in.",
+            message: "Enter your username to continue.",
             preferredStyle: .alert
         )
-        alert.addTextField { tf in
-            tf.placeholder = "Your username"
+        step1.addTextField { tf in
+            tf.placeholder = "Username"
             tf.autocapitalizationType = .none
+            tf.autocorrectionType = .no
         }
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Reset", style: .default) { _ in
-            let username = (alert.textFields?.first?.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        step1.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        step1.addAction(UIAlertAction(title: "Next", style: .default) { [weak self] _ in
+            let username = (step1.textFields?.first?.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
             guard !username.isEmpty else { return }
 
-            let tempPassword = "Questry1234"
-            SupabaseManager.shared.changePassword(username: username, newPassword: tempPassword) { success in
+            SupabaseManager.shared.checkUsernameExists(username: username) { exists in
                 DispatchQueue.main.async {
-                    if success {
-                        let info = UIAlertController(
-                            title: "Password reset ✅",
-                            message: "Your temporary password is:\n\n\(tempPassword)\n\nLog in with it and then change your password in your profile.",
+                    if exists {
+                        self?.showNewPasswordAlert(for: username)
+                    } else {
+                        let err = UIAlertController(
+                            title: "Not found",
+                            message: "No account found with that username.",
                             preferredStyle: .alert
                         )
-                        info.addAction(UIAlertAction(title: "Got it", style: .default))
-                        self.present(info, animated: true)
-                    } else {
-                        let err = UIAlertController(title: "Not found", message: "No account found with that username.", preferredStyle: .alert)
                         err.addAction(UIAlertAction(title: "OK", style: .default))
-                        self.present(err, animated: true)
+                        self?.present(err, animated: true)
                     }
                 }
             }
         })
-        present(alert, animated: true)
+        present(step1, animated: true)
+    }
+
+    private func showNewPasswordAlert(for username: String) {
+        // Step 2: ask for new password + confirmation
+        let step2 = UIAlertController(
+            title: "New password",
+            message: "Choose a new password for \(username).",
+            preferredStyle: .alert
+        )
+        step2.addTextField { tf in
+            tf.placeholder = "New password"
+            tf.isSecureTextEntry = true
+        }
+        step2.addTextField { tf in
+            tf.placeholder = "Repeat password"
+            tf.isSecureTextEntry = true
+        }
+        step2.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        step2.addAction(UIAlertAction(title: "Save", style: .default) { [weak self] _ in
+            let pw1 = step2.textFields?[0].text ?? ""
+            let pw2 = step2.textFields?[1].text ?? ""
+
+            guard pw1.count >= 4 else {
+                self?.showSimpleAlert(title: "Too short", message: "Password must be at least 4 characters.")
+                return
+            }
+            guard pw1 == pw2 else {
+                self?.showSimpleAlert(title: "Mismatch", message: "Passwords don't match. Please try again.")
+                return
+            }
+
+            SupabaseManager.shared.changePassword(username: username, newPassword: pw1) { success in
+                DispatchQueue.main.async {
+                    self?.showSimpleAlert(
+                        title: success ? "Done ✅" : "Error",
+                        message: success ? "Password updated. You can now log in with your new password." : "Could not update password. Please try again."
+                    )
+                }
+            }
+        })
+        present(step2, animated: true)
+    }
+
+    private func showSimpleAlert(title: String, message: String) {
+        let a = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        a.addAction(UIAlertAction(title: "OK", style: .default))
+        present(a, animated: true)
     }
 
     @IBAction func didTapCreateAccount(_ sender: UIButton) {

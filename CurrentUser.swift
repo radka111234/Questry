@@ -70,7 +70,8 @@ final class Session {
     /// Posts `.didLevelUp` notification when the level increases.
     func addXP(_ amount: Int) {
         guard var user = currentUser else { return }
-        let boosted = UserDefaults.standard.bool(forKey: "item_xp_booster") ? amount * 2 : amount
+        let xpBoosterKey = "item_xp_booster_\(user.username)"
+        let boosted = UserDefaults.standard.bool(forKey: xpBoosterKey) ? amount * 2 : amount
         let oldLevel = user.level
         user.xp += boosted
         user.level = max(1, (user.xp / 500) + 1)
@@ -114,7 +115,11 @@ final class Session {
             "math_diagnostic_done", "eng_diagnostic_done", "geo_diagnostic_done",
             "sci_diagnostic_done",  "his_diagnostic_done",
             // Badge state
-            "earned_badge_ids", "badge_total_quests_completed"
+            "earned_badge_ids", "badge_total_quests_completed", "badge_passed_exam_subjects",
+            // Legacy global shop keys (replaced by per-user keys — clear so they don't pollute new accounts)
+            "shop_owned_items",
+            "item_gold_frame", "item_magic_aura", "item_xp_booster",
+            "item_badge_pack", "item_map_theme"
         ] {
             d.removeObject(forKey: key)
         }

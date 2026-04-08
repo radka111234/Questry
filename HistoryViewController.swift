@@ -27,6 +27,7 @@ final class HistoryViewController: UIViewController {
     private var didBuildNodes = false
     private var lastBuiltTopicId: Int = -1
     private weak var backBtn: UIButton?
+    private weak var puzzleBtn: UIButton?
 
     // Pending unlock animation  -  set in viewWillAppear, consumed in viewDidAppear
     private var pendingTopicUnlockId: Int?
@@ -70,6 +71,7 @@ final class HistoryViewController: UIViewController {
         scrollView.showsHorizontalScrollIndicator = false
 
         addBackButton()
+        addPuzzleButton(emoji: "📜", color: UIColor(red: 0.45, green: 0.25, blue: 0.08, alpha: 0.92))
 
         if UserDefaults.standard.integer(forKey: practiceUnlockedKey) == 0 {
             UserDefaults.standard.set(1, forKey: practiceUnlockedKey)
@@ -155,7 +157,35 @@ final class HistoryViewController: UIViewController {
         [avatarImageView, usernameLabel, levelLabel, xpLabel, xpProgress].forEach {
             if let v = $0 { view.bringSubviewToFront(v) }
         }
-        if let btn = backBtn { view.bringSubviewToFront(btn) }
+        if let btn = backBtn   { view.bringSubviewToFront(btn) }
+        if let btn = puzzleBtn { view.bringSubviewToFront(btn) }
+    }
+
+    private func addPuzzleButton(emoji: String, color: UIColor) {
+        let btn = UIButton(type: .system)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("\(emoji) Puzzles", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        btn.backgroundColor = color
+        btn.layer.cornerRadius = 20
+        btn.layer.borderWidth = 1.5
+        btn.layer.borderColor = UIColor.white.withAlphaComponent(0.4).cgColor
+        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
+        btn.addTarget(self, action: #selector(didTapPuzzles), for: .touchUpInside)
+        view.addSubview(btn)
+        puzzleBtn = btn
+        NSLayoutConstraint.activate([
+            btn.topAnchor.constraint(equalTo: xpProgress.bottomAnchor, constant: 10),
+            btn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 14),
+            btn.heightAnchor.constraint(equalToConstant: 36)
+        ])
+    }
+
+    @objc private func didTapPuzzles() {
+        let hub = PuzzleHubViewController()
+        hub.world = .history
+        navigationController?.pushViewController(hub, animated: true)
     }
 
     // MARK: - Map construction
@@ -472,7 +502,19 @@ final class HistoryViewController: UIViewController {
             let questNumber = index + 1
 
             if completed.contains(questNumber) {
-                button.setTitle("✓", for: .normal)
+                button.titleLabel?.numberOfLines = 2
+                button.titleLabel?.lineBreakMode = .byWordWrapping
+                let bigAttr: [NSAttributedString.Key: Any] = [
+                    .font: UIFont.boldSystemFont(ofSize: 20),
+                    .foregroundColor: UIColor.white
+                ]
+                let smallAttr: [NSAttributedString.Key: Any] = [
+                    .font: UIFont.systemFont(ofSize: 9, weight: .semibold),
+                    .foregroundColor: UIColor.white.withAlphaComponent(0.9)
+                ]
+                let attrStr = NSMutableAttributedString(string: "✓\n", attributes: bigAttr)
+                attrStr.append(NSAttributedString(string: "↺ play", attributes: smallAttr))
+                button.setAttributedTitle(attrStr, for: .normal)
                 button.backgroundColor = UIColor(red: 88/255, green: 196/255, blue: 96/255, alpha: 0.95)
                 button.layer.borderColor = UIColor.white.withAlphaComponent(0.85).cgColor
                 button.isEnabled = true
@@ -480,6 +522,8 @@ final class HistoryViewController: UIViewController {
                 nodeGlowViews[index].alpha = 1
 
             } else if questNumber <= unlocked {
+                button.setAttributedTitle(nil, for: .normal)
+                button.titleLabel?.numberOfLines = 1
                 button.setTitle("\(questNumber)", for: .normal)
                 button.backgroundColor = amberColor.withAlphaComponent(0.94)
                 button.layer.borderColor = UIColor.white.withAlphaComponent(0.75).cgColor
@@ -488,6 +532,8 @@ final class HistoryViewController: UIViewController {
                 nodeGlowViews[index].alpha = 1
 
             } else {
+                button.setAttributedTitle(nil, for: .normal)
+                button.titleLabel?.numberOfLines = 1
                 button.setTitle("🔒", for: .normal)
                 button.backgroundColor = UIColor.black.withAlphaComponent(0.30)
                 button.layer.borderColor = UIColor.white.withAlphaComponent(0.25).cgColor
@@ -535,6 +581,12 @@ final class HistoryViewController: UIViewController {
                 vc.mapQuestNumber = 1
                 navigationController?.pushViewController(vc, animated: true)
             }
+        } else if questNumber == 1 && completed.contains(1) {
+            // Replay quest 1 — go straight to interactive questions
+            let vc = HisInteractiveViewController()
+            vc.topicId = topicId
+            vc.questNumber = 1
+            navigationController?.pushViewController(vc, animated: true)
         } else if questNumber == 2 {
             let vc = HisInteractiveViewController()
             vc.topicId = topicId

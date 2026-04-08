@@ -219,6 +219,35 @@ final class SupabaseManager {
         }.resume()
     }
 
+    // MARK: - Check username exists (GET)
+    func checkUsernameExists(
+        username: String,
+        completion: @escaping (Bool) -> Void
+    ) {
+        guard var components = URLComponents(string: "\(baseURL)/rest/v1/Profiles") else {
+            completion(false); return
+        }
+        components.queryItems = [
+            URLQueryItem(name: "select", value: "username"),
+            URLQueryItem(name: "username", value: "eq.\(username)"),
+            URLQueryItem(name: "limit", value: "1")
+        ]
+        guard let url = components.url else { completion(false); return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue(apiKey, forHTTPHeaderField: "apikey")
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil,
+                  (response as? HTTPURLResponse)?.statusCode == 200,
+                  let data = data,
+                  let arr = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]]
+            else { completion(false); return }
+            completion(!arr.isEmpty)
+        }.resume()
+    }
+
     func validateLogin(
         username: String,
         password: String,

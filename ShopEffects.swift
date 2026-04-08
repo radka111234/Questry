@@ -2,10 +2,13 @@ import UIKit
 
 enum ShopEffects {
 
-    static var hasGoldFrame: Bool { UserDefaults.standard.bool(forKey: "item_gold_frame") }
-    static var hasMagicAura: Bool { UserDefaults.standard.bool(forKey: "item_magic_aura") }
-    static var hasXPBooster: Bool { UserDefaults.standard.bool(forKey: "item_xp_booster") }
-    static var hasMapTheme:  Bool { UserDefaults.standard.bool(forKey: "item_map_theme") }
+    // All item flags are stored per-user so purchases never leak across accounts.
+    private static var u: String { Session.shared.currentUser?.username ?? "__guest__" }
+
+    static var hasGoldFrame: Bool { UserDefaults.standard.bool(forKey: "item_gold_frame_\(u)") }
+    static var hasMagicAura: Bool { UserDefaults.standard.bool(forKey: "item_magic_aura_\(u)") }
+    static var hasXPBooster: Bool { UserDefaults.standard.bool(forKey: "item_xp_booster_\(u)") }
+    static var hasMapTheme:  Bool { UserDefaults.standard.bool(forKey: "item_map_theme_\(u)") }
 
     private static let auraTag = 77_991
 

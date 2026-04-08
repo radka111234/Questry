@@ -253,7 +253,7 @@ final class DailyQuestsViewController: UIViewController, UITableViewDataSource, 
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
-        label.text = section == 0 ? "Daily Quests" : "Extra To-Do's"
+        label.text = section == 0 ? t("quests.title") : t("quests.extra")
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
 

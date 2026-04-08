@@ -18,13 +18,13 @@ final class MainTabBarController: UITabBarController {
         tabBar.isTranslucent = true
 
         let homeVC = makeFromStoryboard(id: "MainScreenViewController")
-        let home = makeNav(root: homeVC, title: "Home", systemImage: "house")
+        let home = makeNav(root: homeVC, title: t("tab.home"), systemImage: "house")
 
         let questsVC = makeFromStoryboard(id: "DailyQuestsViewController")
-        let quests = makeNav(root: questsVC, title: "Quests", systemImage: "checklist")
+        let quests = makeNav(root: questsVC, title: t("tab.quests"), systemImage: "checklist")
 
         let profileVC = makeFromStoryboard(id: "ProfileViewController")
-        let profile = makeNav(root: profileVC, title: "Profile", systemImage: "person")
+        let profile = makeNav(root: profileVC, title: t("tab.profile"), systemImage: "person")
 
         viewControllers = [home, quests, profile]
 

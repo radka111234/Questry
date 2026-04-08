@@ -492,8 +492,14 @@ enum GeographyGameData {
     static func practiceQuestions(for topicId: Int, questNumber: Int) -> [MathExamQuestion] {
         let all = practiceQuestionsByTopic[topicId] ?? []
         guard !all.isEmpty else { return [] }
-        // questNumber 2 & 3 → first 5 questions; questNumber 4 → next 5
-        let startIndex = questNumber >= 4 ? 5 : 0
+        let startIndex: Int
+        switch questNumber {
+        case 1:  startIndex = 0
+        case 2:  startIndex = min(5,  all.count - 1)
+        case 3:  startIndex = min(10, all.count - 1)
+        case 4:  startIndex = min(15, all.count - 1)
+        default: startIndex = 0
+        }
         let endIndex = min(startIndex + questionsPerQuest, all.count)
         guard startIndex < endIndex else { return Array(all.prefix(questionsPerQuest)) }
         return Array(all[startIndex..<endIndex])

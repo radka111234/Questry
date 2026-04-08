@@ -364,8 +364,9 @@ final class QuestionViewController: UIViewController {
 
             // Answer text label
             let ansLbl = UILabel(); ansLbl.tag = 500 + idx
-            ansLbl.font = .boldSystemFont(ofSize: 17); ansLbl.textColor = .white
-            ansLbl.numberOfLines = 2; ansLbl.textAlignment = .center
+            ansLbl.font = .boldSystemFont(ofSize: 19); ansLbl.textColor = .white
+            ansLbl.numberOfLines = 3; ansLbl.textAlignment = .center
+            ansLbl.adjustsFontSizeToFitWidth = true; ansLbl.minimumScaleFactor = 0.75
             ansLbl.translatesAutoresizingMaskIntoConstraints = false
             btn.addSubview(ansLbl)
 
@@ -391,7 +392,7 @@ final class QuestionViewController: UIViewController {
         xpChip.layer.cornerRadius = 13; xpChip.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(xpChip)
         let xpChipLbl = UILabel()
-        xpChipLbl.text = "⭐  +5 XP per correct answer"
+        xpChipLbl.text = "⭐  +3 XP per correct answer"
         xpChipLbl.font = .systemFont(ofSize: 12, weight: .medium)
         xpChipLbl.textColor = UIColor.white.withAlphaComponent(0.75)
         xpChipLbl.translatesAutoresizingMaskIntoConstraints = false
@@ -466,7 +467,7 @@ final class QuestionViewController: UIViewController {
             grid.topAnchor.constraint(equalTo: questionDivider.bottomAnchor, constant: 12),
             grid.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             grid.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            grid.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.36),
+            grid.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.44),
 
             xpChip.topAnchor.constraint(equalTo: grid.bottomAnchor, constant: 10),
             xpChip.centerXAnchor.constraint(equalTo: view.centerXAnchor),

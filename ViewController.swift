@@ -27,7 +27,18 @@ final class ViewController: UIViewController {
     }
 
     private func setupUI() {
-        // Background
+        // Gradient fallback — always shown, image layered on top if it loads
+        let gradLayer = CAGradientLayer()
+        gradLayer.colors = [
+            UIColor(red: 0.90, green: 0.96, blue: 0.60, alpha: 1).cgColor,
+            UIColor(red: 0.98, green: 0.98, blue: 0.72, alpha: 1).cgColor
+        ]
+        gradLayer.startPoint = CGPoint(x: 0.5, y: 0)
+        gradLayer.endPoint   = CGPoint(x: 0.5, y: 1)
+        gradLayer.frame      = UIScreen.main.bounds
+        view.layer.insertSublayer(gradLayer, at: 0)
+
+        // Background image
         backgroundImageView.image = UIImage(named: "launch_background")
         backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false

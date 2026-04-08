@@ -24,12 +24,12 @@ final class RewardsShopViewController: UIViewController,
     // Titles = 16 chars each
     // Subtitles = 16 chars each
     private let items: [ShopItem] = [
-        .init(title: "Shiny Gold Frame", subtitle: "Hero border look", cost: 100, imageName: "shop_gold_frame"),
-        .init(title: "Arcane Glow Ring", subtitle: "Glow hero effect", cost: 150, imageName: "shop_magic_aura"),
-        .init(title: "Turbo XP Booster", subtitle: "2x your XP gains", cost: 200, imageName: "shop_double_xp"),
-        .init(title: "Legendary Badge", subtitle: "Unlock rare gems", cost: 250, imageName: "shop_badge_pack"),
-        .init(title: "Mystic Map Look", subtitle: "Restyle your map", cost: 300, imageName: "shop_island_theme"),
-        .init(title: "Mystery Loot Box", subtitle: "Rare loot inside", cost: 400, imageName: "shop_mystery_chest")
+        .init(title: "Shiny Gold Frame", subtitle: "Hero border look", cost: 500,  imageName: "shop_gold_frame"),
+        .init(title: "Arcane Glow Ring", subtitle: "Glow hero effect", cost: 750,  imageName: "shop_magic_aura"),
+        .init(title: "Turbo XP Booster", subtitle: "2x your XP gains", cost: 1000, imageName: "shop_double_xp"),
+        .init(title: "Legendary Badge", subtitle: "Unlock rare gems", cost: 1500,  imageName: "shop_badge_pack"),
+        .init(title: "Mystic Map Look", subtitle: "Restyle your map", cost: 2000,  imageName: "shop_island_theme"),
+        .init(title: "Mystery Loot Box", subtitle: "Rare loot inside", cost: 3000,  imageName: "shop_mystery_chest")
     ]
 
     override func viewDidLoad() {
@@ -217,38 +217,44 @@ final class RewardsShopViewController: UIViewController,
 
     // MARK: - Purchase helpers
 
+    // Per-user key so purchases are isolated between accounts.
+    private var shopOwnedKey: String {
+        "shop_owned_items_\(Session.shared.currentUser?.username ?? "__guest__")"
+    }
+
     private func isPurchased(_ item: ShopItem) -> Bool {
-        let owned = UserDefaults.standard.string(forKey: "shop_owned_items") ?? ""
+        let owned = UserDefaults.standard.string(forKey: shopOwnedKey) ?? ""
         return owned.components(separatedBy: ",").contains(item.imageName)
     }
 
     private func markPurchased(_ item: ShopItem) {
-        var owned = UserDefaults.standard.string(forKey: "shop_owned_items") ?? ""
+        var owned = UserDefaults.standard.string(forKey: shopOwnedKey) ?? ""
         if owned.isEmpty {
             owned = item.imageName
         } else {
             owned += ",\(item.imageName)"
         }
-        UserDefaults.standard.set(owned, forKey: "shop_owned_items")
+        UserDefaults.standard.set(owned, forKey: shopOwnedKey)
     }
 
     private func applyItemEffect(_ item: ShopItem) {
+        let u = Session.shared.currentUser?.username ?? "__guest__"
         switch item.imageName {
         case "shop_gold_frame":
-            UserDefaults.standard.set(true, forKey: "item_gold_frame")
+            UserDefaults.standard.set(true, forKey: "item_gold_frame_\(u)")
         case "shop_magic_aura":
-            UserDefaults.standard.set(true, forKey: "item_magic_aura")
+            UserDefaults.standard.set(true, forKey: "item_magic_aura_\(u)")
         case "shop_double_xp":
-            UserDefaults.standard.set(true, forKey: "item_xp_booster")
+            UserDefaults.standard.set(true, forKey: "item_xp_booster_\(u)")
         case "shop_badge_pack":
-            UserDefaults.standard.set(true, forKey: "item_badge_pack")
+            UserDefaults.standard.set(true, forKey: "item_badge_pack_\(u)")
             // Unlock 'Math Explorer' and 'First World' badges for the player
             var earned = BadgeManager.shared.earnedBadgeIds
             earned.insert("badge_math_explorer")
             earned.insert("badge_first_world")
             BadgeManager.shared.earnedBadgeIds = earned
         case "shop_island_theme":
-            UserDefaults.standard.set(true, forKey: "item_map_theme")
+            UserDefaults.standard.set(true, forKey: "item_map_theme_\(u)")
         case "shop_mystery_chest":
             Session.shared.addXP(50)
             // Show reveal is handled by showMysteryChestReveal() called from handlePurchase

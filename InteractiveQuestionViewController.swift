@@ -473,7 +473,7 @@ final class InteractiveQuestionViewController: UIViewController {
     private func saveQuestCompletion() {
         let defaults = UserDefaults.standard
 
-        rewardXPForThisLevel = max(questions.count * 5, correctAnswerCount * 5)
+        rewardXPForThisLevel = max(questions.count * 3, correctAnswerCount * 3)
         let currentWorldXP = defaults.integer(forKey: worldXPKey)
         defaults.set(currentWorldXP + rewardXPForThisLevel, forKey: worldXPKey)
         Session.shared.addXP(rewardXPForThisLevel)
@@ -491,9 +491,8 @@ final class InteractiveQuestionViewController: UIViewController {
             defaults.set(nextUnlocked, forKey: practiceUnlockedKey)
         }
 
-        // Record streak and sync XP to Supabase
+        // Record streak (XP already added once above — do NOT call addXP again)
         StreakManager.shared.recordPlay()
-        Session.shared.addXP(rewardXPForThisLevel)
 
         // Daily quest tracking
         DailyQuestManager.shared.incrementTotalQuests()
@@ -505,13 +504,12 @@ final class InteractiveQuestionViewController: UIViewController {
 
         // Badge check  -  must happen after XP is saved
         BadgeManager.shared.incrementQuestCount()
-        let totalXP = (Session.shared.currentUser?.xp ?? 0) +
-                      UserDefaults.standard.integer(forKey: worldXPKey)
         let event = BadgeEvent(
             totalQuestsCompleted: BadgeManager.shared.totalQuestsCompleted,
-            totalXP: totalXP,
+            totalXP: Session.shared.currentUser?.xp ?? 0,
             passedExam: false,
-            subject: subject
+            subject: subject,
+            passedExamSubjects: BadgeManager.shared.passedExamSubjects
         )
         let newBadges = BadgeManager.shared.checkAndAward(event: event)
 

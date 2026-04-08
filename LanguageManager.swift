@@ -242,12 +242,24 @@ final class LanguageManager {
             // Preferences  -  Language section
             "pref_section_language":   "Language",
             "pref_app_language":       "App Language",
-            "pref_teaching_language":  "Teaching Language",
+            "pref_teaching_language":  "Teaching Language for English",
 
             // English world - teaching language prompt
             "eng_prompt_title":    "What language should we teach you English in?",
             "eng_prompt_subtitle": "Pick the language you feel most comfortable with. You can change this later in Settings.",
             "eng_prompt_confirm":  "Let's Start! 🚀",
+
+            // Profile screen labels
+            "profile.personal_info":    "Personal Information",
+            "profile.progress_summary": "Progress summary",
+            "profile.change_avatar":    "Change avatar",
+            "profile.change_username":  "Change username",
+            "profile.change_password":  "Change password",
+            "profile.stat_quests":      "Quests completed:",
+            "profile.stat_streak":      "Streak:",
+            "profile.stat_streak_unit": "days",
+            "profile.stat_islands":     "Unlocked islands:",
+            "profile.stat_xp":          "Total XP:",
         ],
 
         // ── ARABIC ───────────────────────────────────────────────────────────
@@ -355,6 +367,18 @@ final class LanguageManager {
             // Progress
             "progress.title":       "تقدُّم العوالم",
             "progress.topics_done": "{0}/{1} موضوع",
+
+            // Profile screen labels
+            "profile.personal_info":    "المعلومات الشخصية",
+            "profile.progress_summary": "ملخص التقدُّم",
+            "profile.change_avatar":    "تغيير الصورة",
+            "profile.change_username":  "تغيير الاسم",
+            "profile.change_password":  "تغيير كلمة المرور",
+            "profile.stat_quests":      "المهام المكتملة:",
+            "profile.stat_streak":      "السلسلة:",
+            "profile.stat_streak_unit": "أيام",
+            "profile.stat_islands":     "الجزر المفتوحة:",
+            "profile.stat_xp":          "إجمالي نقاط الخبرة:",
         ],
 
         // ── CZECH ────────────────────────────────────────────────────────────
@@ -462,6 +486,18 @@ final class LanguageManager {
             // Progress
             "progress.title":       "Postup ve světech",
             "progress.topics_done": "{0}/{1} témat",
+
+            // Profile screen labels
+            "profile.personal_info":    "Osobní informace",
+            "profile.progress_summary": "Přehled postupu",
+            "profile.change_avatar":    "Změnit avatara",
+            "profile.change_username":  "Změnit jméno",
+            "profile.change_password":  "Změnit heslo",
+            "profile.stat_quests":      "Splněné úkoly:",
+            "profile.stat_streak":      "Série:",
+            "profile.stat_streak_unit": "dní",
+            "profile.stat_islands":     "Odemčené ostrovy:",
+            "profile.stat_xp":          "Celkové XP:",
         ],
 
         // ── SPANISH ──────────────────────────────────────────────────────────
@@ -569,6 +605,18 @@ final class LanguageManager {
             // Progress
             "progress.title":       "Progreso mundial",
             "progress.topics_done": "{0}/{1} temas",
+
+            // Profile screen labels
+            "profile.personal_info":    "Información personal",
+            "profile.progress_summary": "Resumen de progreso",
+            "profile.change_avatar":    "Cambiar avatar",
+            "profile.change_username":  "Cambiar nombre",
+            "profile.change_password":  "Cambiar contraseña",
+            "profile.stat_quests":      "Misiones completadas:",
+            "profile.stat_streak":      "Racha:",
+            "profile.stat_streak_unit": "días",
+            "profile.stat_islands":     "Islas desbloqueadas:",
+            "profile.stat_xp":          "XP total:",
         ],
 
         // ── FRENCH ───────────────────────────────────────────────────────────
@@ -676,6 +724,18 @@ final class LanguageManager {
             // Progress
             "progress.title":       "Progression mondiale",
             "progress.topics_done": "{0}/{1} sujets",
+
+            // Profile screen labels
+            "profile.personal_info":    "Informations personnelles",
+            "profile.progress_summary": "Résumé des progrès",
+            "profile.change_avatar":    "Changer d'avatar",
+            "profile.change_username":  "Changer de nom",
+            "profile.change_password":  "Changer de mot de passe",
+            "profile.stat_quests":      "Quêtes terminées :",
+            "profile.stat_streak":      "Série :",
+            "profile.stat_streak_unit": "jours",
+            "profile.stat_islands":     "Îles débloquées :",
+            "profile.stat_xp":          "XP total :",
         ],
 
         // ── GERMAN ───────────────────────────────────────────────────────────
@@ -783,6 +843,18 @@ final class LanguageManager {
             // Progress
             "progress.title":       "Weltfortschritt",
             "progress.topics_done": "{0}/{1} Themen",
+
+            // Profile screen labels
+            "profile.personal_info":    "Persönliche Daten",
+            "profile.progress_summary": "Fortschrittsübersicht",
+            "profile.change_avatar":    "Avatar ändern",
+            "profile.change_username":  "Nutzername ändern",
+            "profile.change_password":  "Passwort ändern",
+            "profile.stat_quests":      "Abgeschlossene Quests:",
+            "profile.stat_streak":      "Serie:",
+            "profile.stat_streak_unit": "Tage",
+            "profile.stat_islands":     "Freigeschaltete Inseln:",
+            "profile.stat_xp":          "Gesamt-XP:",
         ],
     ]
 }

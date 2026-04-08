@@ -94,8 +94,7 @@ final class ProfileViewController: UIViewController {
         [profileTitleLabel, usernameValueLabel, personalInfoHeader, progressHeader].forEach {
             view.addSubview($0)
         }
-        // Settings button wired to storyboard action — hide it; settings accessible from tab
-        settingsButton?.isHidden = true
+        settingsButton?.isHidden = false
     }
 
     // MARK: - Master layout (called once after first layout pass)
@@ -105,6 +104,12 @@ final class ProfileViewController: UIViewController {
         let width   = view.bounds.width - left * 2
         let centerX = view.bounds.midX
         var y: CGFloat = safe + 2
+
+        // ── Settings gear — top-right corner ─────────────────────────
+        let gearSize: CGFloat = 34
+        settingsButton?.frame = CGRect(x: view.bounds.width - left - gearSize,
+                                       y: y + 5,
+                                       width: gearSize, height: gearSize)
 
         // ── "Profile" title ──────────────────────────────────────────
         profileTitleLabel.frame = CGRect(x: left, y: y, width: width, height: 44)
@@ -172,7 +177,7 @@ final class ProfileViewController: UIViewController {
         let white70 = UIColor.white.withAlphaComponent(0.70)
 
         // Title
-        profileTitleLabel.text      = "Profile"
+        profileTitleLabel.text      = t("profile.title")
         profileTitleLabel.textColor = .white
         profileTitleLabel.font      = UIFont.systemFont(ofSize: 34, weight: .bold)
         profileTitleLabel.textAlignment = .center
@@ -182,8 +187,8 @@ final class ProfileViewController: UIViewController {
             hdr.textColor = .white
             hdr.font      = UIFont.systemFont(ofSize: 15, weight: .bold)
         }
-        personalInfoHeader.text = "Personal Information"
-        progressHeader.text     = "Progress summary"
+        personalInfoHeader.text = t("profile.personal_info")
+        progressHeader.text     = t("profile.progress_summary")
 
         // Value labels
         usernameValueLabel.textColor = white92
@@ -196,17 +201,25 @@ final class ProfileViewController: UIViewController {
         }
 
         // "Change avatar" — plain text link
-        styleLinkButton(changePictureButton, title: "Change avatar", color: white70, size: 14)
+        styleLinkButton(changePictureButton, title: t("profile.change_avatar"), color: white70, size: 14)
 
         // "Change username" / "Change password" — subtle text links
-        styleLinkButton(changeUsernameButton, title: "Change username", color: white92, size: 14)
-        styleLinkButton(changePasswordButton, title: "Change password", color: white92, size: 14)
+        styleLinkButton(changeUsernameButton, title: t("profile.change_username"), color: white92, size: 14)
+        styleLinkButton(changePasswordButton, title: t("profile.change_password"), color: white92, size: 14)
+
+        // Settings gear icon — top-right corner
+        let gearConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
+        let gearImage  = UIImage(systemName: "gearshape", withConfiguration: gearConfig)
+        settingsButton?.setImage(gearImage, for: .normal)
+        settingsButton?.setTitle(nil, for: .normal)
+        settingsButton?.tintColor = UIColor.white.withAlphaComponent(0.85)
+        settingsButton?.backgroundColor = .clear
 
         // Navigation buttons — teal pill
-        styleTealButton(worldProgressButton, title: "World Progress")
-        styleTealButton(rewardsShopButton,   title: "Rewards Shop")
-        styleTealButton(badgesButton,        title: "Badges")
-        styleTealButton(logoutButton,        title: "Log Out")
+        styleTealButton(worldProgressButton, title: t("profile.world_progress"))
+        styleTealButton(rewardsShopButton,   title: t("shop.title"))
+        styleTealButton(badgesButton,        title: t("badges.title"))
+        styleTealButton(logoutButton,        title: t("settings.logout"))
 
         // Avatar shadow
         avatarImageView?.layer.shadowColor   = UIColor.systemPurple.cgColor
@@ -260,11 +273,11 @@ final class ProfileViewController: UIViewController {
         let xp = Session.shared.currentUser?.xp ?? 0
 
         usernameValueLabel.text     = Session.shared.currentUser?.username ?? "Guest"
-        levelValueLabel?.text       = "Level \(Session.shared.currentUser?.level ?? 1)"
-        questsCompletedLabel?.text  = "Quests completed: \(questsCompleted)"
-        streakLabel?.text           = "Streak: \(streakDays) days"
-        unlockedIslandsLabel?.text  = "Unlocked islands: \(unlockedIslands)/\(totalIslands)"
-        totalXPLabel?.text          = "Total XP: \(xp)"
+        levelValueLabel?.text       = "\(t("map.level")) \(Session.shared.currentUser?.level ?? 1)"
+        questsCompletedLabel?.text  = "\(t("profile.stat_quests")) \(questsCompleted)"
+        streakLabel?.text           = "\(t("profile.stat_streak")) \(streakDays) \(t("profile.stat_streak_unit"))"
+        unlockedIslandsLabel?.text  = "\(t("profile.stat_islands")) \(unlockedIslands)/\(totalIslands)"
+        totalXPLabel?.text          = "\(t("profile.stat_xp")) \(xp)"
     }
 
     // MARK: - Navigation helper

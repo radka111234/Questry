@@ -20,6 +20,17 @@
 		8B2E57512F61A19B0022D547 /* GeographyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E57502F61A19B0022D547 /* GeographyViewController.swift */; };
 		8B2E57532F61A1D00022D547 /* ScienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E57522F61A1D00022D547 /* ScienceViewController.swift */; };
 		8B2E57572F61A2110022D547 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E57562F61A2110022D547 /* HistoryViewController.swift */; };
+		CF001A0100000001 /* HumanBodyHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000001 /* HumanBodyHubViewController.swift */; };
+		CF001A0100000002 /* BodyMatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000002 /* BodyMatchingViewController.swift */; };
+		CF001A0100000003 /* BodyBuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000003 /* BodyBuilderViewController.swift */; };
+		CF001A0100000004 /* MathComparisonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000004 /* MathComparisonViewController.swift */; };
+		CF001A0100000005 /* MathComparisonHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000005 /* MathComparisonHubViewController.swift */; };
+		CF001A0100000006 /* AlchemyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000006 /* AlchemyViewController.swift */; };
+		CF001A0100000007 /* AlchemyGameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000007 /* AlchemyGameData.swift */; };
+		CF001A0100000008 /* GeographyPuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000008 /* GeographyPuzzleViewController.swift */; };
+		CF001A0100000009 /* HistoryPuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000009 /* HistoryPuzzleViewController.swift */; };
+		CF001A010000000A /* EnglishPuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A020000000A /* EnglishPuzzleViewController.swift */; };
+		CF001A010000000B /* PuzzleHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A020000000B /* PuzzleHubViewController.swift */; };
 		8B627D772F631CB500022835 /* TopicIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B627D762F631CB500022835 /* TopicIntroViewController.swift */; };
 		8B627D7C2F6323DE00022835 /* ExamQuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B627D7B2F6323DE00022835 /* ExamQuestViewController.swift */; };
 		8B627D7E2F6470DD00022835 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B627D7D2F6470DD00022835 /* PassthroughView.swift */; };
@@ -64,6 +75,11 @@
 		8BFC347C2F5AF77200C2AA55 /* RewardsShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFC347B2F5AF77200C2AA55 /* RewardsShopViewController.swift */; };
 		8BFC34802F5BFF0000C2AA55 /* SpinWheelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFC347F2F5BFF0000C2AA55 /* SpinWheelViewController.swift */; };
 		CF1A2B3C4D5E6F7A8B9C0D1A /* ShopEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1A2B3C4D5E6F7A8B9C0D1B /* ShopEffects.swift */; };
+		CFA02B3C4D5E6F7A8B9C0E1A /* HumanBodyHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA02B3C4D5E6F7A8B9C0E1B /* HumanBodyHubViewController.swift */; };
+		CFB02B3C4D5E6F7A8B9C0F1A /* MathComparisonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB02B3C4D5E6F7A8B9C0F1B /* MathComparisonViewController.swift */; };
+		CFB02B3C4D5E6F7A8B9C0F2A /* MathComparisonHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB02B3C4D5E6F7A8B9C0F2B /* MathComparisonHubViewController.swift */; };
+		CFA02B3C4D5E6F7A8B9C0E2A /* BodyMatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA02B3C4D5E6F7A8B9C0E2B /* BodyMatchingViewController.swift */; };
+		CFA02B3C4D5E6F7A8B9C0E3A /* BodyBuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA02B3C4D5E6F7A8B9C0E3B /* BodyBuilderViewController.swift */; };
 		CF2A2B3C4D5E6F7A8B9C0D2A /* GeoDiagnosticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2A2B3C4D5E6F7A8B9C0D2B /* GeoDiagnosticViewController.swift */; };
 		CF3A2B3C4D5E6F7A8B9C0D3A /* GeoInteractiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3A2B3C4D5E6F7A8B9C0D3B /* GeoInteractiveViewController.swift */; };
 		CF4A2B3C4D5E6F7A8B9C0D4A /* GeographyGameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A2B3C4D5E6F7A8B9C0D4B /* GeographyGameData.swift */; };
@@ -179,6 +195,17 @@
 		8B2E57502F61A19B0022D547 /* GeographyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeographyViewController.swift; sourceTree = "<group>"; };
 		8B2E57522F61A1D00022D547 /* ScienceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScienceViewController.swift; sourceTree = "<group>"; };
 		8B2E57562F61A2110022D547 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		CF001A0200000001 /* HumanBodyHubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanBodyHubViewController.swift; sourceTree = "<group>"; };
+		CF001A0200000002 /* BodyMatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyMatchingViewController.swift; sourceTree = "<group>"; };
+		CF001A0200000003 /* BodyBuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyBuilderViewController.swift; sourceTree = "<group>"; };
+		CF001A0200000004 /* MathComparisonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathComparisonViewController.swift; sourceTree = "<group>"; };
+		CF001A0200000005 /* MathComparisonHubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathComparisonHubViewController.swift; sourceTree = "<group>"; };
+		CF001A0200000006 /* AlchemyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyViewController.swift; sourceTree = "<group>"; };
+		CF001A0200000007 /* AlchemyGameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlchemyGameData.swift; sourceTree = "<group>"; };
+		CF001A0200000008 /* GeographyPuzzleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeographyPuzzleViewController.swift; sourceTree = "<group>"; };
+		CF001A0200000009 /* HistoryPuzzleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPuzzleViewController.swift; sourceTree = "<group>"; };
+		CF001A020000000A /* EnglishPuzzleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishPuzzleViewController.swift; sourceTree = "<group>"; };
+		CF001A020000000B /* PuzzleHubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleHubViewController.swift; sourceTree = "<group>"; };
 		8B627D762F631CB500022835 /* TopicIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicIntroViewController.swift; sourceTree = "<group>"; };
 		8B627D7B2F6323DE00022835 /* ExamQuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamQuestViewController.swift; sourceTree = "<group>"; };
 		8B627D7D2F6470DD00022835 /* PassthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
@@ -228,6 +255,11 @@
 		8BFC347B2F5AF77200C2AA55 /* RewardsShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsShopViewController.swift; sourceTree = "<group>"; };
 		8BFC347F2F5BFF0000C2AA55 /* SpinWheelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinWheelViewController.swift; sourceTree = "<group>"; };
 		CF1A2B3C4D5E6F7A8B9C0D1B /* ShopEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopEffects.swift; sourceTree = "<group>"; };
+		CFA02B3C4D5E6F7A8B9C0E1B /* HumanBodyHubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanBodyHubViewController.swift; sourceTree = "<group>"; };
+		CFB02B3C4D5E6F7A8B9C0F1B /* MathComparisonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathComparisonViewController.swift; sourceTree = "<group>"; };
+		CFB02B3C4D5E6F7A8B9C0F2B /* MathComparisonHubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathComparisonHubViewController.swift; sourceTree = "<group>"; };
+		CFA02B3C4D5E6F7A8B9C0E2B /* BodyMatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyMatchingViewController.swift; sourceTree = "<group>"; };
+		CFA02B3C4D5E6F7A8B9C0E3B /* BodyBuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyBuilderViewController.swift; sourceTree = "<group>"; };
 		CF2A2B3C4D5E6F7A8B9C0D2B /* GeoDiagnosticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoDiagnosticViewController.swift; sourceTree = "<group>"; };
 		CF3A2B3C4D5E6F7A8B9C0D3B /* GeoInteractiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoInteractiveViewController.swift; sourceTree = "<group>"; };
 		CF4A2B3C4D5E6F7A8B9C0D4B /* GeographyGameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeographyGameData.swift; sourceTree = "<group>"; };
@@ -434,6 +466,17 @@
 				8BF5CD712F620A0000CF9080 /* Question.swift */,
 				8BF5CD732F620A0000CF9080 /* DraggableObjectView.swift */,
 				8B2E57562F61A2110022D547 /* HistoryViewController.swift */,
+				CF001A0200000001 /* HumanBodyHubViewController.swift */,
+				CF001A0200000002 /* BodyMatchingViewController.swift */,
+				CF001A0200000003 /* BodyBuilderViewController.swift */,
+				CF001A0200000004 /* MathComparisonViewController.swift */,
+				CF001A0200000005 /* MathComparisonHubViewController.swift */,
+				CF001A0200000006 /* AlchemyViewController.swift */,
+				CF001A0200000007 /* AlchemyGameData.swift */,
+				CF001A0200000008 /* GeographyPuzzleViewController.swift */,
+				CF001A0200000009 /* HistoryPuzzleViewController.swift */,
+				CF001A020000000A /* EnglishPuzzleViewController.swift */,
+				CF001A020000000B /* PuzzleHubViewController.swift */,
 				8B2E57522F61A1D00022D547 /* ScienceViewController.swift */,
 				8B2E57502F61A19B0022D547 /* GeographyViewController.swift */,
 				8B2E574E2F61A1730022D547 /* EnglishViewController.swift */,
@@ -485,6 +528,11 @@
 				8BD699742F5731AD00E53D1D /* ViewController.swift */,
 				8BD699752F5731AD00E53D1D /* WorldProgressViewController.swift */,
 				CF1A2B3C4D5E6F7A8B9C0D1B /* ShopEffects.swift */,
+				CFA02B3C4D5E6F7A8B9C0E1B /* HumanBodyHubViewController.swift */,
+				CFB02B3C4D5E6F7A8B9C0F1B /* MathComparisonViewController.swift */,
+				CFB02B3C4D5E6F7A8B9C0F2B /* MathComparisonHubViewController.swift */,
+				CFA02B3C4D5E6F7A8B9C0E2B /* BodyMatchingViewController.swift */,
+				CFA02B3C4D5E6F7A8B9C0E3B /* BodyBuilderViewController.swift */,
 				CF2A2B3C4D5E6F7A8B9C0D2B /* GeoDiagnosticViewController.swift */,
 				CF3A2B3C4D5E6F7A8B9C0D3B /* GeoInteractiveViewController.swift */,
 				CF4A2B3C4D5E6F7A8B9C0D4B /* GeographyGameData.swift */,
@@ -756,6 +804,13 @@
 				8B1B2C512F580AD8001864CD /* NotificationsViewController.swift in Sources */,
 				8B2E57532F61A1D00022D547 /* ScienceViewController.swift in Sources */,
 				8B2E57572F61A2110022D547 /* HistoryViewController.swift in Sources */,
+				CF001A0100000001 /* HumanBodyHubViewController.swift in Sources */,
+				CF001A0100000002 /* BodyMatchingViewController.swift in Sources */,
+				CF001A0100000003 /* BodyBuilderViewController.swift in Sources */,
+				CF001A0100000004 /* MathComparisonViewController.swift in Sources */,
+				CF001A0100000005 /* MathComparisonHubViewController.swift in Sources */,
+				CF001A0100000006 /* AlchemyViewController.swift in Sources */,
+				CF001A0100000007 /* AlchemyGameData.swift in Sources */,
 				8B796DB22F5728FE00A2ECC7 /* BadgesViewController.swift in Sources */,
 				26E9FC5521324BF09CD3EC83 /* BadgeManager.swift in Sources */,
 				CC1234567890ABCDEF012345 /* StreakManager.swift in Sources */,
@@ -770,6 +825,11 @@
 				8B796DB32F5728FE00A2ECC7 /* AppRouter.swift in Sources */,
 				8B796DB42F5728FE00A2ECC7 /* FeedbackViewController.swift in Sources */,
 				CF1A2B3C4D5E6F7A8B9C0D1A /* ShopEffects.swift in Sources */,
+				CFA02B3C4D5E6F7A8B9C0E1A /* HumanBodyHubViewController.swift in Sources */,
+				CFB02B3C4D5E6F7A8B9C0F1A /* MathComparisonViewController.swift in Sources */,
+				CFB02B3C4D5E6F7A8B9C0F2A /* MathComparisonHubViewController.swift in Sources */,
+				CFA02B3C4D5E6F7A8B9C0E2A /* BodyMatchingViewController.swift in Sources */,
+				CFA02B3C4D5E6F7A8B9C0E3A /* BodyBuilderViewController.swift in Sources */,
 				CF2A2B3C4D5E6F7A8B9C0D2A /* GeoDiagnosticViewController.swift in Sources */,
 				CF3A2B3C4D5E6F7A8B9C0D3A /* GeoInteractiveViewController.swift in Sources */,
 				CF4A2B3C4D5E6F7A8B9C0D4A /* GeographyGameData.swift in Sources */,
