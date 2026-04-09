@@ -31,6 +31,15 @@
 		CF001A0100000009 /* HistoryPuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000009 /* HistoryPuzzleViewController.swift */; };
 		CF001A010000000A /* EnglishPuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A020000000A /* EnglishPuzzleViewController.swift */; };
 		CF001A010000000B /* PuzzleHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A020000000B /* PuzzleHubViewController.swift */; };
+		CF001A010000000C /* ProgressTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A020000000C /* ProgressTracker.swift */; };
+		CF001A010000000D /* ProgressAnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A020000000D /* ProgressAnalyticsViewController.swift */; };
+		CF001A010000000E /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A020000000E /* ThemeManager.swift */; };
+		CF001A010000000F /* MotivationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A020000000F /* MotivationManager.swift */; };
+		CF001A0100000010 /* SpacedRepetitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000010 /* SpacedRepetitionManager.swift */; };
+		CF001A0100000011 /* AdaptiveDifficultyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000011 /* AdaptiveDifficultyManager.swift */; };
+		CF001A0100000012 /* RealWorldFacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000012 /* RealWorldFacts.swift */; };
+		CF001A0100000013 /* DragonBattleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000013 /* DragonBattleViewController.swift */; };
+		CF001A0100000014 /* TimedExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000014 /* TimedExamViewController.swift */; };
 		8B627D772F631CB500022835 /* TopicIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B627D762F631CB500022835 /* TopicIntroViewController.swift */; };
 		8B627D7C2F6323DE00022835 /* ExamQuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B627D7B2F6323DE00022835 /* ExamQuestViewController.swift */; };
 		8B627D7E2F6470DD00022835 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B627D7D2F6470DD00022835 /* PassthroughView.swift */; };
@@ -206,6 +215,15 @@
 		CF001A0200000009 /* HistoryPuzzleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPuzzleViewController.swift; sourceTree = "<group>"; };
 		CF001A020000000A /* EnglishPuzzleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishPuzzleViewController.swift; sourceTree = "<group>"; };
 		CF001A020000000B /* PuzzleHubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleHubViewController.swift; sourceTree = "<group>"; };
+		CF001A020000000C /* ProgressTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTracker.swift; sourceTree = "<group>"; };
+		CF001A020000000D /* ProgressAnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressAnalyticsViewController.swift; sourceTree = "<group>"; };
+		CF001A020000000E /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		CF001A020000000F /* MotivationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivationManager.swift; sourceTree = "<group>"; };
+		CF001A0200000010 /* SpacedRepetitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacedRepetitionManager.swift; sourceTree = "<group>"; };
+		CF001A0200000011 /* AdaptiveDifficultyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptiveDifficultyManager.swift; sourceTree = "<group>"; };
+		CF001A0200000012 /* RealWorldFacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealWorldFacts.swift; sourceTree = "<group>"; };
+		CF001A0200000013 /* DragonBattleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBattleViewController.swift; sourceTree = "<group>"; };
+		CF001A0200000014 /* TimedExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedExamViewController.swift; sourceTree = "<group>"; };
 		8B627D762F631CB500022835 /* TopicIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicIntroViewController.swift; sourceTree = "<group>"; };
 		8B627D7B2F6323DE00022835 /* ExamQuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamQuestViewController.swift; sourceTree = "<group>"; };
 		8B627D7D2F6470DD00022835 /* PassthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
@@ -477,6 +495,15 @@
 				CF001A0200000009 /* HistoryPuzzleViewController.swift */,
 				CF001A020000000A /* EnglishPuzzleViewController.swift */,
 				CF001A020000000B /* PuzzleHubViewController.swift */,
+			CF001A020000000C /* ProgressTracker.swift */,
+			CF001A020000000D /* ProgressAnalyticsViewController.swift */,
+			CF001A020000000E /* ThemeManager.swift */,
+			CF001A020000000F /* MotivationManager.swift */,
+			CF001A0200000010 /* SpacedRepetitionManager.swift */,
+			CF001A0200000011 /* AdaptiveDifficultyManager.swift */,
+			CF001A0200000012 /* RealWorldFacts.swift */,
+			CF001A0200000013 /* DragonBattleViewController.swift */,
+				CF001A0200000014 /* TimedExamViewController.swift */,
 				8B2E57522F61A1D00022D547 /* ScienceViewController.swift */,
 				8B2E57502F61A19B0022D547 /* GeographyViewController.swift */,
 				8B2E574E2F61A1730022D547 /* EnglishViewController.swift */,
@@ -859,6 +886,19 @@
 			CF141B3C4D5E6F7A8B9C1D4A /* EnglishTeachingData.swift in Sources */,
 			CF151B3C4D5E6F7A8B9C1D5A /* OnboardingViewController.swift in Sources */,
 			CF161B3C4D5E6F7A8B9C1D6A /* DragonVoiceManager.swift in Sources */,
+			CF001A0100000008 /* GeographyPuzzleViewController.swift in Sources */,
+			CF001A0100000009 /* HistoryPuzzleViewController.swift in Sources */,
+			CF001A010000000A /* EnglishPuzzleViewController.swift in Sources */,
+			CF001A010000000B /* PuzzleHubViewController.swift in Sources */,
+			CF001A010000000C /* ProgressTracker.swift in Sources */,
+			CF001A010000000D /* ProgressAnalyticsViewController.swift in Sources */,
+			CF001A010000000E /* ThemeManager.swift in Sources */,
+			CF001A010000000F /* MotivationManager.swift in Sources */,
+			CF001A0100000010 /* SpacedRepetitionManager.swift in Sources */,
+			CF001A0100000011 /* AdaptiveDifficultyManager.swift in Sources */,
+			CF001A0100000012 /* RealWorldFacts.swift in Sources */,
+			CF001A0100000013 /* DragonBattleViewController.swift in Sources */,
+				CF001A0100000014 /* TimedExamViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

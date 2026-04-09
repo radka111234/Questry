@@ -29,6 +29,7 @@ final class ScienceViewController: UIViewController {
     private weak var backBtn: UIButton?
     private weak var bodyLabBtn: UIButton?
     private weak var alchemyBtn: UIButton?
+    private weak var examBtn: UIButton?
 
     // Pending unlock animation  -  set in viewWillAppear, consumed in viewDidAppear
     private var pendingTopicUnlockId: Int?
@@ -73,6 +74,7 @@ final class ScienceViewController: UIViewController {
         addBackButton()
         addBodyLabButton()
         addAlchemyButton()
+        addExamButton()
 
         if UserDefaults.standard.integer(forKey: practiceUnlockedKey) == 0 {
             UserDefaults.standard.set(1, forKey: practiceUnlockedKey)
@@ -157,6 +159,7 @@ final class ScienceViewController: UIViewController {
         if let btn = backBtn     { view.bringSubviewToFront(btn) }
         if let btn = bodyLabBtn  { view.bringSubviewToFront(btn) }
         if let btn = alchemyBtn  { view.bringSubviewToFront(btn) }
+        if let btn = examBtn     { view.bringSubviewToFront(btn) }
     }
 
     // MARK: - Map construction
@@ -824,6 +827,36 @@ final class ScienceViewController: UIViewController {
 
     @objc private func didTapAlchemy() {
         let vc = AlchemyViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    // MARK: - Exam button
+
+    private func addExamButton() {
+        let btn = UIButton(type: .system)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("⏱️ Exam", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        btn.backgroundColor = UIColor(red: 0.55, green: 0.12, blue: 0.08, alpha: 0.92)
+        btn.layer.cornerRadius = 20
+        btn.layer.borderWidth = 1.5
+        btn.layer.borderColor = UIColor.white.withAlphaComponent(0.4).cgColor
+        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
+        btn.addTarget(self, action: #selector(didTapExam), for: .touchUpInside)
+        view.addSubview(btn)
+        examBtn = btn
+        NSLayoutConstraint.activate([
+            btn.topAnchor.constraint(equalTo: xpProgress.bottomAnchor, constant: 10),
+            btn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -120),
+            btn.heightAnchor.constraint(equalToConstant: 36)
+        ])
+    }
+
+    @objc private func didTapExam() {
+        let vc = TimedExamViewController()
+        vc.subject = "Science"
+        vc.topicId = currentTopicId()
         navigationController?.pushViewController(vc, animated: true)
     }
 

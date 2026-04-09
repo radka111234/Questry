@@ -26,6 +26,7 @@ final class ProfileViewController: UIViewController {
     private let usernameValueLabel      = UILabel()
     private let personalInfoHeader      = UILabel()
     private let progressHeader          = UILabel()
+    private let analyticsButton         = UIButton(type: .system)
 
     // MARK: - Computed data
     private let totalIslands = 5
@@ -91,7 +92,7 @@ final class ProfileViewController: UIViewController {
 
     // MARK: - Add programmatic views to hierarchy
     private func addProgrammaticViews() {
-        [profileTitleLabel, usernameValueLabel, personalInfoHeader, progressHeader].forEach {
+        [profileTitleLabel, usernameValueLabel, personalInfoHeader, progressHeader, analyticsButton].forEach {
             view.addSubview($0)
         }
         settingsButton?.isHidden = false
@@ -164,6 +165,10 @@ final class ProfileViewController: UIViewController {
 
         // ── [Badges] ─────────────────────────────────────────────────
         badgesButton?.frame = CGRect(x: left, y: y, width: width, height: navBtnH)
+        y += navBtnH + 10
+
+        // ── [Progress Analytics] ──────────────────────────────────────
+        analyticsButton.frame = CGRect(x: left, y: y, width: width, height: navBtnH)
         y += navBtnH + 16
 
         // ── [Log Out] ─────────────────────────────────────────────────
@@ -220,6 +225,8 @@ final class ProfileViewController: UIViewController {
         styleTealButton(rewardsShopButton,   title: t("shop.title"))
         styleTealButton(badgesButton,        title: t("badges.title"))
         styleTealButton(logoutButton,        title: t("settings.logout"))
+        styleTealButton(analyticsButton,     title: "📊 Detailed Progress")
+        analyticsButton.addTarget(self, action: #selector(didTapAnalytics), for: .touchUpInside)
 
         // Avatar shadow
         avatarImageView?.layer.shadowColor   = UIColor.systemPurple.cgColor
@@ -357,6 +364,11 @@ final class ProfileViewController: UIViewController {
             AppRouter.showLogin()
         })
         present(alert, animated: true)
+    }
+
+    @objc private func didTapAnalytics() {
+        let vc = ProgressAnalyticsViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     @IBAction func didTapSettings(_ sender: UIButton) { pushVC(id: "SettingsViewController") }

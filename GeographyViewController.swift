@@ -28,6 +28,7 @@ final class GeographyViewController: UIViewController {
     private var lastBuiltTopicId: Int = -1
     private weak var backBtn: UIButton?
     private weak var puzzleBtn: UIButton?
+    private weak var examBtn: UIButton?
 
     // Pending unlock animation  -  set in viewWillAppear, consumed in viewDidAppear
     private var pendingTopicUnlockId: Int?
@@ -69,6 +70,7 @@ final class GeographyViewController: UIViewController {
 
         addBackButton()
         addPuzzleButton(emoji: "🗺️", color: UIColor(red: 0.08, green: 0.28, blue: 0.62, alpha: 0.92))
+        addExamButton(color: UIColor(red: 0.55, green: 0.15, blue: 0.08, alpha: 0.92))
 
         if UserDefaults.standard.integer(forKey: practiceUnlockedKey) == 0 {
             UserDefaults.standard.set(1, forKey: practiceUnlockedKey)
@@ -156,6 +158,35 @@ final class GeographyViewController: UIViewController {
         }
         if let btn = backBtn   { view.bringSubviewToFront(btn) }
         if let btn = puzzleBtn { view.bringSubviewToFront(btn) }
+        if let btn = examBtn   { view.bringSubviewToFront(btn) }
+    }
+
+    private func addExamButton(color: UIColor) {
+        let btn = UIButton(type: .system)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("⏱️ Exam", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        btn.backgroundColor = color
+        btn.layer.cornerRadius = 20
+        btn.layer.borderWidth = 1.5
+        btn.layer.borderColor = UIColor.white.withAlphaComponent(0.4).cgColor
+        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
+        btn.addTarget(self, action: #selector(didTapExam), for: .touchUpInside)
+        view.addSubview(btn)
+        examBtn = btn
+        NSLayoutConstraint.activate([
+            btn.topAnchor.constraint(equalTo: xpProgress.bottomAnchor, constant: 10),
+            btn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -120),
+            btn.heightAnchor.constraint(equalToConstant: 36)
+        ])
+    }
+
+    @objc private func didTapExam() {
+        let vc = TimedExamViewController()
+        vc.subject = "Geography"
+        vc.topicId = currentTopicId()
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     private func addPuzzleButton(emoji: String, color: UIColor) {
@@ -174,7 +205,7 @@ final class GeographyViewController: UIViewController {
         puzzleBtn = btn
         NSLayoutConstraint.activate([
             btn.topAnchor.constraint(equalTo: xpProgress.bottomAnchor, constant: 10),
-            btn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 14),
+            btn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -14),
             btn.heightAnchor.constraint(equalToConstant: 36)
         ])
     }

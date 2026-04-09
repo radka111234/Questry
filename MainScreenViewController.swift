@@ -72,10 +72,12 @@ final class MainScreenViewController: UIViewController {
 
     @objc private func handleLevelUp(_ notification: Notification) {
         let newLevel = (notification.userInfo?["newLevel"] as? Int) ?? (Session.shared.currentUser?.level ?? 1)
-        showLevelUpOverlay(newLevel: newLevel)
+        let oldLevel = newLevel - 1
+        let newTier  = ThemeManager.shared.didUnlockNewTier(oldLevel: oldLevel, newLevel: newLevel)
+        showLevelUpOverlay(newLevel: newLevel, newTier: newTier)
     }
 
-    private func showLevelUpOverlay(newLevel: Int) {
+    private func showLevelUpOverlay(newLevel: Int, newTier: Bool = false) {
         let dim = UIView()
         dim.translatesAutoresizingMaskIntoConstraints = false
         dim.backgroundColor = UIColor.black.withAlphaComponent(0)
@@ -126,11 +128,14 @@ final class MainScreenViewController: UIViewController {
         levelLabel.textAlignment = .center
         levelLabel.numberOfLines = 0
 
+        let theme = ThemeManager.shared.themeForLevel(newLevel)
+        let subText = newTier ? theme.unlockMessage : "Keep completing quests to level up even further 🚀"
+
         let subLabel = UILabel()
         subLabel.translatesAutoresizingMaskIntoConstraints = false
-        subLabel.text = "Keep completing quests to level up even further 🚀"
+        subLabel.text = subText
         subLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        subLabel.textColor = UIColor.white.withAlphaComponent(0.65)
+        subLabel.textColor = newTier ? theme.accentColor : UIColor.white.withAlphaComponent(0.65)
         subLabel.textAlignment = .center
         subLabel.numberOfLines = 0
 
@@ -206,13 +211,14 @@ final class MainScreenViewController: UIViewController {
         let xp: Float = Float(user.xp % 500)
         let nextLevelXP: Float = 500
         xpProgress.progress = xp / nextLevelXP
-        xpProgress.tintColor = .systemGreen
+        ThemeManager.shared.styleXPBar(xpProgress)
         xpProgress.trackTintColor = UIColor.white.withAlphaComponent(0.2)
 
         ShopEffects.applyMapTheme(to: view)
 
         unlockedIslands = computeUnlockedIslands()
         applyLocks()
+        MotivationManager.shared.nudgeIfFirstLoginToday(in: view)
     }
 
     override func viewDidLayoutSubviews() {
@@ -295,13 +301,8 @@ final class MainScreenViewController: UIViewController {
 
     private func setGlow(_ button: UIButton?, enabled: Bool) {
         guard let button else { return }
-
         if enabled {
-            button.layer.shadowColor = UIColor.systemGreen.cgColor
-            button.layer.shadowRadius = 10
-            button.layer.shadowOpacity = 0.35
-            button.layer.shadowOffset = .zero
-            button.layer.masksToBounds = false
+            ThemeManager.shared.applyGlow(to: button)
         } else {
             button.layer.shadowOpacity = 0
         }

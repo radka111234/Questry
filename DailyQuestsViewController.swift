@@ -238,13 +238,30 @@ final class DailyQuestsViewController: UIViewController, UITableViewDataSource, 
         streakBadge.isHidden = streak == 0
     }
 
-    // MARK: - Table
-    func numberOfSections(in tableView: UITableView) -> Int {
-        2
+    // MARK: - Review helpers
+
+    private struct ReviewItem {
+        let subject: String       // "geography" | "history" | "english"
+        let displayName: String
+        let count: Int
     }
 
+    private var reviewItems: [ReviewItem] {
+        let srm = SpacedRepetitionManager.shared
+        return [
+            ReviewItem(subject: "geography", displayName: "🗺️ Geography", count: srm.totalMissed(subject: "geography")),
+            ReviewItem(subject: "history",   displayName: "📜 History",   count: srm.totalMissed(subject: "history")),
+            ReviewItem(subject: "english",   displayName: "✍️ English",   count: srm.totalMissed(subject: "english")),
+        ].filter { $0.count > 0 }
+    }
+
+    // MARK: - Table
+    func numberOfSections(in tableView: UITableView) -> Int { 3 }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 0 ? dailyQuests.count : extraTodos.count
+        if section == 0 { return dailyQuests.count }
+        if section == 1 { return extraTodos.count }
+        return reviewItems.isEmpty ? 1 : reviewItems.count  // always at least 1 row (empty state)
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -253,7 +270,8 @@ final class DailyQuestsViewController: UIViewController, UITableViewDataSource, 
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
-        label.text = section == 0 ? t("quests.title") : t("quests.extra")
+        let titles = [t("quests.title"), t("quests.extra"), "🔁 Review Missed Questions"]
+        label.text = section < titles.count ? titles[section] : ""
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
 
@@ -279,6 +297,12 @@ final class DailyQuestsViewController: UIViewController, UITableViewDataSource, 
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        // Review section
+        if indexPath.section == 2 {
+            if reviewItems.isEmpty { return makeReviewEmptyCell() }
+            return makeReviewCell(for: indexPath)
+        }
 
         let item = indexPath.section == 0 ? dailyQuests[indexPath.row] : extraTodos[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuestCell", for: indexPath)
@@ -375,8 +399,143 @@ final class DailyQuestsViewController: UIViewController, UITableViewDataSource, 
         return cell
     }
 
+    private func makeReviewEmptyCell() -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "QuestCell", for: IndexPath(row: 0, section: 2))
+        cell.backgroundColor = .clear
+        cell.selectionStyle = .none
+        cell.contentView.subviews.forEach { $0.removeFromSuperview() }
+
+        let card = UIView()
+        card.translatesAutoresizingMaskIntoConstraints = false
+        card.backgroundColor = UIColor(red: 0.08, green: 0.20, blue: 0.20, alpha: 0.50)
+        card.layer.cornerRadius = 16
+        card.layer.borderWidth = 1
+        card.layer.borderColor = UIColor(red: 0.20, green: 0.90, blue: 0.75, alpha: 0.25).cgColor
+        cell.contentView.addSubview(card)
+
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "✅ No missed questions yet!\nPlay Geography, History or English puzzles — any wrong answers will appear here to review."
+        lbl.textColor = UIColor.white.withAlphaComponent(0.55)
+        lbl.font = UIFont.systemFont(ofSize: 13)
+        lbl.numberOfLines = 0
+        lbl.textAlignment = .center
+        card.addSubview(lbl)
+
+        NSLayoutConstraint.activate([
+            card.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 6),
+            card.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -6),
+            card.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 16),
+            card.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -16),
+
+            lbl.topAnchor.constraint(equalTo: card.topAnchor, constant: 18),
+            lbl.bottomAnchor.constraint(equalTo: card.bottomAnchor, constant: -18),
+            lbl.leadingAnchor.constraint(equalTo: card.leadingAnchor, constant: 16),
+            lbl.trailingAnchor.constraint(equalTo: card.trailingAnchor, constant: -16),
+        ])
+        return cell
+    }
+
+    private func makeReviewCell(for indexPath: IndexPath) -> UITableViewCell {
+        let review = reviewItems[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "QuestCell", for: indexPath)
+        cell.backgroundColor = .clear
+        cell.selectionStyle = .none
+        cell.contentView.subviews.forEach { $0.removeFromSuperview() }
+
+        let card = UIView()
+        card.translatesAutoresizingMaskIntoConstraints = false
+        card.backgroundColor = UIColor(red: 0.08, green: 0.30, blue: 0.30, alpha: 0.80)
+        card.layer.cornerRadius = 16
+        card.layer.borderWidth = 1.5
+        card.layer.borderColor = UIColor(red: 0.20, green: 0.90, blue: 0.75, alpha: 0.50).cgColor
+        cell.contentView.addSubview(card)
+
+        let titleLbl = UILabel()
+        titleLbl.translatesAutoresizingMaskIntoConstraints = false
+        titleLbl.text = review.displayName
+        titleLbl.textColor = .white
+        titleLbl.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+
+        let subLbl = UILabel()
+        subLbl.translatesAutoresizingMaskIntoConstraints = false
+        subLbl.text = "Practice \(review.count) question\(review.count == 1 ? "" : "s") you got wrong"
+        subLbl.textColor = UIColor.white.withAlphaComponent(0.70)
+        subLbl.font = UIFont.systemFont(ofSize: 12)
+
+        let badge = UILabel()
+        badge.translatesAutoresizingMaskIntoConstraints = false
+        badge.text = "\(review.count)"
+        badge.textColor = .white
+        badge.font = UIFont.boldSystemFont(ofSize: 16)
+        badge.textAlignment = .center
+        badge.backgroundColor = UIColor(red: 0.95, green: 0.35, blue: 0.25, alpha: 1)
+        badge.layer.cornerRadius = 14
+        badge.clipsToBounds = true
+
+        let goBtn = UIButton(type: .system)
+        goBtn.translatesAutoresizingMaskIntoConstraints = false
+        goBtn.setTitle("Review →", for: .normal)
+        goBtn.setTitleColor(.white, for: .normal)
+        goBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        goBtn.backgroundColor = UIColor(red: 0.10, green: 0.70, blue: 0.60, alpha: 0.9)
+        goBtn.layer.cornerRadius = 12
+        goBtn.isUserInteractionEnabled = false  // cell tap handles navigation
+
+        for v in [titleLbl, subLbl, badge, goBtn] { card.addSubview(v) }
+        NSLayoutConstraint.activate([
+            card.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 6),
+            card.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -6),
+            card.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 14),
+            card.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -14),
+            card.heightAnchor.constraint(greaterThanOrEqualToConstant: 80),
+
+            badge.trailingAnchor.constraint(equalTo: card.trailingAnchor, constant: -12),
+            badge.topAnchor.constraint(equalTo: card.topAnchor, constant: 12),
+            badge.widthAnchor.constraint(equalToConstant: 28),
+            badge.heightAnchor.constraint(equalToConstant: 28),
+
+            titleLbl.topAnchor.constraint(equalTo: card.topAnchor, constant: 16),
+            titleLbl.leadingAnchor.constraint(equalTo: card.leadingAnchor, constant: 14),
+            titleLbl.trailingAnchor.constraint(equalTo: badge.leadingAnchor, constant: -8),
+
+            subLbl.topAnchor.constraint(equalTo: titleLbl.bottomAnchor, constant: 4),
+            subLbl.leadingAnchor.constraint(equalTo: titleLbl.leadingAnchor),
+            subLbl.trailingAnchor.constraint(equalTo: goBtn.leadingAnchor, constant: -8),
+
+            goBtn.trailingAnchor.constraint(equalTo: card.trailingAnchor, constant: -12),
+            goBtn.bottomAnchor.constraint(equalTo: card.bottomAnchor, constant: -12),
+            goBtn.widthAnchor.constraint(equalToConstant: 90),
+            goBtn.heightAnchor.constraint(equalToConstant: 28),
+            subLbl.bottomAnchor.constraint(lessThanOrEqualTo: card.bottomAnchor, constant: -12),
+        ])
+        return cell
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        // Review section — launch puzzle VC in review mode
+        if indexPath.section == 2 {
+            guard !reviewItems.isEmpty else { return }
+            let review = reviewItems[indexPath.row]
+            switch review.subject {
+            case "geography":
+                let vc = GeographyPuzzleViewController()
+                vc.isReviewMode = true
+                navigationController?.pushViewController(vc, animated: true)
+            case "history":
+                let vc = HistoryPuzzleViewController()
+                vc.isReviewMode = true
+                navigationController?.pushViewController(vc, animated: true)
+            case "english":
+                let vc = EnglishPuzzleViewController()
+                vc.isReviewMode = true
+                navigationController?.pushViewController(vc, animated: true)
+            default: break
+            }
+            return
+        }
 
         let item = indexPath.section == 0 ? dailyQuests[indexPath.row] : extraTodos[indexPath.row]
 

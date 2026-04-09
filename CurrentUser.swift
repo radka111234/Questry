@@ -77,6 +77,7 @@ final class Session {
         user.level = max(1, (user.xp / 500) + 1)
         currentUser = user
         save()  // persist locally immediately
+        ProgressTracker.shared.recordSnapshot()
 
         if user.level > oldLevel {
             NotificationCenter.default.post(
