@@ -40,6 +40,8 @@
 		CF001A0100000012 /* RealWorldFacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000012 /* RealWorldFacts.swift */; };
 		CF001A0100000013 /* DragonBattleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000013 /* DragonBattleViewController.swift */; };
 		CF001A0100000014 /* TimedExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000014 /* TimedExamViewController.swift */; };
+		CF001A0100000015 /* RunnerGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000015 /* RunnerGameScene.swift */; };
+		CF001A0100000016 /* RunnerGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001A0200000016 /* RunnerGameViewController.swift */; };
 		8B627D772F631CB500022835 /* TopicIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B627D762F631CB500022835 /* TopicIntroViewController.swift */; };
 		8B627D7C2F6323DE00022835 /* ExamQuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B627D7B2F6323DE00022835 /* ExamQuestViewController.swift */; };
 		8B627D7E2F6470DD00022835 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B627D7D2F6470DD00022835 /* PassthroughView.swift */; };
@@ -224,6 +226,8 @@
 		CF001A0200000012 /* RealWorldFacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealWorldFacts.swift; sourceTree = "<group>"; };
 		CF001A0200000013 /* DragonBattleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBattleViewController.swift; sourceTree = "<group>"; };
 		CF001A0200000014 /* TimedExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimedExamViewController.swift; sourceTree = "<group>"; };
+		CF001A0200000015 /* RunnerGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerGameScene.swift; sourceTree = "<group>"; };
+		CF001A0200000016 /* RunnerGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerGameViewController.swift; sourceTree = "<group>"; };
 		8B627D762F631CB500022835 /* TopicIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicIntroViewController.swift; sourceTree = "<group>"; };
 		8B627D7B2F6323DE00022835 /* ExamQuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamQuestViewController.swift; sourceTree = "<group>"; };
 		8B627D7D2F6470DD00022835 /* PassthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
@@ -504,6 +508,8 @@
 			CF001A0200000012 /* RealWorldFacts.swift */,
 			CF001A0200000013 /* DragonBattleViewController.swift */,
 				CF001A0200000014 /* TimedExamViewController.swift */,
+				CF001A0200000015 /* RunnerGameScene.swift */,
+				CF001A0200000016 /* RunnerGameViewController.swift */,
 				8B2E57522F61A1D00022D547 /* ScienceViewController.swift */,
 				8B2E57502F61A19B0022D547 /* GeographyViewController.swift */,
 				8B2E574E2F61A1730022D547 /* EnglishViewController.swift */,
@@ -899,6 +905,8 @@
 			CF001A0100000012 /* RealWorldFacts.swift in Sources */,
 			CF001A0100000013 /* DragonBattleViewController.swift in Sources */,
 				CF001A0100000014 /* TimedExamViewController.swift in Sources */,
+				CF001A0100000015 /* RunnerGameScene.swift in Sources */,
+				CF001A0100000016 /* RunnerGameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

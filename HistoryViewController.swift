@@ -29,6 +29,7 @@ final class HistoryViewController: UIViewController {
     private weak var backBtn: UIButton?
     private weak var puzzleBtn: UIButton?
     private weak var examBtn: UIButton?
+    private weak var runnerBtn: UIButton?
 
     // Pending unlock animation  -  set in viewWillAppear, consumed in viewDidAppear
     private var pendingTopicUnlockId: Int?
@@ -76,6 +77,7 @@ final class HistoryViewController: UIViewController {
         if let anchor = puzzleBtn {
             addExamButton(color: UIColor(red: 0.20, green: 0.10, blue: 0.40, alpha: 0.92), anchoredLeftOf: anchor)
         }
+        if let anchor = examBtn { addRunnerButton(anchoredLeftOf: anchor) }
 
         if UserDefaults.standard.integer(forKey: practiceUnlockedKey) == 0 {
             UserDefaults.standard.set(1, forKey: practiceUnlockedKey)
@@ -162,9 +164,10 @@ final class HistoryViewController: UIViewController {
         [avatarImageView, usernameLabel, levelLabel, xpLabel, xpProgress].forEach {
             if let v = $0 { view.bringSubviewToFront(v) }
         }
-        if let btn = backBtn   { view.bringSubviewToFront(btn) }
-        if let btn = puzzleBtn { view.bringSubviewToFront(btn) }
-        if let btn = examBtn   { view.bringSubviewToFront(btn) }
+        if let btn = backBtn    { view.bringSubviewToFront(btn) }
+        if let btn = puzzleBtn  { view.bringSubviewToFront(btn) }
+        if let btn = examBtn    { view.bringSubviewToFront(btn) }
+        if let btn = runnerBtn  { view.bringSubviewToFront(btn) }
     }
 
     private func addExamButton(color: UIColor, anchoredLeftOf anchor: UIButton) {
@@ -190,6 +193,34 @@ final class HistoryViewController: UIViewController {
 
     @objc private func didTapExam() {
         let vc = TimedExamViewController()
+        vc.subject = "History"
+        vc.topicId = currentTopicId()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
+    private func addRunnerButton(anchoredLeftOf anchor: UIButton) {
+        let btn = UIButton(type: .system)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("🏃 Run", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        btn.backgroundColor = UIColor(red: 0.08, green: 0.45, blue: 0.18, alpha: 0.92)
+        btn.layer.cornerRadius = 20
+        btn.layer.borderWidth = 1.5
+        btn.layer.borderColor = UIColor.white.withAlphaComponent(0.4).cgColor
+        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
+        btn.addTarget(self, action: #selector(didTapRunner), for: .touchUpInside)
+        view.addSubview(btn)
+        runnerBtn = btn
+        NSLayoutConstraint.activate([
+            btn.topAnchor.constraint(equalTo: xpProgress.bottomAnchor, constant: 10),
+            btn.trailingAnchor.constraint(equalTo: anchor.leadingAnchor, constant: -8),
+            btn.heightAnchor.constraint(equalToConstant: 36)
+        ])
+    }
+
+    @objc private func didTapRunner() {
+        let vc = RunnerGameViewController()
         vc.subject = "History"
         vc.topicId = currentTopicId()
         navigationController?.pushViewController(vc, animated: true)
