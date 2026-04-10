@@ -69,7 +69,7 @@ final class MathViewController: UIViewController {
 
         addBackButton()
         addMathLabButton()
-        addExamButton()
+        if let anchor = mathLabBtn { addExamButton(anchoredLeftOf: anchor) }
 
         if UserDefaults.standard.integer(forKey: practiceUnlockedKey) == 0 {
             UserDefaults.standard.set(1, forKey: practiceUnlockedKey)
@@ -130,6 +130,7 @@ final class MathViewController: UIViewController {
 
         avatarImageView.layer.cornerRadius = avatarImageView.bounds.width / 2
         avatarImageView.clipsToBounds = true
+        ShopEffects.applyAvatarCosmetics(to: avatarImageView)
 
         mapImageView.frame = view.bounds
         scrollView.frame = view.bounds
@@ -160,7 +161,7 @@ final class MathViewController: UIViewController {
         if let btn = examBtn    { view.bringSubviewToFront(btn) }
     }
 
-    private func addExamButton() {
+    private func addExamButton(anchoredLeftOf anchor: UIButton) {
         let btn = UIButton(type: .system)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("⏱️ Exam", for: .normal)
@@ -176,7 +177,7 @@ final class MathViewController: UIViewController {
         examBtn = btn
         NSLayoutConstraint.activate([
             btn.topAnchor.constraint(equalTo: xpProgress.bottomAnchor, constant: 10),
-            btn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -120),
+            btn.trailingAnchor.constraint(equalTo: anchor.leadingAnchor, constant: -8),
             btn.heightAnchor.constraint(equalToConstant: 36)
         ])
     }

@@ -5,10 +5,19 @@ enum ShopEffects {
     // All item flags are stored per-user so purchases never leak across accounts.
     private static var u: String { Session.shared.currentUser?.username ?? "__guest__" }
 
+    // "Owned" = bought. "Equipped" = currently active (can be toggled off/on).
     static var hasGoldFrame: Bool { UserDefaults.standard.bool(forKey: "item_gold_frame_\(u)") }
     static var hasMagicAura: Bool { UserDefaults.standard.bool(forKey: "item_magic_aura_\(u)") }
     static var hasXPBooster: Bool { UserDefaults.standard.bool(forKey: "item_xp_booster_\(u)") }
     static var hasMapTheme:  Bool { UserDefaults.standard.bool(forKey: "item_map_theme_\(u)") }
+
+    /// Toggle a cosmetic item on or off (gold_frame / magic_aura / map_theme / xp_booster).
+    static func setEquipped(_ itemKey: String, _ on: Bool) {
+        UserDefaults.standard.set(on, forKey: "\(itemKey)_\(u)")
+    }
+    static func isEquipped(_ itemKey: String) -> Bool {
+        UserDefaults.standard.bool(forKey: "\(itemKey)_\(u)")
+    }
 
     private static let auraTag = 77_991
 

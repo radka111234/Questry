@@ -70,7 +70,9 @@ final class GeographyViewController: UIViewController {
 
         addBackButton()
         addPuzzleButton(emoji: "🗺️", color: UIColor(red: 0.08, green: 0.28, blue: 0.62, alpha: 0.92))
-        addExamButton(color: UIColor(red: 0.55, green: 0.15, blue: 0.08, alpha: 0.92))
+        if let anchor = puzzleBtn {
+            addExamButton(color: UIColor(red: 0.55, green: 0.15, blue: 0.08, alpha: 0.92), anchoredLeftOf: anchor)
+        }
 
         if UserDefaults.standard.integer(forKey: practiceUnlockedKey) == 0 {
             UserDefaults.standard.set(1, forKey: practiceUnlockedKey)
@@ -131,6 +133,7 @@ final class GeographyViewController: UIViewController {
 
         avatarImageView.layer.cornerRadius = avatarImageView.bounds.width / 2
         avatarImageView.clipsToBounds = true
+        ShopEffects.applyAvatarCosmetics(to: avatarImageView)
 
         mapImageView.frame = view.bounds
         scrollView.frame = view.bounds
@@ -161,7 +164,7 @@ final class GeographyViewController: UIViewController {
         if let btn = examBtn   { view.bringSubviewToFront(btn) }
     }
 
-    private func addExamButton(color: UIColor) {
+    private func addExamButton(color: UIColor, anchoredLeftOf anchor: UIButton) {
         let btn = UIButton(type: .system)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("⏱️ Exam", for: .normal)
@@ -177,7 +180,7 @@ final class GeographyViewController: UIViewController {
         examBtn = btn
         NSLayoutConstraint.activate([
             btn.topAnchor.constraint(equalTo: xpProgress.bottomAnchor, constant: 10),
-            btn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -120),
+            btn.trailingAnchor.constraint(equalTo: anchor.leadingAnchor, constant: -8),
             btn.heightAnchor.constraint(equalToConstant: 36)
         ])
     }

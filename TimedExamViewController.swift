@@ -443,11 +443,8 @@ final class TimedExamViewController: UIViewController {
 
         // Award XP
         if xp > 0 {
-            if let user = Session.shared.currentUser {
-                let newXP    = user.xp + xp
-                let newLevel = user.level + (newXP >= user.level * 100 ? 1 : 0)
-                Session.shared.currentUser?.xp    = newXP
-                Session.shared.currentUser?.level = newLevel
+            Session.shared.addXP(xp)
+            if Session.shared.currentUser != nil {
                 let worldKey: String
                 switch subject.lowercased() {
                 case "math":      worldKey = "math_world_total_xp"

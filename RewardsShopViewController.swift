@@ -89,6 +89,8 @@ final class RewardsShopViewController: UIViewController,
     private func refreshHeader() {
         let avatarName = UserDefaults.standard.string(forKey: "selected_avatar_name") ?? "avatar0"
         avatarImageView.image = UIImage(named: avatarName)
+        avatarImageView.layoutIfNeeded()
+        ShopEffects.applyAvatarCosmetics(to: avatarImageView)
 
         guard let user = Session.shared.currentUser else {
             usernameLabel.text = "Guest"
@@ -266,7 +268,31 @@ final class RewardsShopViewController: UIViewController,
     @objc private func didTapBuy(_ sender: UIButton) {
         let index = sender.tag
         guard index >= 0, index < items.count else { return }
-        handlePurchase(at: index)
+        let item = items[index]
+        if isPurchased(item) {
+            handleEquipToggle(for: item)
+        } else {
+            handlePurchase(at: index)
+        }
+    }
+
+    // MARK: - Equip / Unequip toggle
+    private func equipKey(for item: ShopItem) -> String? {
+        switch item.imageName {
+        case "shop_gold_frame":    return "item_gold_frame"
+        case "shop_magic_aura":    return "item_magic_aura"
+        case "shop_double_xp":     return "item_xp_booster"
+        case "shop_island_theme":  return "item_map_theme"
+        default: return nil
+        }
+    }
+
+    private func handleEquipToggle(for item: ShopItem) {
+        guard let key = equipKey(for: item) else { return }
+        let currently = ShopEffects.isEquipped(key)
+        ShopEffects.setEquipped(key, !currently)
+        refreshHeader()
+        collectionView.reloadData()
     }
 
     private func handlePurchase(at index: Int) {
@@ -299,11 +325,16 @@ final class RewardsShopViewController: UIViewController,
                 self.applyItemEffect(item)
                 self.refreshHeader()
                 self.collectionView.reloadData()
+                self.showPurchaseCelebration(for: item)
                 if item.imageName == "shop_mystery_chest" {
-                    self.showMysteryChestReveal()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                        self.showMysteryChestReveal()
+                    }
                 } else if item.imageName == "shop_badge_pack" {
-                    let badges = BadgeDefinition.all.filter { ["badge_math_explorer", "badge_first_world"].contains($0.id) }
-                    self.showBadgesEarned(badges) {}
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                        let badges = BadgeDefinition.all.filter { ["badge_math_explorer", "badge_first_world"].contains($0.id) }
+                        self.showBadgesEarned(badges) {}
+                    }
                 }
             } else {
                 let err = UIAlertController(title: "Not enough XP", message: nil, preferredStyle: .alert)
@@ -373,8 +404,17 @@ final class RewardsShopViewController: UIViewController,
         let buyButton = UIButton(type: .system)
         buyButton.translatesAutoresizingMaskIntoConstraints = false
         if owned {
-            buyButton.setTitle("Owned", for: .normal)
-            buyButton.backgroundColor = UIColor.systemGreen.withAlphaComponent(0.85)
+            // Show Equip / Unequip if the item has an equip key; else just "Owned"
+            if let key = equipKey(for: item) {
+                let isOn = ShopEffects.isEquipped(key)
+                buyButton.setTitle(isOn ? "✓ On" : "Equip", for: .normal)
+                buyButton.backgroundColor = isOn
+                    ? UIColor(red: 0.10, green: 0.65, blue: 0.35, alpha: 0.90)
+                    : UIColor(red: 0.55, green: 0.15, blue: 0.80, alpha: 0.90)
+            } else {
+                buyButton.setTitle("Owned ✓", for: .normal)
+                buyButton.backgroundColor = UIColor.systemGreen.withAlphaComponent(0.85)
+            }
         } else if canAfford {
             buyButton.setTitle("Buy", for: .normal)
             buyButton.backgroundColor = UIColor.systemTeal.withAlphaComponent(0.9)
@@ -385,7 +425,7 @@ final class RewardsShopViewController: UIViewController,
         buyButton.setTitleColor(.white, for: .normal)
         buyButton.layer.cornerRadius = 11
         buyButton.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
-        buyButton.isUserInteractionEnabled = true
+        buyButton.isUserInteractionEnabled = owned || canAfford
         buyButton.tag = indexPath.item
         buyButton.addTarget(self, action: #selector(didTapBuy(_:)), for: .touchUpInside)
 
@@ -427,7 +467,7 @@ final class RewardsShopViewController: UIViewController,
 
             buyButton.trailingAnchor.constraint(equalTo: card.trailingAnchor, constant: -14),
             buyButton.bottomAnchor.constraint(equalTo: card.bottomAnchor, constant: -12),
-            buyButton.widthAnchor.constraint(equalToConstant: 72),
+            buyButton.widthAnchor.constraint(equalToConstant: 80),
             buyButton.heightAnchor.constraint(equalToConstant: 30)
         ])
 
@@ -458,6 +498,79 @@ final class RewardsShopViewController: UIViewController,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         10
+    }
+
+    // MARK: - Purchase Celebration
+
+    private func showPurchaseCelebration(for item: ShopItem) {
+        guard let window = view.window ?? UIApplication.shared.windows.first else { return }
+
+        let count = 40
+        let colors: [UIColor] = [
+            UIColor(red: 1.00, green: 0.82, blue: 0.00, alpha: 1),
+            UIColor(red: 0.65, green: 0.15, blue: 1.00, alpha: 1),
+            UIColor(red: 0.10, green: 0.75, blue: 0.45, alpha: 1),
+            UIColor(red: 0.95, green: 0.28, blue: 0.38, alpha: 1),
+            UIColor(red: 0.08, green: 0.55, blue: 0.95, alpha: 1),
+            UIColor(red: 1.00, green: 0.60, blue: 0.10, alpha: 1),
+        ]
+
+        // "Purchased!" toast
+        let toast = UILabel()
+        toast.text = "🎉 \(item.title) purchased!"
+        toast.textColor = .white
+        toast.font = UIFont.boldSystemFont(ofSize: 17)
+        toast.textAlignment = .center
+        toast.backgroundColor = UIColor(red: 0.08, green: 0.06, blue: 0.22, alpha: 0.95)
+        toast.layer.cornerRadius = 22
+        toast.layer.masksToBounds = true
+        toast.translatesAutoresizingMaskIntoConstraints = false
+        window.addSubview(toast)
+        NSLayoutConstraint.activate([
+            toast.centerXAnchor.constraint(equalTo: window.centerXAnchor),
+            toast.centerYAnchor.constraint(equalTo: window.centerYAnchor, constant: -60),
+            toast.widthAnchor.constraint(lessThanOrEqualTo: window.widthAnchor, constant: -48),
+            toast.heightAnchor.constraint(equalToConstant: 52),
+        ])
+        // Add horizontal padding inside label
+        toast.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+
+        toast.alpha = 0
+        toast.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.6,
+                       initialSpringVelocity: 0.5, options: []) {
+            toast.alpha = 1; toast.transform = .identity
+        }
+        UIView.animate(withDuration: 0.30, delay: 1.6, options: []) {
+            toast.alpha = 0; toast.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+        } completion: { _ in toast.removeFromSuperview() }
+
+        // Confetti particles
+        let center = CGPoint(x: window.bounds.midX, y: window.bounds.midY - 80)
+        for i in 0..<count {
+            let size = CGFloat.random(in: 7...14)
+            let particle = UIView(frame: CGRect(x: center.x - size/2, y: center.y - size/2,
+                                                width: size, height: size))
+            particle.backgroundColor = colors[i % colors.count]
+            particle.layer.cornerRadius = Bool.random() ? size/2 : 3
+            particle.alpha = 1
+            window.addSubview(particle)
+
+            let angle = CGFloat(i) / CGFloat(count) * .pi * 2
+            let distance = CGFloat.random(in: 80...200)
+            let dx = cos(angle) * distance
+            let dy = sin(angle) * distance - CGFloat.random(in: 20...80)
+            let rotation = CGFloat.random(in: -3...3)
+
+            UIView.animate(withDuration: Double.random(in: 0.6...1.0),
+                           delay: Double.random(in: 0...0.15),
+                           usingSpringWithDamping: 0.8,
+                           initialSpringVelocity: 0.5, options: []) {
+                particle.transform = CGAffineTransform(translationX: dx, y: dy)
+                    .rotated(by: rotation)
+                particle.alpha = 0
+            } completion: { _ in particle.removeFromSuperview() }
+        }
     }
 
     // MARK: - Mystery Chest Reveal
