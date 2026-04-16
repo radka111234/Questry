@@ -74,9 +74,9 @@ final class ScienceViewController: UIViewController {
 
         addBackButton()
         addBodyLabButton()
-        addAlchemyButton()
         if let anchor = bodyLabBtn { addExamButton(anchoredLeftOf: anchor) }
         if let anchor = examBtn { addRunnerButton(anchoredLeftOf: anchor) }
+        if let anchor = runnerBtn { addAlchemyButton(anchoredLeftOf: anchor) }
 
         if UserDefaults.standard.integer(forKey: practiceUnlockedKey) == 0 {
             UserDefaults.standard.set(1, forKey: practiceUnlockedKey)
@@ -785,12 +785,12 @@ final class ScienceViewController: UIViewController {
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("🫀 Body Lab", for: .normal)
         btn.setTitleColor(.white, for: .normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         btn.backgroundColor = UIColor(red: 0.10, green: 0.55, blue: 0.35, alpha: 0.92)
-        btn.layer.cornerRadius = 20
+        btn.layer.cornerRadius = 18
         btn.layer.borderWidth = 1.5
         btn.layer.borderColor = UIColor.white.withAlphaComponent(0.4).cgColor
-        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
+        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         btn.addTarget(self, action: #selector(didTapBodyLab), for: .touchUpInside)
 
         view.addSubview(btn)
@@ -798,8 +798,8 @@ final class ScienceViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             btn.topAnchor.constraint(equalTo: xpProgress.bottomAnchor, constant: 10),
-            btn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -14),
-            btn.heightAnchor.constraint(equalToConstant: 36)
+            btn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+            btn.heightAnchor.constraint(equalToConstant: 32)
         ])
     }
 
@@ -808,24 +808,26 @@ final class ScienceViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
 
-    private func addAlchemyButton() {
+    private func addAlchemyButton(anchoredLeftOf anchor: UIButton) {
         let btn = UIButton(type: .system)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("⚗️ Alchemy", for: .normal)
         btn.setTitleColor(.white, for: .normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         btn.backgroundColor = UIColor(red: 0.35, green: 0.10, blue: 0.65, alpha: 0.92)
-        btn.layer.cornerRadius = 20
+        btn.layer.cornerRadius = 18
         btn.layer.borderWidth = 1.5
         btn.layer.borderColor = UIColor.white.withAlphaComponent(0.4).cgColor
-        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
+        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         btn.addTarget(self, action: #selector(didTapAlchemy), for: .touchUpInside)
         view.addSubview(btn)
         alchemyBtn = btn
         NSLayoutConstraint.activate([
             btn.topAnchor.constraint(equalTo: xpProgress.bottomAnchor, constant: 10),
-            btn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 14),
-            btn.heightAnchor.constraint(equalToConstant: 36)
+            btn.trailingAnchor.constraint(equalTo: anchor.leadingAnchor, constant: -6),
+            btn.heightAnchor.constraint(equalToConstant: 32),
+            // Safety: never clip off the left edge of the screen
+            btn.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 8)
         ])
     }
 
@@ -841,19 +843,19 @@ final class ScienceViewController: UIViewController {
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("⏱️ Exam", for: .normal)
         btn.setTitleColor(.white, for: .normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         btn.backgroundColor = UIColor(red: 0.55, green: 0.12, blue: 0.08, alpha: 0.92)
-        btn.layer.cornerRadius = 20
+        btn.layer.cornerRadius = 18
         btn.layer.borderWidth = 1.5
         btn.layer.borderColor = UIColor.white.withAlphaComponent(0.4).cgColor
-        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
+        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         btn.addTarget(self, action: #selector(didTapExam), for: .touchUpInside)
         view.addSubview(btn)
         examBtn = btn
         NSLayoutConstraint.activate([
             btn.topAnchor.constraint(equalTo: xpProgress.bottomAnchor, constant: 10),
-            btn.trailingAnchor.constraint(equalTo: anchor.leadingAnchor, constant: -8),
-            btn.heightAnchor.constraint(equalToConstant: 36)
+            btn.trailingAnchor.constraint(equalTo: anchor.leadingAnchor, constant: -6),
+            btn.heightAnchor.constraint(equalToConstant: 32)
         ])
     }
 
@@ -869,19 +871,19 @@ final class ScienceViewController: UIViewController {
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("🏃 Run", for: .normal)
         btn.setTitleColor(.white, for: .normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         btn.backgroundColor = UIColor(red: 0.08, green: 0.45, blue: 0.18, alpha: 0.92)
-        btn.layer.cornerRadius = 20
+        btn.layer.cornerRadius = 18
         btn.layer.borderWidth = 1.5
         btn.layer.borderColor = UIColor.white.withAlphaComponent(0.4).cgColor
-        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
+        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         btn.addTarget(self, action: #selector(didTapRunner), for: .touchUpInside)
         view.addSubview(btn)
         runnerBtn = btn
         NSLayoutConstraint.activate([
             btn.topAnchor.constraint(equalTo: xpProgress.bottomAnchor, constant: 10),
-            btn.trailingAnchor.constraint(equalTo: anchor.leadingAnchor, constant: -8),
-            btn.heightAnchor.constraint(equalToConstant: 36)
+            btn.trailingAnchor.constraint(equalTo: anchor.leadingAnchor, constant: -6),
+            btn.heightAnchor.constraint(equalToConstant: 32)
         ])
     }
 

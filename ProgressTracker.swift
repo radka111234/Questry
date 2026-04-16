@@ -63,6 +63,17 @@ final class ProgressTracker {
         return list.filter { $0.date <= Self.dateStr(cutoff) }.last
     }
 
+    /// Returns the oldest recorded snapshot for the current user,
+    /// used as a "before" baseline when no 14-day-old snapshot exists yet.
+    func earliestSnapshot() -> Snapshot? {
+        let username = Session.shared.currentUser?.username ?? ""
+        let list = snapshotsByUser[username] ?? []
+        // list is already sorted ascending by date
+        // Return the first entry that is NOT today (to avoid showing 0 gain)
+        let today = Self.dateStr(Date())
+        return list.first { $0.date < today }
+    }
+
     func totalXPEarnedInDays(_ days: Int) -> Int {
         let current = Session.shared.currentUser?.xp ?? 0
         let old     = snapshotDaysAgo(days)?.xp ?? current

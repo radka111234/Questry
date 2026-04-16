@@ -4,9 +4,10 @@ import UIKit
 struct WorldProgressItem {
     let title: String
     let iconName: String
-    let level: Int
-    let xp: Int
+    let topicsDone: Int
+    let topicsTotal: Int
     let progress: Float   // 0.0 - 1.0
+    let isUnlocked: Bool
 }
 
 // MARK: - VC
@@ -62,21 +63,16 @@ final class WorldProgressViewController: GradientBackgroundViewController, UITab
         func topicsDone(_ key: String) -> Int {
             (d.array(forKey: key) as? [Int] ?? []).count
         }
-        func worldXP(_ key: String) -> Int { d.integer(forKey: key) }
-        func worldLevel(xp: Int, topics: Int) -> Int {
-            guard xp > 0 || topics > 0 else { return 0 }
-            return max(1, (xp / 100) + 1)
-        }
-        func progress(done: Int, total: Int) -> Float {
+        func pct(done: Int, total: Int) -> Float {
             guard total > 0 else { return 0 }
             return min(Float(done) / Float(total), 1.0)
         }
 
-        let mathXP  = worldXP("math_world_total_xp"); let mathDone = topicsDone("math_completed_topic_ids")
-        let engXP   = worldXP("eng_world_total_xp");  let engDone  = topicsDone("eng_completed_topic_ids")
-        let geoXP   = worldXP("geo_world_total_xp");  let geoDone  = topicsDone("geo_completed_topic_ids")
-        let sciXP   = worldXP("sci_world_total_xp");  let sciDone  = topicsDone("sci_completed_topic_ids")
-        let hisXP   = worldXP("his_world_total_xp");  let hisDone  = topicsDone("his_completed_topic_ids")
+        let mathDone = topicsDone("math_completed_topic_ids")
+        let engDone  = topicsDone("eng_completed_topic_ids")
+        let geoDone  = topicsDone("geo_completed_topic_ids")
+        let sciDone  = topicsDone("sci_completed_topic_ids")
+        let hisDone  = topicsDone("his_completed_topic_ids")
 
         let mathTotal = max(MathGameData.topics.count, 1)
         let engTotal  = max(EnglishGameData.topics.count, 1)
@@ -84,38 +80,47 @@ final class WorldProgressViewController: GradientBackgroundViewController, UITab
         let sciTotal  = max(ScienceGameData.topics.count, 1)
         let hisTotal  = max(HistoryGameData.topics.count, 1)
 
+        // Science + History unlock after completing ≥1 core topic (same as home map)
+        let coreUnlocked = mathDone + engDone + geoDone >= 1
+
         items = [
             .init(title: "Math",      iconName: "icon_math",
-                  level: worldLevel(xp: mathXP, topics: mathDone), xp: mathXP,
-                  progress: progress(done: mathDone, total: mathTotal)),
+                  topicsDone: mathDone, topicsTotal: mathTotal,
+                  progress: pct(done: mathDone, total: mathTotal), isUnlocked: true),
             .init(title: "English",   iconName: "icon_language",
-                  level: worldLevel(xp: engXP,  topics: engDone),  xp: engXP,
-                  progress: progress(done: engDone,  total: engTotal)),
+                  topicsDone: engDone,  topicsTotal: engTotal,
+                  progress: pct(done: engDone,  total: engTotal),  isUnlocked: true),
             .init(title: "Geography", iconName: "icon_geography",
-                  level: worldLevel(xp: geoXP,  topics: geoDone),  xp: geoXP,
-                  progress: progress(done: geoDone,  total: geoTotal)),
+                  topicsDone: geoDone,  topicsTotal: geoTotal,
+                  progress: pct(done: geoDone,  total: geoTotal),  isUnlocked: true),
             .init(title: "Science",   iconName: "icon_science",
-                  level: worldLevel(xp: sciXP,  topics: sciDone),  xp: sciXP,
-                  progress: progress(done: sciDone,  total: sciTotal)),
+                  topicsDone: sciDone,  topicsTotal: sciTotal,
+                  progress: pct(done: sciDone,  total: sciTotal),  isUnlocked: coreUnlocked),
             .init(title: "History",   iconName: "icon_history",
-                  level: worldLevel(xp: hisXP,  topics: hisDone),  xp: hisXP,
-                  progress: progress(done: hisDone,  total: hisTotal)),
+                  topicsDone: hisDone,  topicsTotal: hisTotal,
+                  progress: pct(done: hisDone,  total: hisTotal),  isUnlocked: coreUnlocked),
         ]
 
         tableView.reloadData()
     }
 
     private func refreshHeader() {
-        let totalXP = items.map(\.xp).reduce(0, +)
-
-        // If you want to reflect the user's global level, use Session.shared.currentUser
+        // Use the authoritative session XP (same value shown everywhere in the app)
+        let totalXP   = Session.shared.currentUser?.xp    ?? 0
         let userLevel = Session.shared.currentUser?.level ?? 1
 
-        // Count worlds with level > 0 as "unlocked"
-        let unlockedCount = items.filter { $0.level > 0 }.count
+        // Mirror the same unlock logic used on the home map:
+        // Math / English / Geography are always accessible (3).
+        // Science + History unlock once the player completes ≥ 1 topic in any core world.
+        let d = UserDefaults.standard
+        let mathDone = (d.array(forKey: "math_completed_topic_ids") as? [Int] ?? []).count
+        let engDone  = (d.array(forKey: "eng_completed_topic_ids")  as? [Int] ?? []).count
+        let geoDone  = (d.array(forKey: "geo_completed_topic_ids")  as? [Int] ?? []).count
+        let coreUnlocked = mathDone + engDone + geoDone >= 1
+        let unlockedCount = 3 + (coreUnlocked ? 2 : 0)
 
-        totalXPLabel.text = "Total XP: \(totalXP)"
-        levelLabel.text = "Level: \(userLevel)"
+        totalXPLabel.text     = "Total XP: \(totalXP)"
+        levelLabel.text       = "Level: \(userLevel)"
         worldsUnlockedLabel.text = "Worlds Unlocked: \(unlockedCount)"
     }
 
@@ -134,12 +139,13 @@ final class WorldProgressViewController: GradientBackgroundViewController, UITab
         let item = items[indexPath.row]
         cell.configure(with: item)
 
-        // Style
         cell.backgroundColor = UIColor.white.withAlphaComponent(0.06)
         cell.selectionStyle = .none
-
-        cell.titleLabel.textColor = .white
-        cell.subtitleLabel.textColor = UIColor.white.withAlphaComponent(0.75)
+        // Title/subtitle colours — subtitleLabel alpha handled per-item inside configure()
+        cell.titleLabel.textColor = item.isUnlocked ? .white : UIColor.white.withAlphaComponent(0.5)
+        cell.subtitleLabel.textColor = item.isUnlocked
+            ? UIColor.white.withAlphaComponent(0.75)
+            : UIColor.white.withAlphaComponent(0.4)
 
         return cell
     }

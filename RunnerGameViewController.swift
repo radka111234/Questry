@@ -39,8 +39,6 @@ final class RunnerGameViewController: UIViewController {
         skView.presentScene(scene)
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: false)
-    }
+    // Nav bar stays hidden — it was hidden by the app-wide nav setup and
+    // re-showing it here caused the parent world VC to get two back buttons.
 }

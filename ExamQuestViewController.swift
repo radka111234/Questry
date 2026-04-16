@@ -165,8 +165,10 @@ final class ExamQuestViewController: UIViewController {
             }
         }
 
-        // Fallback: if practice mode has no questions for this topic/quest, sample from the exam pool
-        if isPracticeMode && questions.isEmpty {
+        // Safety net: practice quests must always have at least 5 questions.
+        // Pad from the exam pool when the practice bank runs short.
+        let minQuestions = 5
+        if isPracticeMode && questions.count < minQuestions {
             let examPool: [MathExamQuestion]
             switch subject {
             case "Geography": examPool = GeographyGameData.examQuestions(for: topicId)
@@ -179,7 +181,10 @@ final class ExamQuestViewController: UIViewController {
             case "History":   examPool = HistoryGameData.examQuestions(for: topicId)
             default:          examPool = MathGameData.examQuestions(for: topicId)
             }
-            questions = Array(examPool.shuffled().prefix(5))
+            let existing = Set(questions.map { $0.id })
+            let extras = examPool.filter { !existing.contains($0.id) }.shuffled()
+            let needed  = minQuestions - questions.count
+            questions += Array(extras.prefix(needed))
         }
 
         // Store full pool, then deal a fresh shuffled hand
@@ -215,6 +220,48 @@ final class ExamQuestViewController: UIViewController {
         gradientLayer.frame = view.bounds
         confettiLayer.emitterPosition = CGPoint(x: view.bounds.midX, y: -10)
         confettiLayer.emitterSize = CGSize(width: view.bounds.width, height: 1)
+        layoutOptionButtons()
+    }
+
+    /// Lay out the visible option buttons as full-width tiles between the
+    /// question card and the bottom safe area.  Called from viewDidLayoutSubviews
+    /// and after toggling button visibility in loadCurrentQuestion().
+    private func layoutOptionButtons() {
+        let sideMargin: CGFloat = 16
+        let spacing: CGFloat    = 10
+        let topGap: CGFloat     = 14   // gap below question card
+        let bottomGap: CGFloat  = 20   // gap above safe-area bottom
+
+        // Use the question card's actual position if it has been laid out,
+        // otherwise fall back to the storyboard value (405 pt).
+        let cardBottom: CGFloat
+        if questionCardView.frame.height > 0 {
+            cardBottom = questionCardView.frame.maxY
+        } else {
+            cardBottom = 405
+        }
+
+        let startY  = cardBottom + topGap
+        let endY    = view.bounds.height - view.safeAreaInsets.bottom - bottomGap
+        let available = endY - startY
+
+        let visible = optionButtons.filter { !$0.isHidden }
+        guard !visible.isEmpty, available > 50 else { return }
+
+        let totalSpacing = spacing * CGFloat(visible.count - 1)
+        let btnH = max(56, (available - totalSpacing) / CGFloat(visible.count))
+        let btnW = view.bounds.width - sideMargin * 2
+
+        var y = startY
+        for btn in visible {
+            btn.frame = CGRect(x: sideMargin, y: y, width: btnW, height: btnH)
+            // Centre the letter badge vertically within the new button height
+            let badgeIdx = optionButtons.firstIndex(of: btn) ?? 0
+            if let badge = btn.viewWithTag(800 + badgeIdx) {
+                badge.frame = CGRect(x: 16, y: (btnH - 28) / 2, width: 28, height: 28)
+            }
+            y += btnH + spacing
+        }
     }
 
     private var subjectGradient: (top: UIColor, bot: UIColor) {
@@ -293,34 +340,35 @@ final class ExamQuestViewController: UIViewController {
             streakPillLbl.trailingAnchor.constraint(equalTo: streakPill.trailingAnchor, constant: -10)
         ])
 
-        // ── Kahoot-style option buttons ─────────────────────────────────
+        // ── Kahoot-style option buttons — styled in place, laid out in viewDidLayoutSubviews ──
+        // (The storyboard uses fixed-frame layout with no Auto Layout constraints,
+        //  so we keep the buttons in their original superview and set proper frames
+        //  once the view has its final size.)
         let letters = ["A","B","C","D","E"]
+
         for (i, btn) in optionButtons.enumerated() {
             guard i < kahootColors.count else { continue }
 
-            // Apply Kahoot color via UIButtonConfiguration API
+            // Must use translatesAutoresizingMaskIntoConstraints = true for frame-based layout
+            btn.translatesAutoresizingMaskIntoConstraints = true
+
             if var cfg = btn.configuration {
                 cfg.baseBackgroundColor = kahootColors[i]
                 cfg.baseForegroundColor = .white
-                // Push text right so badge has room on the left
-                cfg.contentInsets = NSDirectionalEdgeInsets(top: 14, leading: 54, bottom: 14, trailing: 12)
+                cfg.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 58, bottom: 16, trailing: 16)
                 cfg.titleAlignment = .leading
                 cfg.titleLineBreakMode = .byWordWrapping
                 cfg.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrs in
-                    var a = attrs; a.font = UIFont.boldSystemFont(ofSize: 18); return a
+                    var a = attrs; a.font = UIFont.boldSystemFont(ofSize: 15); return a
                 }
                 btn.configuration = cfg
             } else {
-                // Fallback for plain-style buttons
                 btn.tintColor = kahootColors[i]
                 btn.setTitleColor(.white, for: .normal)
             }
             btn.titleLabel?.numberOfLines = 0
             btn.titleLabel?.lineBreakMode = .byWordWrapping
-            // Remove the storyboard fixed-height constraint so the button can grow
-            btn.constraints.filter { $0.firstAttribute == .height && $0.relation == .equal }.forEach { $0.isActive = false }
-            btn.heightAnchor.constraint(greaterThanOrEqualToConstant: 90).isActive = true
-            btn.layer.cornerRadius = 16
+            btn.layer.cornerRadius = 18
             btn.layer.shadowColor   = UIColor.black.cgColor
             btn.layer.shadowOpacity = 0.28
             btn.layer.shadowOffset  = CGSize(width: 0, height: 4)
@@ -328,23 +376,19 @@ final class ExamQuestViewController: UIViewController {
             btn.clipsToBounds = false
 
             // Letter badge pinned inside button on the left
-            let badge = UILabel()
-            badge.tag = 800 + i
-            badge.text = letters[i]
-            badge.font = UIFont.boldSystemFont(ofSize: 13)
-            badge.textColor = UIColor.black.withAlphaComponent(0.85)
-            badge.backgroundColor = UIColor.white.withAlphaComponent(0.85)
-            badge.textAlignment = .center
-            badge.layer.cornerRadius = 12
-            badge.clipsToBounds = true
-            badge.translatesAutoresizingMaskIntoConstraints = false
-            btn.addSubview(badge)
-            NSLayoutConstraint.activate([
-                badge.leadingAnchor.constraint(equalTo: btn.leadingAnchor, constant: 14),
-                badge.centerYAnchor.constraint(equalTo: btn.centerYAnchor),
-                badge.widthAnchor.constraint(equalToConstant: 24),
-                badge.heightAnchor.constraint(equalToConstant: 24)
-            ])
+            if btn.viewWithTag(800 + i) == nil {        // avoid duplicates on rebuild
+                let badge = UILabel()
+                badge.tag = 800 + i
+                badge.text = letters[i]
+                badge.font = UIFont.boldSystemFont(ofSize: 15)
+                badge.textColor = UIColor.black.withAlphaComponent(0.85)
+                badge.backgroundColor = UIColor.white.withAlphaComponent(0.85)
+                badge.textAlignment = .center
+                badge.layer.cornerRadius = 14
+                badge.clipsToBounds = true
+                badge.frame = CGRect(x: 16, y: 0, width: 28, height: 28)   // y set in layoutOptionButtons
+                btn.addSubview(badge)
+            }
         }
 
         // ── Feedback panel (slides up from bottom after tapping) ────────
@@ -458,6 +502,7 @@ final class ExamQuestViewController: UIViewController {
         questionCountLabel.textColor = UIColor.white.withAlphaComponent(0.72)
         questionLabel.textColor = .white
         questionLabel.numberOfLines = 0
+        questionLabel.font = UIFont.boldSystemFont(ofSize: 15)
 
         nextButton.layer.cornerRadius = 22
         nextButton.clipsToBounds = true
@@ -561,6 +606,9 @@ final class ExamQuestViewController: UIViewController {
             }
             styleOptionButton(button, isSelected: false)
         }
+
+        // Recalculate frames now that hidden states are set
+        layoutOptionButtons()
 
         // Stagger buttons in with a bounce
         for (i, btn) in optionButtons.enumerated() where !btn.isHidden {

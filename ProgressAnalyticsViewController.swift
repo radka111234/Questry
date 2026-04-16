@@ -18,6 +18,17 @@ final class ProgressAnalyticsViewController: UIViewController {
         buildContent()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Hide the navigation bar so the custom back button is the only one visible
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradLayer.frame = view.bounds
@@ -148,10 +159,29 @@ final class ProgressAnalyticsViewController: UIViewController {
         let user    = Session.shared.currentUser
         let nowXP   = user?.xp    ?? 0
         let nowLvl  = user?.level ?? 1
-        let thenSnap = ProgressTracker.shared.snapshotDaysAgo(14)
-        let thenXP  = thenSnap?.xp    ?? nowXP
-        let thenLvl = thenSnap?.level ?? nowLvl
+
+        let thenSnap    = ProgressTracker.shared.snapshotDaysAgo(14)
+        let earliestSnap = ProgressTracker.shared.earliestSnapshot()
+
+        // Pick the best "before" reference: 14-day snapshot first, then earliest available.
+        // If that snapshot has MORE XP than today the data is stale (account was reset between
+        // sessions) — fall back to 0 so we never show XP going backwards.
+        var rawSnap = thenSnap ?? earliestSnap
+        if let s = rawSnap, s.xp > nowXP { rawSnap = nil }
+
+        let thenXP  = rawSnap?.xp    ?? 0
+        let thenLvl = rawSnap?.level ?? 1
         let xpGain  = max(0, nowXP - thenXP)
+
+        // Label for the left column: "14 days ago", "First record", or "Start"
+        let thenLabel: String
+        if thenSnap != nil && (thenSnap?.xp ?? Int.max) <= nowXP {
+            thenLabel = "14 days ago"
+        } else if earliestSnap != nil && (earliestSnap?.xp ?? Int.max) <= nowXP {
+            thenLabel = "First record"
+        } else {
+            thenLabel = "Start"
+        }
 
         let card = makeCard(color: UIColor(red: 0.55, green: 0.15, blue: 0.90, alpha: 1))
 
@@ -162,8 +192,7 @@ final class ProgressAnalyticsViewController: UIViewController {
         stack.distribution = .fillEqually
         stack.spacing = 12
 
-        let thenCol = makeCompareColumn(label: "14 days ago",
-                                        xp: thenXP, level: thenLvl)
+        let thenCol = makeCompareColumn(label: thenLabel, xp: thenXP, level: thenLvl)
         let arrow   = makeLabel("→", size: 22, bold: true)
         arrow.textAlignment = .center
         arrow.translatesAutoresizingMaskIntoConstraints = false
@@ -174,7 +203,8 @@ final class ProgressAnalyticsViewController: UIViewController {
         stack.addArrangedSubview(thenCol)
         stack.addArrangedSubview(nowCol)
 
-        let gainLbl = makeLabel("+\(xpGain) XP gained", size: 14, bold: true,
+        let gainText = xpGain > 0 ? "+\(xpGain) XP gained 🎉" : "Keep going to earn XP!"
+        let gainLbl = makeLabel(gainText, size: 14, bold: true,
                                 color: UIColor(red: 0.96, green: 0.80, blue: 0.10, alpha: 1))
         gainLbl.textAlignment = .center
 

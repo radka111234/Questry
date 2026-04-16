@@ -67,6 +67,20 @@ final class InteractiveQuestionViewController: UIViewController {
 
         questions = MathGameData.practiceQuestions(for: levelNumber, questNumber: mapQuestNumber)
 
+        // Guarantee at least 5 questions — repeat from earlier in the bank if needed
+        if questions.count < 5 {
+            let full = MathGameData.practiceQuestions(for: levelNumber, questNumber: 1)
+            if !full.isEmpty {
+                var padded = questions
+                var i = 0
+                while padded.count < 5 {
+                    padded.append(full[i % full.count])
+                    i += 1
+                }
+                questions = padded
+            }
+        }
+
         setupUI()
         setupBackButton()
         styleHeader()

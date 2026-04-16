@@ -72,6 +72,12 @@ final class TopicIntroViewController: UIViewController {
         explanationLabel.numberOfLines = 0
         exampleLabel.numberOfLines = 0
 
+        // Reduce font sizes so full text fits without truncation
+        explanationLabel.font = UIFont(name: "Rockwell-Regular", size: 15)
+                             ?? UIFont.systemFont(ofSize: 15)
+        exampleLabel.font = UIFont(name: "Rockwell-Regular", size: 14)
+                         ?? UIFont.systemFont(ofSize: 14)
+
         startPracticeButton.layer.cornerRadius = 22
         startPracticeButton.clipsToBounds = true
         startPracticeButton.backgroundColor = questYellow
