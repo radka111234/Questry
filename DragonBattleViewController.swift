@@ -368,9 +368,12 @@ final class DragonBattleViewController: UIViewController {
 
         let shuffledAnswers = roundPairs.map { $0.answer }.shuffled()
 
+        // Force layout so boardCard.bounds is valid (it may be zero before first layout)
+        boardCard.layoutIfNeeded()
+
         let rows = count
-        let btnH: CGFloat = min(52, (boardCard.bounds.height - 32 - CGFloat(rows - 1) * 10) / CGFloat(rows))
-        let colW: CGFloat = (boardCard.bounds.width - 48) / 2
+        let btnH: CGFloat = max(44, min(52, (boardCard.bounds.height - 32 - CGFloat(rows - 1) * 10) / CGFloat(rows)))
+        let colW: CGFloat = max(120, (boardCard.bounds.width - 48) / 2)
         let leftX: CGFloat = 16
         let rightX: CGFloat = boardCard.bounds.width / 2 + 8
 
@@ -398,7 +401,25 @@ final class DragonBattleViewController: UIViewController {
             }
         }
 
-        scheduleDragonMove()
+        // Player goes first — enable buttons and let dragon wait
+        setPlayerInteraction(enabled: true)
+        dragonTimer?.invalidate()
+        dragonTimer = nil
+        dragonThinkLabel.text = ""
+    }
+
+    /// Enable or disable all player-facing buttons.
+    private func setPlayerInteraction(enabled: Bool) {
+        promptBtns.forEach { btn in
+            let idx = btn.tag
+            let alreadyMatched = matchedByPlayer.contains(idx) || matchedByDragon.contains(idx)
+            btn.isEnabled = enabled && !alreadyMatched
+        }
+        answerBtns.forEach { btn in
+            let idx = btn.tag
+            let alreadyMatched = matchedByPlayer.contains(idx) || matchedByDragon.contains(idx)
+            btn.isEnabled = enabled && !alreadyMatched
+        }
     }
 
     private func makeBtn(title: String, tag: Int, isPrompt: Bool) -> UIButton {
@@ -452,6 +473,9 @@ final class DragonBattleViewController: UIViewController {
         guard let pi = selectedPromptIndex, let ai = selectedAnswerIndex else { return }
         selectedPromptIndex = nil; selectedAnswerIndex = nil
 
+        // Lock player buttons — it's now the dragon's turn
+        setPlayerInteraction(enabled: false)
+
         let prompt = roundPairs[pi].prompt
         let answer = answerBtns[ai].title(for: .normal) ?? ""
 
@@ -467,21 +491,50 @@ final class DragonBattleViewController: UIViewController {
             updateScoreLabels()
             AdaptiveDifficultyManager.shared.recordResult(subject: subjectKey, correct: true)
             if Bool.random() { MotivationManager.shared.speak(for: .correctAnswer) }
-            checkRoundComplete()
+
+            if checkRoundCompleteAfterPlayer() { return }  // round ended — dragon skips
         } else {
-            // Wrong
+            // Wrong — show flash then hand to dragon
             styleBtn(promptBtns[pi], state: .wrong, isPrompt: true)
             styleBtn(answerBtns[ai], state: .wrong, isPrompt: false)
             UINotificationFeedbackGenerator().notificationOccurred(.error)
             SpacedRepetitionManager.shared.recordMiss(subject: subjectKey, prompt: prompt, answer: roundPairs[pi].answer)
             AdaptiveDifficultyManager.shared.recordResult(subject: subjectKey, correct: false)
             MotivationManager.shared.speak(for: .wrongAnswer)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) { [weak self] in
                 guard let self else { return }
                 self.styleBtn(self.promptBtns[pi], state: .normal, isPrompt: true)
                 self.styleBtn(self.answerBtns[ai], state: .normal, isPrompt: false)
             }
         }
+
+        // Dragon takes its turn after a short delay
+        scheduleDragonTurnAfterPlayer()
+    }
+
+    /// Schedule the dragon's response immediately after the player's turn.
+    private func scheduleDragonTurnAfterPlayer() {
+        dragonTimer?.invalidate()
+        let delay = Double.random(in: 0.9...1.8)
+        showDragonThinking(in: delay)
+        dragonTimer = Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { [weak self] _ in
+            self?.dragonMakesMove()
+        }
+    }
+
+    /// Returns true if the round is over (so we skip starting the dragon's turn).
+    @discardableResult
+    private func checkRoundCompleteAfterPlayer() -> Bool {
+        let allMatched = matchedByPlayer.count + matchedByDragon.count == roundPairs.count
+        guard allMatched else { return false }
+        dragonTimer?.invalidate()
+        availablePairs = Array(availablePairs.dropFirst(roundPairs.count))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
+            guard let self else { return }
+            if self.availablePairs.isEmpty || self.gameSecondsLeft <= 0 { self.endGame() }
+            else { self.dealRound() }
+        }
+        return true
     }
 
     // MARK: - Dragon AI
@@ -524,11 +577,17 @@ final class DragonBattleViewController: UIViewController {
         // Dragon gloat
         let gloats = ["Ha! Too slow! 🐉", "Got one! 🔥", "Dragon wins this one! ⚡", "Watch and learn! 🐲"]
         dragonThinkLabel.text = gloats.randomElement()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [weak self] in
             self?.dragonThinkLabel.text = ""
         }
 
-        checkRoundComplete()
+        // Check if round is over
+        if checkRoundCompleteAfterPlayer() { return }
+
+        // Hand control back to the player
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            self?.setPlayerInteraction(enabled: true)
+        }
     }
 
     private func showDragonThinking(in seconds: TimeInterval) {
@@ -541,27 +600,9 @@ final class DragonBattleViewController: UIViewController {
 
     // MARK: - Round complete
 
+    // (Kept for legacy call sites — new turn-based flow uses checkRoundCompleteAfterPlayer)
     private func checkRoundComplete() {
-        let allMatched = matchedByPlayer.count + matchedByDragon.count == roundPairs.count
-        guard allMatched else {
-            if dragonTimer == nil || !dragonTimer!.isValid {
-                scheduleDragonMove()
-            }
-            return
-        }
-        dragonTimer?.invalidate()
-
-        // Remove matched pairs from available pool
-        availablePairs = Array(availablePairs.dropFirst(roundPairs.count))
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
-            guard let self else { return }
-            if self.availablePairs.isEmpty || self.gameSecondsLeft <= 0 {
-                self.endGame()
-            } else {
-                self.dealRound()
-            }
-        }
+        _ = checkRoundCompleteAfterPlayer()
     }
 
     // MARK: - Countdown

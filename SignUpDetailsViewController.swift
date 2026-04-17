@@ -91,7 +91,8 @@ final class SignUpDetailsViewController: UIViewController, UIPickerViewDataSourc
         UserDefaults.standard.set(avatarName, forKey: "selected_avatar_name")
 
         // Save session (so map can show username/avatar)
-        // Clear any previous user's device-wide progress so the new account starts fresh
+        // Switch account context — saves previous user's data and starts a clean slate.
+        AccountSwitcher.switchToUser(signUpData.username)
         Session.shared.clearLocalProgress()
 
         Session.shared.currentUser = CurrentUser(

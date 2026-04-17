@@ -31,6 +31,10 @@ final class LoginViewController: UIViewController {
                 // Logged in
                 AuthState.isLoggedIn = true
 
+                // Switch per-user UserDefaults data (progress, topics, avatar, etc.)
+                // MUST happen before Session.shared.currentUser is set.
+                AccountSwitcher.switchToUser(profile.username)
+
                 // Update session — prefer the higher XP between Supabase and local.
                 // Local key is per-username so it survives logout and re-login.
                 let localXP    = UserDefaults.standard.integer(forKey: "session_xp_\(profile.username)")

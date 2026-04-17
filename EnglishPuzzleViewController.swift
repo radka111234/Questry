@@ -354,7 +354,13 @@ final class EnglishPuzzleViewController: UIViewController {
             styleBtn(btn, .normal, animated: false); btn.isEnabled = true
         }
         for (i, btn) in answerBtns.enumerated() {
-            btn.setTitle(i < shuffledAnswers.count ? shuffledAnswers[i] : "", for: .normal)
+            guard i < shuffledAnswers.count else {
+                btn.setTitle("", for: .normal)
+                styleBtn(btn, .normal, animated: false)
+                btn.isEnabled = false
+                continue
+            }
+            btn.setTitle(shuffledAnswers[i], for: .normal)
             styleBtn(btn, .normal, animated: false); btn.isEnabled = true
             if let idx = roundPairs.firstIndex(where: { $0.answer == shuffledAnswers[i] }) {
                 btn.accessibilityValue = "\(idx)"
