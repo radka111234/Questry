@@ -57,7 +57,6 @@
 		EE1234567890ABCDEF012345 /* DailyQuestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1234567890ABCDEF012345 /* DailyQuestManager.swift */; };
 		8B796DB32F5728FE00A2ECC7 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796D9C2F5728FE00A2ECC7 /* AppRouter.swift */; };
 		8B796DB42F5728FE00A2ECC7 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796DA22F5728FE00A2ECC7 /* FeedbackViewController.swift */; };
-		8B796DB52F5728FE00A2ECC7 /* File.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8B796DA32F5728FE00A2ECC7 /* File.txt */; };
 		8B796DB82F5728FE00A2ECC7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B796DA62F5728FE00A2ECC7 /* LaunchScreen.storyboard */; };
 		8B796DB92F5728FE00A2ECC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B796D9D2F5728FE00A2ECC7 /* Assets.xcassets */; };
 		8B796DBC2F57295400A2ECC7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796DBB2F57295400A2ECC7 /* MainTabBarController.swift */; };
@@ -86,11 +85,6 @@
 		8BFC347C2F5AF77200C2AA55 /* RewardsShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFC347B2F5AF77200C2AA55 /* RewardsShopViewController.swift */; };
 		8BFC34802F5BFF0000C2AA55 /* SpinWheelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFC347F2F5BFF0000C2AA55 /* SpinWheelViewController.swift */; };
 		CF1A2B3C4D5E6F7A8B9C0D1A /* ShopEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1A2B3C4D5E6F7A8B9C0D1B /* ShopEffects.swift */; };
-		CFA02B3C4D5E6F7A8B9C0E1A /* HumanBodyHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA02B3C4D5E6F7A8B9C0E1B /* HumanBodyHubViewController.swift */; };
-		CFB02B3C4D5E6F7A8B9C0F1A /* MathComparisonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB02B3C4D5E6F7A8B9C0F1B /* MathComparisonViewController.swift */; };
-		CFB02B3C4D5E6F7A8B9C0F2A /* MathComparisonHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB02B3C4D5E6F7A8B9C0F2B /* MathComparisonHubViewController.swift */; };
-		CFA02B3C4D5E6F7A8B9C0E2A /* BodyMatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA02B3C4D5E6F7A8B9C0E2B /* BodyMatchingViewController.swift */; };
-		CFA02B3C4D5E6F7A8B9C0E3A /* BodyBuilderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA02B3C4D5E6F7A8B9C0E3B /* BodyBuilderViewController.swift */; };
 		CF2A2B3C4D5E6F7A8B9C0D2A /* GeoDiagnosticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2A2B3C4D5E6F7A8B9C0D2B /* GeoDiagnosticViewController.swift */; };
 		CF3A2B3C4D5E6F7A8B9C0D3A /* GeoInteractiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3A2B3C4D5E6F7A8B9C0D3B /* GeoInteractiveViewController.swift */; };
 		CF4A2B3C4D5E6F7A8B9C0D4A /* GeographyGameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A2B3C4D5E6F7A8B9C0D4B /* GeographyGameData.swift */; };
@@ -245,7 +239,6 @@
 		FF1234567890ABCDEF012345 /* DailyQuestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyQuestManager.swift; sourceTree = "<group>"; };
 		8B796DA12F5728FE00A2ECC7 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		8B796DA22F5728FE00A2ECC7 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
-		8B796DA32F5728FE00A2ECC7 /* File.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = File.txt; sourceTree = "<group>"; };
 		8B796DA42F5728FE00A2ECC7 /* HelpCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpCenterViewController.swift; sourceTree = "<group>"; };
 		8B796DA62F5728FE00A2ECC7 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B796DA72F5728FE00A2ECC7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -277,11 +270,6 @@
 		8BFC347B2F5AF77200C2AA55 /* RewardsShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsShopViewController.swift; sourceTree = "<group>"; };
 		8BFC347F2F5BFF0000C2AA55 /* SpinWheelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinWheelViewController.swift; sourceTree = "<group>"; };
 		CF1A2B3C4D5E6F7A8B9C0D1B /* ShopEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopEffects.swift; sourceTree = "<group>"; };
-		CFA02B3C4D5E6F7A8B9C0E1B /* HumanBodyHubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanBodyHubViewController.swift; sourceTree = "<group>"; };
-		CFB02B3C4D5E6F7A8B9C0F1B /* MathComparisonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathComparisonViewController.swift; sourceTree = "<group>"; };
-		CFB02B3C4D5E6F7A8B9C0F2B /* MathComparisonHubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathComparisonHubViewController.swift; sourceTree = "<group>"; };
-		CFA02B3C4D5E6F7A8B9C0E2B /* BodyMatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyMatchingViewController.swift; sourceTree = "<group>"; };
-		CFA02B3C4D5E6F7A8B9C0E3B /* BodyBuilderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyBuilderViewController.swift; sourceTree = "<group>"; };
 		CF2A2B3C4D5E6F7A8B9C0D2B /* GeoDiagnosticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoDiagnosticViewController.swift; sourceTree = "<group>"; };
 		CF3A2B3C4D5E6F7A8B9C0D3B /* GeoInteractiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoInteractiveViewController.swift; sourceTree = "<group>"; };
 		CF4A2B3C4D5E6F7A8B9C0D4B /* GeographyGameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeographyGameData.swift; sourceTree = "<group>"; };
@@ -537,7 +525,6 @@
 				FF1234567890ABCDEF012345 /* DailyQuestManager.swift */,
 				8B796DA12F5728FE00A2ECC7 /* CurrentUser.swift */,
 				8B796DA22F5728FE00A2ECC7 /* FeedbackViewController.swift */,
-				8B796DA32F5728FE00A2ECC7 /* File.txt */,
 				8B796DA42F5728FE00A2ECC7 /* HelpCenterViewController.swift */,
 				8B796DA62F5728FE00A2ECC7 /* LaunchScreen.storyboard */,
 				8B796DA72F5728FE00A2ECC7 /* LoginViewController.swift */,
@@ -561,11 +548,6 @@
 				8BD699742F5731AD00E53D1D /* ViewController.swift */,
 				8BD699752F5731AD00E53D1D /* WorldProgressViewController.swift */,
 				CF1A2B3C4D5E6F7A8B9C0D1B /* ShopEffects.swift */,
-				CFA02B3C4D5E6F7A8B9C0E1B /* HumanBodyHubViewController.swift */,
-				CFB02B3C4D5E6F7A8B9C0F1B /* MathComparisonViewController.swift */,
-				CFB02B3C4D5E6F7A8B9C0F2B /* MathComparisonHubViewController.swift */,
-				CFA02B3C4D5E6F7A8B9C0E2B /* BodyMatchingViewController.swift */,
-				CFA02B3C4D5E6F7A8B9C0E3B /* BodyBuilderViewController.swift */,
 				CF2A2B3C4D5E6F7A8B9C0D2B /* GeoDiagnosticViewController.swift */,
 				CF3A2B3C4D5E6F7A8B9C0D3B /* GeoInteractiveViewController.swift */,
 				CF4A2B3C4D5E6F7A8B9C0D4B /* GeographyGameData.swift */,
@@ -719,7 +701,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B796DB52F5728FE00A2ECC7 /* File.txt in Resources */,
 				8BD6996B2F572FDD00E53D1D /* Main.storyboard in Resources */,
 				8B796DB82F5728FE00A2ECC7 /* LaunchScreen.storyboard in Resources */,
 				8B796DB92F5728FE00A2ECC7 /* Assets.xcassets in Resources */,
@@ -858,11 +839,6 @@
 				8B796DB32F5728FE00A2ECC7 /* AppRouter.swift in Sources */,
 				8B796DB42F5728FE00A2ECC7 /* FeedbackViewController.swift in Sources */,
 				CF1A2B3C4D5E6F7A8B9C0D1A /* ShopEffects.swift in Sources */,
-				CFA02B3C4D5E6F7A8B9C0E1A /* HumanBodyHubViewController.swift in Sources */,
-				CFB02B3C4D5E6F7A8B9C0F1A /* MathComparisonViewController.swift in Sources */,
-				CFB02B3C4D5E6F7A8B9C0F2A /* MathComparisonHubViewController.swift in Sources */,
-				CFA02B3C4D5E6F7A8B9C0E2A /* BodyMatchingViewController.swift in Sources */,
-				CFA02B3C4D5E6F7A8B9C0E3A /* BodyBuilderViewController.swift in Sources */,
 				CF2A2B3C4D5E6F7A8B9C0D2A /* GeoDiagnosticViewController.swift in Sources */,
 				CF3A2B3C4D5E6F7A8B9C0D3A /* GeoInteractiveViewController.swift in Sources */,
 				CF4A2B3C4D5E6F7A8B9C0D4A /* GeographyGameData.swift in Sources */,
