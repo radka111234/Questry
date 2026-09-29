@@ -1,0 +1,27 @@
+name: Build
+
+# Compiles the app on a real macOS runner in the cloud, so we can catch
+# build errors without needing Xcode installed locally. Runs on every
+# push and on pull requests.
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app
+
+      - name: Build (Debug, simulator, no code signing)
+        run: |
+          xcodebuild build \
+            -project Questry.xcodeproj \
+            -scheme Questry \
+            -destination "generic/platform=iOS Simulator" \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO
