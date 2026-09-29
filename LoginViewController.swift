@@ -46,7 +46,8 @@ final class LoginViewController: UIViewController {
                     avatarIndex: profile.avatar,
                     level: bestLevel,
                     xp: bestXP,
-                    age: profile.age
+                    age: profile.age,
+                    sessionToken: profile.sessionToken
                 )
 
                 // Restore this user's avatar BEFORE calling save() so save() captures
@@ -142,7 +143,7 @@ final class LoginViewController: UIViewController {
                 return
             }
 
-            SupabaseManager.shared.changePassword(username: username, newPassword: pw1) { success in
+            SupabaseManager.shared.resetPasswordUnverified(username: username, newPassword: pw1) { success in
                 DispatchQueue.main.async {
                     self?.showSimpleAlert(
                         title: success ? "Done ✅" : "Error",

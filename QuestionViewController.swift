@@ -630,6 +630,11 @@ final class QuestionViewController: UIViewController {
     // MARK: - Answer handling
 
     @objc private func didTapAnswer(_ sender: UIButton) {
+        // Every sibling *ViewController (ExamQuest, TimedExam, MathComparison, the
+        // Diagnostic/Interactive screens, etc.) guards its answer-tap handler against
+        // currentIndex being out of range; this one didn't, so a stray tap landing
+        // during the slide-transition in advanceToNextQuestion() could crash here.
+        guard currentIndex < questions.count else { return }
         let q = questions[currentIndex]
         setAnswerButtonsEnabled(false)
 

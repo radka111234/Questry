@@ -10,6 +10,10 @@ struct CurrentUser {
     var level: Int
     var xp: Int
     var age: Int
+    /// Issued by app_login / app_create_profile. Proves to the database that
+    /// this device is still the account owner, since the app doesn't use
+    /// Supabase Auth and the anon key alone can't tell users apart.
+    var sessionToken: String? = nil
 }
 
 final class Session {
@@ -38,6 +42,9 @@ final class Session {
         // Per-user keys — survive logout so fallback works on re-login
         d.set(user.xp,   forKey: "session_xp_\(user.username)")
         d.set(user.level, forKey: "session_level_\(user.username)")
+        if let token = user.sessionToken {
+            d.set(token, forKey: "session_token_\(user.username)")
+        }
         // Per-user avatar name — prevents avatar leaking to other accounts
         if let avatarName = d.string(forKey: "selected_avatar_name") {
             d.set(avatarName, forKey: "avatar_name_\(user.username)")
@@ -56,7 +63,8 @@ final class Session {
             avatarIndex: d.integer(forKey: Key.avatarIndex),
             level:       max(1, level),
             xp:          max(0, xp),
-            age:         d.integer(forKey: Key.age)
+            age:         d.integer(forKey: Key.age),
+            sessionToken: d.string(forKey: "session_token_\(username)")
         )
         // Restore this user's avatar name so no other account's avatar leaks in
         if let avatarName = d.string(forKey: "avatar_name_\(username)") {
@@ -87,14 +95,17 @@ final class Session {
             )
         }
 
-        SupabaseManager.shared.updateProgress(
-            username: user.username,
-            xp: user.xp,
-            level: user.level,
-            completion: { success in
-                print("XP sync:", success ? "✓" : "✗", "xp=\(user.xp) level=\(user.level)")
-            }
-        )
+        if let token = user.sessionToken {
+            SupabaseManager.shared.updateProgress(
+                username: user.username,
+                sessionToken: token,
+                xp: user.xp,
+                level: user.level,
+                completion: { success in
+                    print("XP sync:", success ? "✓" : "✗", "xp=\(user.xp) level=\(user.level)")
+                }
+            )
+        }
     }
 
     /// Clear all device-wide progress keys so a new user or logged-out user
@@ -135,14 +146,17 @@ final class Session {
         user.level = max(1, (user.xp / 500) + 1)
         currentUser = user
         save()  // persist locally immediately
-        SupabaseManager.shared.updateProgress(
-            username: user.username,
-            xp: user.xp,
-            level: user.level,
-            completion: { success in
-                print("spendXP sync:", success ? "✓" : "✗", "xp=\(user.xp)")
-            }
-        )
+        if let token = user.sessionToken {
+            SupabaseManager.shared.updateProgress(
+                username: user.username,
+                sessionToken: token,
+                xp: user.xp,
+                level: user.level,
+                completion: { success in
+                    print("spendXP sync:", success ? "✓" : "✗", "xp=\(user.xp)")
+                }
+            )
+        }
         return true
     }
 }

@@ -43,6 +43,16 @@ enum AccountSwitcher {
         "pt_snapshots_v2",
         "eng_teaching_language_chosen",
         "eng_teaching_language",
+        // Badges, daily quests, and the login streak are also stored under
+        // global keys but were missing from this list, so switching accounts
+        // on a shared device leaked one user's badges/quests/streak into the
+        // next user's session (and could stomp them on the next switch back).
+        "earned_badge_ids",
+        "badge_passed_exam_subjects",
+        "badge_total_quests_completed",
+        "dq_date", "dq_login", "dq_math", "dq_geo", "dq_eng", "dq_sci", "dq_his",
+        "dq_answers", "dq_avatar", "dq_progress", "dq_unlock",
+        "math_streak_count", "math_streak_last_date",
     ]
 
     private static let activeUsernameKey = "account_switcher_active_username"

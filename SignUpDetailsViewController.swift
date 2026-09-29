@@ -113,9 +113,14 @@ final class SignUpDetailsViewController: UIViewController, UIPickerViewDataSourc
             isParent: signUpData.isParent,
             avatar: avatarIndex,
             startingWorld: selectedWorld
-        ) { success in
+        ) { token in
             DispatchQueue.main.async {
-                if success {
+                if let token {
+                    if var user = Session.shared.currentUser {
+                        user.sessionToken = token
+                        Session.shared.currentUser = user
+                        Session.shared.save()
+                    }
                     AuthState.isLoggedIn = true
                     // Reset onboarding so new account always sees the dragon guide
                     UserDefaults.standard.set(false, forKey: "onboarding_completed")
@@ -127,15 +132,20 @@ final class SignUpDetailsViewController: UIViewController, UIPickerViewDataSourc
                     }
                     AppRouter.showMainApp()   // ✅ navigate once, after success
                 } else {
-                    self.showAlert(title: "Database error", message: "Could not save Profile.")
+                    self.showAlert(title: "Could not sign up",
+                                    message: "That username may already be taken, or there was a connection problem. Please try again.")
                 }
             }
         }
     }
 
     @IBAction func didTapPrivacyPolicy(_ sender: UIButton) {
-        guard let url = URL(string: "https://example.com/privacy") else { return }
-        present(SFSafariViewController(url: url), animated: true)
+        // Was pointing at a dead placeholder URL (https://example.com/privacy).
+        // Show the in-app privacy policy screen instead until a real hosted
+        // privacy policy URL exists (required before App Store / Play submission).
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "PrivacyPolicyViewController")
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     // MARK: - Helpers

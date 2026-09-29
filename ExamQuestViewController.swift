@@ -930,9 +930,9 @@ final class ExamQuestViewController: UIViewController {
             defaults.set(nextUnlocked, forKey: practiceUnlockedKey)
         }
 
-        // Record streak and sync XP to Supabase
+        // Record streak (XP already added once above — do NOT call addXP again;
+        // this used to double-award XP on every practice quest completion)
         StreakManager.shared.recordPlay()
-        Session.shared.addXP(xp)
 
         // Daily quest tracking
         DailyQuestManager.shared.incrementTotalQuests()
@@ -1044,9 +1044,9 @@ final class ExamQuestViewController: UIViewController {
             defaults.set(doneTopics, forKey: completedTopicsKey)
         }
 
-        // Record streak and sync XP to Supabase
+        // Record streak (XP already added once above — do NOT call addXP again;
+        // this used to double-award XP on every exam pass)
         StreakManager.shared.recordPlay()
-        Session.shared.addXP(rewardXP)
 
         // Daily quest tracking
         DailyQuestManager.shared.incrementTotalQuests()

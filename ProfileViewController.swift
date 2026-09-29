@@ -304,15 +304,16 @@ final class ProfileViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alert.addAction(UIAlertAction(title: "Save", style: .default) { [weak self] _ in
             let newName = (alert.textFields?.first?.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !newName.isEmpty, let user = Session.shared.currentUser else { return }
+            guard !newName.isEmpty, let user = Session.shared.currentUser, let token = user.sessionToken else { return }
             let old = user.username
 
             Session.shared.currentUser = CurrentUser(username: newName, avatarIndex: user.avatarIndex,
-                                                     level: user.level, xp: user.xp, age: user.age)
+                                                     level: user.level, xp: user.xp, age: user.age,
+                                                     sessionToken: token)
             Session.shared.save()
             self?.refreshUI()
 
-            SupabaseManager.shared.changeUsername(oldUsername: old, newUsername: newName) { success in
+            SupabaseManager.shared.changeUsername(username: old, sessionToken: token, newUsername: newName) { success in
                 DispatchQueue.main.async {
                     if !success {
                         Session.shared.currentUser = user
@@ -327,7 +328,8 @@ final class ProfileViewController: UIViewController {
     }
 
     @IBAction func didTapChangePassword(_ sender: UIButton) {
-        guard let username = Session.shared.currentUser?.username else { return }
+        guard let user = Session.shared.currentUser, let token = user.sessionToken else { return }
+        let username = user.username
         let alert = UIAlertController(title: "Change Password", message: nil, preferredStyle: .alert)
         alert.addTextField { $0.placeholder = "New password";     $0.isSecureTextEntry = true }
         alert.addTextField { $0.placeholder = "Confirm password"; $0.isSecureTextEntry = true }
@@ -337,10 +339,15 @@ final class ProfileViewController: UIViewController {
             let pw2 = alert.textFields?[1].text ?? ""
             guard pw1.count >= 4 else { self?.showAlert("Too short", "Password must be at least 4 characters."); return }
             guard pw1 == pw2      else { self?.showAlert("Mismatch", "Passwords don't match."); return }
-            SupabaseManager.shared.changePassword(username: username, newPassword: pw1) { success in
+            SupabaseManager.shared.changePasswordLoggedIn(username: username, sessionToken: token, newPassword: pw1) { newToken in
                 DispatchQueue.main.async {
-                    self?.showAlert(success ? "Done ✅" : "Error",
-                                   success ? "Password updated." : "Could not update password.")
+                    if let newToken, var user = Session.shared.currentUser {
+                        user.sessionToken = newToken
+                        Session.shared.currentUser = user
+                        Session.shared.save()
+                    }
+                    self?.showAlert(newToken != nil ? "Done ✅" : "Error",
+                                   newToken != nil ? "Password updated." : "Could not update password.")
                 }
             }
         })
