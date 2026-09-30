@@ -13,6 +13,7 @@
 		8B1B2C5D2F5859AE001864CD /* GradientBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B2C5C2F5859AE001864CD /* GradientBackgroundViewController.swift */; };
 		8B1B2C5F2F586F2A001864CD /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B2C5E2F586F2A001864CD /* TermsViewController.swift */; };
 		8B1B2C612F586F55001864CD /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B2C602F586F55001864CD /* PrivacyPolicyViewController.swift */; };
+		6B06EA9E4D968219F8E2EA1D /* AppLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A36854EB3F8DF81D231A67 /* AppLinks.swift */; };
 		8B1B2C6C2F59943B001864CD /* WorldProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B2C6B2F59943B001864CD /* WorldProgressCell.swift */; };
 		8B1B2C6E2F599D8C001864CD /* BadgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B2C6D2F599D8C001864CD /* BadgeCell.swift */; };
 		8B2E574D2F61A1500022D547 /* MathViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2E574C2F61A1500022D547 /* MathViewController.swift */; };
@@ -193,6 +194,7 @@
 		8B1B2C5C2F5859AE001864CD /* GradientBackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundViewController.swift; sourceTree = "<group>"; };
 		8B1B2C5E2F586F2A001864CD /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		8B1B2C602F586F55001864CD /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		33A36854EB3F8DF81D231A67 /* AppLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLinks.swift; sourceTree = "<group>"; };
 		8B1B2C6B2F59943B001864CD /* WorldProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldProgressCell.swift; sourceTree = "<group>"; };
 		8B1B2C6D2F599D8C001864CD /* BadgeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeCell.swift; sourceTree = "<group>"; };
 		8B2E574C2F61A1500022D547 /* MathViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathViewController.swift; sourceTree = "<group>"; };
@@ -509,6 +511,7 @@
 				8B1B2C6D2F599D8C001864CD /* BadgeCell.swift */,
 				8B1B2C6B2F59943B001864CD /* WorldProgressCell.swift */,
 				8B1B2C602F586F55001864CD /* PrivacyPolicyViewController.swift */,
+				33A36854EB3F8DF81D231A67 /* AppLinks.swift */,
 				8B1B2C5E2F586F2A001864CD /* TermsViewController.swift */,
 				8B1B2C5C2F5859AE001864CD /* GradientBackgroundViewController.swift */,
 				8B1B2C542F580B47001864CD /* PrivacyViewController.swift */,
@@ -807,6 +810,7 @@
 				8BFC34752F59C6AE00C2AA55 /* AvatarCell.swift in Sources */,
 				8BFC34772F5ACAA300C2AA55 /* DailyQuestsViewController.swift in Sources */,
 				8B1B2C612F586F55001864CD /* PrivacyPolicyViewController.swift in Sources */,
+				6B06EA9E4D968219F8E2EA1D /* AppLinks.swift in Sources */,
 				8B796DAE2F5728FE00A2ECC7 /* HelpCenterViewController.swift in Sources */,
 				8B796DAF2F5728FE00A2ECC7 /* AvatarStudioViewController.swift in Sources */,
 				8B627D772F631CB500022835 /* TopicIntroViewController.swift in Sources */,

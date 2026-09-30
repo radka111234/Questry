@@ -115,12 +115,22 @@ final class LoginViewController: UIViewController {
     }
 
     private func showNewPasswordAlert(for username: String) {
-        // Step 2: ask for new password + confirmation
+        // Step 2: verify the recovery PIN set at signup, then ask for a new
+        // password + confirmation. This used to skip straight to the new
+        // password with no identity check beyond the username existing —
+        // meaning anyone who knew or guessed a username could take over that
+        // account. The PIN is what makes this actually safe: the backend now
+        // rejects the reset unless the hashed PIN matches too.
         let step2 = UIAlertController(
-            title: "New password",
-            message: "Choose a new password for \(username).",
+            title: "Verify & reset",
+            message: "Enter the recovery PIN you set for \(username), then choose a new password.",
             preferredStyle: .alert
         )
+        step2.addTextField { tf in
+            tf.placeholder = "Recovery PIN"
+            tf.keyboardType = .numberPad
+            tf.isSecureTextEntry = true
+        }
         step2.addTextField { tf in
             tf.placeholder = "New password"
             tf.isSecureTextEntry = true
@@ -131,9 +141,14 @@ final class LoginViewController: UIViewController {
         }
         step2.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         step2.addAction(UIAlertAction(title: "Save", style: .default) { [weak self] _ in
-            let pw1 = step2.textFields?[0].text ?? ""
-            let pw2 = step2.textFields?[1].text ?? ""
+            let pin = step2.textFields?[0].text ?? ""
+            let pw1 = step2.textFields?[1].text ?? ""
+            let pw2 = step2.textFields?[2].text ?? ""
 
+            guard !pin.isEmpty else {
+                self?.showSimpleAlert(title: "PIN required", message: "Enter the recovery PIN you set when you signed up.")
+                return
+            }
             guard pw1.count >= 4 else {
                 self?.showSimpleAlert(title: "Too short", message: "Password must be at least 4 characters.")
                 return
@@ -143,11 +158,13 @@ final class LoginViewController: UIViewController {
                 return
             }
 
-            SupabaseManager.shared.resetPasswordUnverified(username: username, newPassword: pw1) { success in
+            SupabaseManager.shared.resetPasswordWithPIN(username: username, pin: pin, newPassword: pw1) { success in
                 DispatchQueue.main.async {
                     self?.showSimpleAlert(
                         title: success ? "Done ✅" : "Error",
-                        message: success ? "Password updated. You can now log in with your new password." : "Could not update password. Please try again."
+                        message: success
+                            ? "Password updated. You can now log in with your new password."
+                            : "Incorrect PIN, or there was a connection problem. Please try again."
                     )
                 }
             }

@@ -29,10 +29,8 @@ final class PrivacyViewController: GradientBackgroundViewController {
 
     @IBAction func didTapFullPolicy(_ sender: UIButton) {
         // Was pointing at a dead placeholder URL (https://example.com/privacy).
-        // Show the in-app privacy policy screen instead until a real hosted
-        // privacy policy URL exists (required before App Store / Play submission).
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "PrivacyPolicyViewController")
-        navigationController?.pushViewController(vc, animated: true)
+        // Now opens the real hosted privacy policy (required before App Store
+        // / Play submission — Apple and Google both require this to be a live URL).
+        present(SFSafariViewController(url: AppLinks.privacyPolicy), animated: true)
     }
 }

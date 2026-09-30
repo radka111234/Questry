@@ -83,6 +83,7 @@ final class SupabaseManager {
         isParent: Bool,
         avatar: Int,
         startingWorld: String,
+        recoveryPIN: String,
         completion: @escaping (String?) -> Void
     ) {
         let params: [String: Any] = [
@@ -92,7 +93,11 @@ final class SupabaseManager {
             "p_grade": grade,
             "p_is_parent": isParent,
             "p_avatar": avatar,
-            "p_starting_world": startingWorld
+            "p_starting_world": startingWorld,
+            // Hashed the same way as the password — never stored in plain text.
+            // Lets "forgot password" verify identity instead of just trusting
+            // that the caller knows a username (see app_reset_password_with_pin).
+            "p_pin_hash": hashPassword(recoveryPIN)
         ]
         callRPC("app_create_profile", params: params) { data, status in
             guard status == 200, let data = data,
@@ -186,23 +191,24 @@ final class SupabaseManager {
         }
     }
 
-    // MARK: - "Forgot password" reset.
-    // NOTE: still only checks a username, same as the flow it replaces —
-    // this app collects no email/phone to verify identity against, so this
-    // cannot be made fully safe at the database layer. It's queued as a
-    // product decision (collect a parent email, or add a recovery PIN),
-    // not something this migration silently fixes. What this DOES fix is
-    // that reaching it no longer means exposing the whole table.
-    func resetPasswordUnverified(
+    // MARK: - "Forgot password" reset, verified with the recovery PIN set at signup.
+    // Replaces the old resetPasswordUnverified, which only checked that a
+    // username existed — anyone who knew or guessed a username could take
+    // over that account. The database function this calls only updates the
+    // password when the hashed PIN also matches, so a stranger with just the
+    // anon key and a username can no longer reset anyone's password.
+    func resetPasswordWithPIN(
         username: String,
+        pin: String,
         newPassword: String,
         completion: @escaping (Bool) -> Void
     ) {
         let params: [String: Any] = [
             "p_username": username,
+            "p_pin_hash": hashPassword(pin),
             "p_new_password_hash": hashPassword(newPassword)
         ]
-        callRPC("app_reset_password_unverified", params: params) { data, status in
+        callRPC("app_reset_password_with_pin", params: params) { data, status in
             guard status == 200, let data = data,
                   let rows = try? JSONDecoder().decode([[String: String]].self, from: data),
                   rows.first?["session_token"] != nil

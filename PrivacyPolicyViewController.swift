@@ -19,16 +19,21 @@ final class PrivacyPolicyViewController: GradientBackgroundViewController {
         Questry respects your privacy.
 
         We store only the information necessary to run the game:
-        • Username
-        • Learning progress (XP and level)
+        • Username and password (password is never stored as plain text)
+        • A recovery PIN, used only to verify it's you if you reset your password
+        • Age and grade level, to tailor content
+        • Learning progress (XP, level, badges, streaks)
         • Avatar selection
-        • App preferences
 
-        Your data is securely stored using Supabase.
+        Your data is securely stored using Supabase, with database-level access
+        restricted to only the specific actions the app needs.
 
-        We do not sell or share your personal data with third parties.
+        There is no advertising and no tracking in Questry, and we do not sell
+        or share your personal data with third parties.
 
-        If you have questions about your data, please contact support through the feedback section.
+        For the full policy, see the link on the previous screen. If you have
+        questions about your data, please contact support through the feedback
+        section.
         """
 
         view.addSubview(label)
