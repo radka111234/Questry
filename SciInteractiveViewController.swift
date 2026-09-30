@@ -513,7 +513,10 @@ final class SciInteractiveViewController: UIViewController {
         let next = max(currentUnlocked, questNumber + 1)
         defaults.set(min(next, 5), forKey: practiceUnlockedKey)
 
-        DailyQuestManager.shared.recordGeoLesson()
+        // This was calling recordGeoLesson() (copy-pasted from the Geography template), which marked the
+        // Geography daily quest done and never satisfied the Science one, no matter how many Science quests
+        // were completed. Use the Science-specific recorder instead.
+        DailyQuestManager.shared.recordSciLesson()
         DailyQuestManager.shared.incrementTotalQuests()
         StreakManager.shared.recordPlay()
 

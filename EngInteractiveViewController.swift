@@ -547,7 +547,10 @@ final class EngInteractiveViewController: UIViewController {
         defaults.set(min(next, 5), forKey: practiceUnlockedKey)
 
         // Record events
-        DailyQuestManager.shared.recordGeoLesson()
+        // This was calling recordGeoLesson() (copy-pasted from the Geography template), which marked the
+        // Geography daily quest done and never satisfied the English one, no matter how many English quests
+        // were completed. Use the English-specific recorder instead.
+        DailyQuestManager.shared.recordEngLesson()
         DailyQuestManager.shared.incrementTotalQuests()
         StreakManager.shared.recordPlay()
 

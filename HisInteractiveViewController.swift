@@ -512,7 +512,10 @@ final class HisInteractiveViewController: UIViewController {
         let next = max(currentUnlocked, questNumber + 1)
         defaults.set(min(next, 5), forKey: practiceUnlockedKey)
 
-        DailyQuestManager.shared.recordGeoLesson()
+        // This was calling recordGeoLesson() (copy-pasted from the Geography template), which marked the
+        // Geography daily quest done and never satisfied the History one, no matter how many History quests
+        // were completed. Use the History-specific recorder instead.
+        DailyQuestManager.shared.recordHisLesson()
         DailyQuestManager.shared.incrementTotalQuests()
         StreakManager.shared.recordPlay()
 

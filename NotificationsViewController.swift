@@ -31,14 +31,13 @@ final class NotificationsViewController: GradientBackgroundViewController {
             timePicker.date = saved
         }
 
-        timePicker.datePickerMode = .time
-        timePicker.isEnabled = reminderSwitch.isOn
-        timePicker.alpha = reminderSwitch.isOn ? 1.0 : 0.4
-        
-        timePicker.isEnabled = true
-        timePicker.alpha = 1.0
         timePicker.preferredDatePickerStyle = .wheels
         timePicker.datePickerMode = .time
+        // These two lines used to unconditionally force isEnabled/alpha back to "on"
+        // right after the lines below set them from reminderSwitch.isOn, so the time
+        // picker looked interactive even when reminders were turned off.
+        timePicker.isEnabled = reminderSwitch.isOn
+        timePicker.alpha = reminderSwitch.isOn ? 1.0 : 0.4
     }
 
     @IBAction func didToggleReminder(_ sender: UISwitch) {

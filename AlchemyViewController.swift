@@ -481,10 +481,15 @@ extension AlchemyViewController: UICollectionViewDataSource, UICollectionViewDel
         } else if slotB == nil {
             setSlot(.b, elementId: id)
         } else {
-            // Replace slot A and shift old A to B
-            slotA = slotB
-            slotAView.configure(with: slotB!)
-            setSlot(.b, elementId: id)
+            // Both slots were full. This used to do `slotA = slotB` here, which
+            // actually shifted the OLD slot B into A and silently discarded
+            // whatever was in slot A — the opposite of what the comment promised
+            // and what a player tapping a third element would expect (their first
+            // pick vanishing with no explanation). Shift old A into B instead, so
+            // the new tap replaces A and nothing picked is lost.
+            slotB = slotA
+            slotBView.configure(with: slotA!)
+            setSlot(.a, elementId: id)
         }
 
         // Brief selection flash

@@ -308,7 +308,10 @@ final class EnglishPuzzleViewController: UIViewController {
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         btn.titleLabel?.numberOfLines = 2
         btn.titleLabel?.textAlignment = .center
-        btn.backgroundColor = isPrompt ? promptColors[tag] : answerColors[tag]
+        // promptColors/answerColors only have 5 entries, but pairsPerRound can be 6 on
+        // hard difficulty, so tag (up to 5) indexed straight into these would crash on
+        // hard rounds. normalColor(for:) below already wraps with % — mirror that here.
+        btn.backgroundColor = isPrompt ? promptColors[tag % promptColors.count] : answerColors[tag % answerColors.count]
         btn.layer.cornerRadius  = 16
         btn.layer.shadowColor   = UIColor.black.cgColor
         btn.layer.shadowOpacity = 0.28

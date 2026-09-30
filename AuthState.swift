@@ -53,6 +53,10 @@ enum AccountSwitcher {
         "dq_date", "dq_login", "dq_math", "dq_geo", "dq_eng", "dq_sci", "dq_his",
         "dq_answers", "dq_avatar", "dq_progress", "dq_unlock",
         "math_streak_count", "math_streak_last_date",
+        // Was a global flag, so on a shared device one account completing the
+        // onboarding tutorial silently skipped it for every other account that
+        // logged in afterward. Made per-account like the rest of this list.
+        "onboarding_completed",
     ]
 
     private static let activeUsernameKey = "account_switcher_active_username"

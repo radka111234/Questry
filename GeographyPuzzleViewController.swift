@@ -315,7 +315,10 @@ final class GeographyPuzzleViewController: UIViewController {
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         btn.titleLabel?.numberOfLines = 2
         btn.titleLabel?.textAlignment = .center
-        btn.backgroundColor = isPrompt ? promptColors[tag] : answerColors[tag]
+        // promptColors/answerColors only have 5 entries, but pairsPerRound can be 6 on
+        // hard difficulty, so tag (up to 5) indexed straight into these would crash on
+        // hard rounds. normalColor(for:) below already wraps with % — mirror that here.
+        btn.backgroundColor = isPrompt ? promptColors[tag % promptColors.count] : answerColors[tag % answerColors.count]
         btn.layer.cornerRadius = 16
         btn.layer.shadowColor   = UIColor.black.cgColor
         btn.layer.shadowOpacity = 0.28
@@ -370,7 +373,17 @@ final class GeographyPuzzleViewController: UIViewController {
             btn.isEnabled = true
         }
         for (i, btn) in answerBtns.enumerated() {
-            btn.setTitle(i < shuffledAnswers.count ? shuffledAnswers[i] : "", for: .normal)
+            // The last round can have fewer pairs than pairsPerRound (pairs.count isn't
+            // always a multiple of it), leaving shuffledAnswers shorter than answerBtns.
+            // shuffledAnswers[i] was being read unconditionally below, crashing on that
+            // final short round. Guard it the same way the title above already does.
+            guard i < shuffledAnswers.count else {
+                btn.setTitle("", for: .normal)
+                styleBtn(btn, .normal, animated: false)
+                btn.isEnabled = false
+                continue
+            }
+            btn.setTitle(shuffledAnswers[i], for: .normal)
             styleBtn(btn, .normal, animated: false)
             btn.isEnabled = true
             if let idx = roundPairs.firstIndex(where: { $0.answer == shuffledAnswers[i] }) {
