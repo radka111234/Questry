@@ -368,6 +368,21 @@ final class LanguageManager {
             "progress.title":       "تقدُّم العوالم",
             "progress.topics_done": "{0}/{1} موضوع",
 
+            // Language Picker
+            "lang_picker_title_app":          "اختر اللغة",
+            "lang_picker_title_teaching":     "لغة التعليم",
+            "lang_picker_teaching_subtitle":  "بأي لغة تريد تعلم الإنجليزية؟",
+
+            // Preferences  -  Language section
+            "pref_section_language":   "اللغة",
+            "pref_app_language":       "لغة التطبيق",
+            "pref_teaching_language":  "لغة تعليم الإنجليزية",
+
+            // English world - teaching language prompt
+            "eng_prompt_title":    "بأي لغة نُعلّمك الإنجليزية؟",
+            "eng_prompt_subtitle": "اختر اللغة التي تشعر براحة أكبر معها. يمكنك تغيير هذا لاحقًا في الإعدادات.",
+            "eng_prompt_confirm":  "لنبدأ! 🚀",
+
             // Profile screen labels
             "profile.personal_info":    "المعلومات الشخصية",
             "profile.progress_summary": "ملخص التقدُّم",
@@ -486,6 +501,21 @@ final class LanguageManager {
             // Progress
             "progress.title":       "Postup ve světech",
             "progress.topics_done": "{0}/{1} témat",
+
+            // Language Picker
+            "lang_picker_title_app":          "Vybrat jazyk",
+            "lang_picker_title_teaching":     "Vyučovací jazyk",
+            "lang_picker_teaching_subtitle":  "Ze kterého jazyka se chceš učit angličtinu?",
+
+            // Preferences  -  Language section
+            "pref_section_language":   "Jazyk",
+            "pref_app_language":       "Jazyk aplikace",
+            "pref_teaching_language":  "Vyučovací jazyk pro angličtinu",
+
+            // English world - teaching language prompt
+            "eng_prompt_title":    "V jakém jazyce tě máme učit angličtinu?",
+            "eng_prompt_subtitle": "Vyber si jazyk, ve kterém se cítíš nejlépe. Později to můžeš změnit v Nastavení.",
+            "eng_prompt_confirm":  "Začínáme! 🚀",
 
             // Profile screen labels
             "profile.personal_info":    "Osobní informace",
@@ -606,6 +636,21 @@ final class LanguageManager {
             "progress.title":       "Progreso mundial",
             "progress.topics_done": "{0}/{1} temas",
 
+            // Language Picker
+            "lang_picker_title_app":          "Elegir idioma",
+            "lang_picker_title_teaching":     "Idioma de enseñanza",
+            "lang_picker_teaching_subtitle":  "¿Desde qué idioma quieres aprender inglés?",
+
+            // Preferences  -  Language section
+            "pref_section_language":   "Idioma",
+            "pref_app_language":       "Idioma de la app",
+            "pref_teaching_language":  "Idioma de enseñanza para inglés",
+
+            // English world - teaching language prompt
+            "eng_prompt_title":    "¿En qué idioma quieres que te enseñemos inglés?",
+            "eng_prompt_subtitle": "Elige el idioma con el que te sientas más cómodo. Puedes cambiarlo más tarde en Ajustes.",
+            "eng_prompt_confirm":  "¡Empecemos! 🚀",
+
             // Profile screen labels
             "profile.personal_info":    "Información personal",
             "profile.progress_summary": "Resumen de progreso",
@@ -725,6 +770,21 @@ final class LanguageManager {
             "progress.title":       "Progression mondiale",
             "progress.topics_done": "{0}/{1} sujets",
 
+            // Language Picker
+            "lang_picker_title_app":          "Choisir la langue",
+            "lang_picker_title_teaching":     "Langue d'enseignement",
+            "lang_picker_teaching_subtitle":  "À partir de quelle langue veux-tu apprendre l'anglais ?",
+
+            // Preferences  -  Language section
+            "pref_section_language":   "Langue",
+            "pref_app_language":       "Langue de l'application",
+            "pref_teaching_language":  "Langue d'enseignement pour l'anglais",
+
+            // English world - teaching language prompt
+            "eng_prompt_title":    "Dans quelle langue veux-tu qu'on t'enseigne l'anglais ?",
+            "eng_prompt_subtitle": "Choisis la langue avec laquelle tu es le plus à l'aise. Tu pourras la changer plus tard dans les Réglages.",
+            "eng_prompt_confirm":  "C'est parti ! 🚀",
+
             // Profile screen labels
             "profile.personal_info":    "Informations personnelles",
             "profile.progress_summary": "Résumé des progrès",
@@ -843,6 +903,21 @@ final class LanguageManager {
             // Progress
             "progress.title":       "Weltfortschritt",
             "progress.topics_done": "{0}/{1} Themen",
+
+            // Language Picker
+            "lang_picker_title_app":          "Sprache wählen",
+            "lang_picker_title_teaching":     "Unterrichtssprache",
+            "lang_picker_teaching_subtitle":  "Aus welcher Sprache möchtest du Englisch lernen?",
+
+            // Preferences  -  Language section
+            "pref_section_language":   "Sprache",
+            "pref_app_language":       "App-Sprache",
+            "pref_teaching_language":  "Unterrichtssprache für Englisch",
+
+            // English world - teaching language prompt
+            "eng_prompt_title":    "In welcher Sprache sollen wir dir Englisch beibringen?",
+            "eng_prompt_subtitle": "Wähle die Sprache, in der du dich am wohlsten fühlst. Du kannst das später in den Einstellungen ändern.",
+            "eng_prompt_confirm":  "Los geht's! 🚀",
 
             // Profile screen labels
             "profile.personal_info":    "Persönliche Daten",

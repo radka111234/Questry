@@ -60,6 +60,7 @@
 		8B796DB42F5728FE00A2ECC7 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796DA22F5728FE00A2ECC7 /* FeedbackViewController.swift */; };
 		8B796DB82F5728FE00A2ECC7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B796DA62F5728FE00A2ECC7 /* LaunchScreen.storyboard */; };
 		8B796DB92F5728FE00A2ECC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B796D9D2F5728FE00A2ECC7 /* Assets.xcassets */; };
+		28705F0F14353ADB77DAB306 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BA815DA050614E8455FAD1DC /* PrivacyInfo.xcprivacy */; };
 		8B796DBC2F57295400A2ECC7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796DBB2F57295400A2ECC7 /* MainTabBarController.swift */; };
 		8B796DBE2F57296B00A2ECC7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796DBD2F57296B00A2ECC7 /* SignUpViewController.swift */; };
 		8B796DC02F57298100A2ECC7 /* SignUpDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B796DBF2F57298100A2ECC7 /* SignUpDetailsViewController.swift */; };
@@ -233,6 +234,7 @@
 		8B796D9B2F5728FE00A2ECC7 /* AcknowledgementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsViewController.swift; sourceTree = "<group>"; };
 		8B796D9C2F5728FE00A2ECC7 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		8B796D9D2F5728FE00A2ECC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BA815DA050614E8455FAD1DC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		8B796D9E2F5728FE00A2ECC7 /* AuthState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthState.swift; sourceTree = "<group>"; };
 		8B796D9F2F5728FE00A2ECC7 /* AvatarStudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarStudioViewController.swift; sourceTree = "<group>"; };
 		8B796DA02F5728FE00A2ECC7 /* BadgesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesViewController.swift; sourceTree = "<group>"; };
@@ -520,6 +522,7 @@
 				8B796D9B2F5728FE00A2ECC7 /* AcknowledgementsViewController.swift */,
 				8B796D9C2F5728FE00A2ECC7 /* AppRouter.swift */,
 				8B796D9D2F5728FE00A2ECC7 /* Assets.xcassets */,
+				BA815DA050614E8455FAD1DC /* PrivacyInfo.xcprivacy */,
 				8B796D9E2F5728FE00A2ECC7 /* AuthState.swift */,
 				8B796D9F2F5728FE00A2ECC7 /* AvatarStudioViewController.swift */,
 				8B796DA02F5728FE00A2ECC7 /* BadgesViewController.swift */,
@@ -707,6 +710,7 @@
 				8BD6996B2F572FDD00E53D1D /* Main.storyboard in Resources */,
 				8B796DB82F5728FE00A2ECC7 /* LaunchScreen.storyboard in Resources */,
 				8B796DB92F5728FE00A2ECC7 /* Assets.xcassets in Resources */,
+				28705F0F14353ADB77DAB306 /* PrivacyInfo.xcprivacy in Resources */,
 				AU000000000000000000000001 /* Pengu.mp3 in Resources */,
 				AU000000000000000000000002 /* onboarding_1.mp3 in Resources */,
 				AU000000000000000000000003 /* onboarding_2.mp3 in Resources */,
