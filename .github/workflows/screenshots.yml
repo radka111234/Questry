@@ -58,6 +58,16 @@ jobs:
             -only-testing:QuestryUITests \
             CODE_SIGNING_ALLOWED=NO
 
+      - name: Collect screenshots from the Simulator
+        # The test process writes to a fixed path on the runner's Mac itself
+        # (see ScreenshotTests.swift) rather than the repo checkout, since a
+        # Simulator-hosted process can't reliably see $GITHUB_WORKSPACE.
+        # Bring them into the checkout so upload-artifact can find them.
+        run: |
+          mkdir -p screenshots
+          cp -R "$HOME/questry-screenshots/." screenshots/
+          find screenshots -type f
+
       - name: Upload screenshots
         uses: actions/upload-artifact@v4
         with:
