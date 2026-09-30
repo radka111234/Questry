@@ -36,6 +36,7 @@ final class AvatarStudioViewController: GradientBackgroundViewController,
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
+        classSegment.accessibilityIdentifier = "avatarStudio.classSegment"
 
         avatarPreviewImageView.contentMode = .scaleAspectFit
         avatarPreviewImageView.clipsToBounds = true

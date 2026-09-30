@@ -12,6 +12,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: windowScene)
 
+        // Automated App Store screenshot capture (see ScreenshotTestSupport.swift)
+        // seeds a fake logged-in session and jumps straight to the main app,
+        // bypassing login and the network entirely. Never active for a real user.
+        if ScreenshotTestSupport.isActive {
+            ScreenshotTestSupport.seedIfNeeded()
+            window.rootViewController = MainTabBarController()
+            self.window = window
+            window.makeKeyAndVisible()
+            return
+        }
+
         // Restore session from UserDefaults so XP/level are available immediately
         // even before the user reaches LoginViewController
         if AuthState.isLoggedIn {

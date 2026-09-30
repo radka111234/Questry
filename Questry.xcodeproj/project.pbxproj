@@ -169,6 +169,8 @@
 		AU000000000000000000000031 /* his_topic_6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000031 /* his_topic_6.mp3 */; };
 		AU000000000000000000000032 /* his_topic_7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000032 /* his_topic_7.mp3 */; };
 		AU000000000000000000000033 /* his_topic_8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AF000000000000000000000033 /* his_topic_8.mp3 */; };
+		47745A07A341096D38BDA056 /* ScreenshotTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1262C9164EBAAF6C35401D /* ScreenshotTestSupport.swift */; };
+		099A5425F0E53C3CE16C39E6 /* ScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DDD18AA0996FD6AB54D8C1 /* ScreenshotTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -352,6 +354,8 @@
 		AF000000000000000000000031 /* his_topic_6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = his_topic_6.mp3; path = his_topic_6.mp3; sourceTree = "<group>"; };
 		AF000000000000000000000032 /* his_topic_7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = his_topic_7.mp3; path = his_topic_7.mp3; sourceTree = "<group>"; };
 		AF000000000000000000000033 /* his_topic_8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = his_topic_8.mp3; path = his_topic_8.mp3; sourceTree = "<group>"; };
+		0D1262C9164EBAAF6C35401D /* ScreenshotTestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotTestSupport.swift; sourceTree = "<group>"; };
+		D0DDD18AA0996FD6AB54D8C1 /* ScreenshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestryUITests/ScreenshotTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -514,6 +518,8 @@
 				8B1B2C6B2F59943B001864CD /* WorldProgressCell.swift */,
 				8B1B2C602F586F55001864CD /* PrivacyPolicyViewController.swift */,
 				33A36854EB3F8DF81D231A67 /* AppLinks.swift */,
+				0D1262C9164EBAAF6C35401D /* ScreenshotTestSupport.swift */,
+				D0DDD18AA0996FD6AB54D8C1 /* ScreenshotTests.swift */,
 				8B1B2C5E2F586F2A001864CD /* TermsViewController.swift */,
 				8B1B2C5C2F5859AE001864CD /* GradientBackgroundViewController.swift */,
 				8B1B2C542F580B47001864CD /* PrivacyViewController.swift */,
@@ -815,6 +821,7 @@
 				8BFC34772F5ACAA300C2AA55 /* DailyQuestsViewController.swift in Sources */,
 				8B1B2C612F586F55001864CD /* PrivacyPolicyViewController.swift in Sources */,
 				6B06EA9E4D968219F8E2EA1D /* AppLinks.swift in Sources */,
+				47745A07A341096D38BDA056 /* ScreenshotTestSupport.swift in Sources */,
 				8B796DAE2F5728FE00A2ECC7 /* HelpCenterViewController.swift in Sources */,
 				8B796DAF2F5728FE00A2ECC7 /* AvatarStudioViewController.swift in Sources */,
 				8B627D772F631CB500022835 /* TopicIntroViewController.swift in Sources */,
@@ -905,6 +912,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				099A5425F0E53C3CE16C39E6 /* ScreenshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

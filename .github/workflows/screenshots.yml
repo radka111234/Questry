@@ -1,0 +1,66 @@
+name: Screenshots
+
+# Generates real App Store screenshots by running the app in the iOS
+# Simulator on a GitHub-hosted Mac — no local Mac or Xcode needed. Trigger
+# it manually from the Actions tab ("Run workflow"), then download the
+# "questry-screenshots" zip from the finished run.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  screenshots:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select latest available Xcode
+        run: |
+          LATEST=$(ls -d /Applications/Xcode_*.app | sort -V | tail -1)
+          echo "Using $LATEST"
+          sudo xcode-select -s "$LATEST"
+          xcodebuild -version
+
+      - name: Pick the largest available iPhone simulator
+        id: sim
+        run: |
+          NAME=$(xcrun simctl list devices available -j | python3 -c '
+          import json, sys
+          data = json.load(sys.stdin)["devices"]
+          best_pro_max = None
+          best_any = None
+          for runtime, devices in data.items():
+              if "iOS" not in runtime:
+                  continue
+              for d in devices:
+                  if not d["name"].startswith("iPhone"):
+                      continue
+                  best_any = d["name"]
+                  if "Pro Max" in d["name"]:
+                      best_pro_max = d["name"]
+          print(best_pro_max or best_any or "")
+          ')
+          if [ -z "$NAME" ]; then
+            echo "No iPhone simulator found on this runner" >&2
+            exit 1
+          fi
+          echo "Using simulator: $NAME"
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+
+      - name: Run screenshot UI tests
+        env:
+          DEVICE_TAG: iphone-large
+        run: |
+          xcodebuild test \
+            -project Questry.xcodeproj \
+            -scheme Questry \
+            -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.name }}" \
+            -only-testing:QuestryUITests \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: questry-screenshots
+          path: screenshots/
+          if-no-files-found: error

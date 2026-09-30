@@ -26,6 +26,12 @@ final class MainTabBarController: UITabBarController {
         let profileVC = makeFromStoryboard(id: "ProfileViewController")
         let profile = makeNav(root: profileVC, title: t("tab.profile"), systemImage: "person")
 
+        // Locale-independent identifiers so the screenshot UI tests can find
+        // these tabs regardless of which language the app is set to.
+        home.tabBarItem.accessibilityIdentifier = "tab.home"
+        quests.tabBarItem.accessibilityIdentifier = "tab.quests"
+        profile.tabBarItem.accessibilityIdentifier = "tab.profile"
+
         viewControllers = [home, quests, profile]
 
         NotificationCenter.default.addObserver(

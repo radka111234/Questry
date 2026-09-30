@@ -228,6 +228,10 @@ final class ProfileViewController: UIViewController {
         styleTealButton(analyticsButton,     title: "📊 Detailed Progress")
         analyticsButton.addTarget(self, action: #selector(didTapAnalytics), for: .touchUpInside)
 
+        // Locale-independent identifiers for the screenshot UI tests.
+        badgesButton?.accessibilityIdentifier = "profile.badges"
+        changePictureButton?.accessibilityIdentifier = "profile.avatarStudio"
+
         // Avatar shadow
         avatarImageView?.layer.shadowColor   = UIColor.systemPurple.cgColor
         avatarImageView?.layer.shadowRadius  = 14
