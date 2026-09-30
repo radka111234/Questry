@@ -18,13 +18,25 @@ final class ScreenshotTests: XCTestCase {
 
     // MARK: - Saving
 
-    /// Where finished PNGs are written. GITHUB_WORKSPACE is the checked-out
-    /// repo root on the CI runner; DEVICE_TAG identifies which simulator
-    /// this run used, so multiple device sizes don't overwrite each other.
+    /// Where finished PNGs are written.
+    ///
+    /// This process runs inside the iOS Simulator, which does NOT reliably
+    /// inherit the shell environment that invoked `xcodebuild test` (so
+    /// GITHUB_WORKSPACE can't be trusted here) — but a Simulator process is
+    /// otherwise unsandboxed and can write to any path on the real Mac. So
+    /// this writes to a fixed, predictable location on the Mac itself, and
+    /// the workflow copies it into the repo checkout afterward.
     private var outputDir: URL {
-        let base = ProcessInfo.processInfo.environment["GITHUB_WORKSPACE"] ?? NSTemporaryDirectory()
+        let home = NSHomeDirectory()
+        // A real "/Users/<name>" home means we can write there directly.
+        // If NSHomeDirectory() instead points inside the Simulator's own
+        // sandboxed container (path contains "CoreSimulator"), fall back to
+        // GitHub's macOS runner user, which is always "runner".
+        let base = home.contains("CoreSimulator")
+            ? "/Users/runner/questry-screenshots"
+            : home + "/questry-screenshots"
         let tag = ProcessInfo.processInfo.environment["DEVICE_TAG"] ?? "default"
-        let dir = URL(fileURLWithPath: base).appendingPathComponent("screenshots").appendingPathComponent(tag)
+        let dir = URL(fileURLWithPath: base).appendingPathComponent(tag)
         try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
         return dir
     }
