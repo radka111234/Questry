@@ -51,22 +51,27 @@ jobs:
         env:
           DEVICE_TAG: iphone-large
         run: |
+          set -o pipefail
           xcodebuild test \
             -project Questry.xcodeproj \
             -scheme Questry \
             -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.name }}" \
             -only-testing:QuestryUITests \
-            CODE_SIGNING_ALLOWED=NO
+            CODE_SIGNING_ALLOWED=NO \
+            2>&1 | tee xcodebuild.log
+          echo "----- SCREENSHOTS log lines (where ScreenshotTests.swift actually tried to write) -----"
+          grep "SCREENSHOTS:" xcodebuild.log || echo "(no SCREENSHOTS: lines found in the test output at all)"
 
       - name: Collect screenshots from the Simulator
-        # The test process writes to a fixed path on the runner's Mac itself
-        # (see ScreenshotTests.swift) rather than the repo checkout, since a
-        # Simulator-hosted process can't reliably see $GITHUB_WORKSPACE.
-        # Bring them into the checkout so upload-artifact can find them.
         run: |
           mkdir -p screenshots
-          cp -R "$HOME/questry-screenshots/." screenshots/
+          cp -R "$HOME/questry-screenshots/." screenshots/ 2>/dev/null || true
+          echo "----- Files collected from the expected location -----"
           find screenshots -type f
+          if [ -z "$(find screenshots -type f)" ]; then
+            echo "Nothing there — searching all of \$HOME for the PNGs in case they landed somewhere else..."
+            find "$HOME" -iname "*.png" 2>/dev/null | grep -iE "world-map|dragon-welcome|daily-quests|badges|avatar-studio" || echo "(not found anywhere under \$HOME either)"
+          fi
 
       - name: Upload screenshots
         uses: actions/upload-artifact@v4
