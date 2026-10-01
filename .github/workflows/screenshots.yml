@@ -93,7 +93,15 @@ jobs:
           dst_dir = "screenshots"
           manifest_path = os.path.join(src_dir, "manifest.json")
 
-          expected = {"world-map", "dragon-welcome", "daily-quests", "badges", "avatar-studio"}
+          expected = {
+              "world-map", "dragon-welcome", "daily-quests", "badges", "avatar-studio",
+              "rewards-shop", "world-progress", "progress-analytics", "settings",
+              "preferences", "language-picker", "notifications", "privacy", "subscription",
+              "help-center", "feedback", "terms-of-service", "privacy-policy", "acknowledgements",
+              "math-hub", "english-hub", "geography-hub", "science-hub", "history-hub",
+              "diagnostic", "math-exam", "math-runner", "math-comparison-hub",
+              "geography-puzzle-hub", "science-body-lab-hub", "science-alchemy",
+          }
           copied = set()
 
           def copy_as(src_name, wanted_name):
