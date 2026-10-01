@@ -51,21 +51,120 @@ jobs:
         env:
           DEVICE_TAG: iphone-large
         run: |
+          set -o pipefail
+          rm -rf TestResults.xcresult
           xcodebuild test \
             -project Questry.xcodeproj \
             -scheme Questry \
             -destination "platform=iOS Simulator,name=${{ steps.sim.outputs.name }}" \
             -only-testing:QuestryUITests \
-            CODE_SIGNING_ALLOWED=NO
+            -resultBundlePath TestResults.xcresult \
+            CODE_SIGNING_ALLOWED=NO \
+            2>&1 | tee xcodebuild.log
+          echo "----- SCREENSHOTS log lines (where ScreenshotTests.swift actually tried to write) -----"
+          grep "SCREENSHOTS:" xcodebuild.log || echo "(no SCREENSHOTS: lines found in the test output at all)"
 
-      - name: Collect screenshots from the Simulator
-        # The test process writes to a fixed path on the runner's Mac itself
-        # (see ScreenshotTests.swift) rather than the repo checkout, since a
-        # Simulator-hosted process can't reliably see $GITHUB_WORKSPACE.
-        # Bring them into the checkout so upload-artifact can find them.
+      - name: Export screenshots from the test result bundle
+        # Every screenshot is also attached to the test report via
+        # XCTAttachment (see ScreenshotTests.swift), and that mechanism does
+        # NOT depend on guessing a writable path on the runner's disk — it's
+        # Xcode's own standard, reliable way of storing test artifacts. Pull
+        # the PNGs back out of TestResults.xcresult here instead of trusting
+        # the direct filesystem write.
         run: |
-          mkdir -p screenshots
-          cp -R "$HOME/questry-screenshots/." screenshots/
+          mkdir -p screenshots xcresult-attachments
+
+          echo "----- xcrun xcresulttool export attachments -----"
+          xcrun xcresulttool export attachments \
+            --path TestResults.xcresult \
+            --output-path xcresult-attachments \
+            || echo "(export attachments command itself failed — see error above)"
+
+          echo "----- Raw exported files -----"
+          find xcresult-attachments -type f
+
+          echo "----- manifest.json -----"
+          cat xcresult-attachments/manifest.json 2>/dev/null || echo "(no manifest.json)"
+
+          python3 - <<'PY'
+          import json, os, shutil
+
+          src_dir = "xcresult-attachments"
+          dst_dir = "screenshots"
+          manifest_path = os.path.join(src_dir, "manifest.json")
+
+          expected = {"world-map", "dragon-welcome", "daily-quests", "badges", "avatar-studio"}
+          copied = set()
+
+          def copy_as(src_name, wanted_name):
+              src = os.path.join(src_dir, src_name)
+              if not os.path.isfile(src):
+                  return False
+              shutil.copyfile(src, os.path.join(dst_dir, wanted_name + ".png"))
+              copied.add(wanted_name)
+              return True
+
+          if os.path.isfile(manifest_path):
+              with open(manifest_path) as f:
+                  manifest = json.load(f)
+              # manifest.json's exact shape has shifted across Xcode versions,
+              # so try every plausible key for both the human-readable name
+              # (the string passed to XCTAttachment.name) and the exported
+              # file's actual on-disk name.
+              if isinstance(manifest, list):
+                  entries = manifest
+              elif isinstance(manifest, dict):
+                  entries = manifest.get("attachments") or manifest.get("values") or [manifest]
+              else:
+                  entries = []
+              for entry in entries:
+                  if not isinstance(entry, dict):
+                      continue
+                  name_candidates = [
+                      entry.get("suggestedHumanReadableName"),
+                      entry.get("attachmentName"),
+                      entry.get("name"),
+                      entry.get("exportedFileName"),
+                  ]
+                  file_candidates = [
+                      entry.get("exportedFileName"),
+                      entry.get("exportedPath"),
+                      entry.get("filename"),
+                  ]
+                  file_name = next((c for c in file_candidates if c), None)
+                  if not file_name:
+                      continue
+                  matched = None
+                  for cand in name_candidates:
+                      if not cand:
+                          continue
+                      base = os.path.splitext(cand)[0]
+                      if base in expected:
+                          matched = base
+                          break
+                  if matched:
+                      copy_as(file_name, matched)
+
+          # Whatever wasn't matched by name, copy every remaining exported
+          # file as-is so the run still produces something to inspect rather
+          # than failing with zero files again.
+          if os.path.isdir(src_dir):
+              for fn in sorted(os.listdir(src_dir)):
+                  if fn == "manifest.json":
+                      continue
+                  base = os.path.splitext(fn)[0]
+                  if base in copied:
+                      continue
+                  shutil.copyfile(os.path.join(src_dir, fn), os.path.join(dst_dir, fn))
+
+          print("Matched by expected name:", sorted(copied))
+          print("Missing:", sorted(expected - copied))
+          PY
+
+          echo "----- Also merging in the direct-write fallback location, just in case -----"
+          cp -R "$HOME/questry-screenshots/." screenshots/ 2>/dev/null || true
+
+          echo "----- Final screenshots/ contents -----"
           find screenshots -type f
 
       - name: Upload screenshots
