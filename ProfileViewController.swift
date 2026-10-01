@@ -231,6 +231,10 @@ final class ProfileViewController: UIViewController {
         // Locale-independent identifiers for the screenshot UI tests.
         badgesButton?.accessibilityIdentifier = "profile.badges"
         changePictureButton?.accessibilityIdentifier = "profile.avatarStudio"
+        worldProgressButton?.accessibilityIdentifier = "profile.worldProgress"
+        rewardsShopButton?.accessibilityIdentifier = "profile.rewardsShop"
+        settingsButton?.accessibilityIdentifier = "profile.settings"
+        analyticsButton.accessibilityIdentifier = "profile.analytics"
 
         // Avatar shadow
         avatarImageView?.layer.shadowColor   = UIColor.systemPurple.cgColor

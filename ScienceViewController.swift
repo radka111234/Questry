@@ -792,6 +792,7 @@ final class ScienceViewController: UIViewController {
         btn.layer.borderColor = UIColor.white.withAlphaComponent(0.4).cgColor
         btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         btn.addTarget(self, action: #selector(didTapBodyLab), for: .touchUpInside)
+        btn.accessibilityIdentifier = "sci.bodyLabBtn"
 
         view.addSubview(btn)
         bodyLabBtn = btn
@@ -820,6 +821,7 @@ final class ScienceViewController: UIViewController {
         btn.layer.borderColor = UIColor.white.withAlphaComponent(0.4).cgColor
         btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         btn.addTarget(self, action: #selector(didTapAlchemy), for: .touchUpInside)
+        btn.accessibilityIdentifier = "sci.alchemyBtn"
         view.addSubview(btn)
         alchemyBtn = btn
         NSLayoutConstraint.activate([

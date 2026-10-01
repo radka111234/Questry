@@ -146,6 +146,8 @@ extension PreferencesViewController: UITableViewDataSource, UITableViewDelegate 
         cell.textLabel?.text = "\(row.emoji)  \(t(row.titleKey))"
         cell.accessoryType   = .disclosureIndicator
         cell.tintColor       = UIColor.white.withAlphaComponent(0.55)
+        // Locale-independent identifier for the screenshot UI tests.
+        cell.accessibilityIdentifier = "pref.language.\(indexPath.row)"
 
         // Detail label (right-aligned value)
         cell.contentView.viewWithTag(888)?.removeFromSuperview()

@@ -234,6 +234,13 @@ final class MainScreenViewController: UIViewController {
         all.forEach { btn in
             btn?.backgroundColor = .clear
         }
+
+        // Locale-independent identifiers for the screenshot UI tests.
+        mathButton?.accessibilityIdentifier = "home.island.math"
+        englishButton?.accessibilityIdentifier = "home.island.english"
+        geographyButton?.accessibilityIdentifier = "home.island.geography"
+        scienceButton?.accessibilityIdentifier = "home.island.science"
+        historyButton?.accessibilityIdentifier = "home.island.history"
     }
 
     private func applyLocks() {

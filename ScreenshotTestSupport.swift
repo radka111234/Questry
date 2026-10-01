@@ -21,6 +21,14 @@ enum ScreenshotTestSupport {
         ProcessInfo.processInfo.arguments.contains("-UITestShowOnboarding")
     }
 
+    /// Whether this particular launch should leave Math's diagnostic quiz
+    /// un-done, so visiting the Math world shows the diagnostic screen
+    /// instead of the normal hub. Every other screenshot test wants the
+    /// diagnostic already out of the way, so this is false by default.
+    private static var showDiagnostic: Bool {
+        ProcessInfo.processInfo.arguments.contains("-UITestShowDiagnostic")
+    }
+
     /// Seeds a fake logged-in session with representative progress data —
     /// no network calls, no real Supabase account — so every screen shows
     /// real-looking content instead of an empty new-account state.
@@ -52,6 +60,20 @@ enum ScreenshotTestSupport {
         d.set(23, forKey: "total_quests_completed")
         d.set(6, forKey: "math_streak_count")
         d.set(Date(), forKey: "math_streak_last_date")
+
+        // Every subject hub pushes its own diagnostic quiz on first visit
+        // unless this is marked done — leave Math's open when the caller
+        // explicitly wants to screenshot the diagnostic itself, otherwise
+        // every subject stays past it so the hub screenshots are clean.
+        d.set(!showDiagnostic, forKey: "math_diagnostic_done")
+        d.set(true, forKey: "eng_diagnostic_done")
+        d.set(true, forKey: "geo_diagnostic_done")
+        d.set(true, forKey: "sci_diagnostic_done")
+        d.set(true, forKey: "his_diagnostic_done")
+
+        // English also prompts for a teaching language on first visit —
+        // mark it chosen so the hub screenshot isn't blocked by that prompt.
+        d.set(true, forKey: "eng_teaching_language_chosen")
 
         // Today's Daily Quests — dq_date must match DailyQuestManager's own
         // "yyyy-MM-dd" format exactly, or it resets these flags on first access.

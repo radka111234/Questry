@@ -37,13 +37,24 @@ final class ScreenshotTests: XCTestCase {
             : home + "/questry-screenshots"
         let tag = ProcessInfo.processInfo.environment["DEVICE_TAG"] ?? "default"
         let dir = URL(fileURLWithPath: base).appendingPathComponent(tag)
-        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        // Deliberately NOT `try?` here: a silently swallowed failure here
+        // previously made every screenshot vanish without a trace. Print
+        // plainly to stdout, which xcodebuild surfaces in the CI log, so a
+        // wrong guess about the path is visible instead of just "no files".
+        do {
+            try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+            print("SCREENSHOTS: output dir ready at \(dir.path) (NSHomeDirectory=\(home))")
+        } catch {
+            print("SCREENSHOTS: FAILED to create \(dir.path) — \(error) (NSHomeDirectory=\(home))")
+        }
         return dir
     }
 
     /// Captures the screen, attaches it to the test report, and — the part
     /// that actually matters — writes the raw PNG straight to disk so the
-    /// workflow can upload it as-is, at full native resolution.
+    /// workflow can upload it as-is, at full native resolution. Fails the
+    /// test loudly if the write doesn't actually happen, instead of quietly
+    /// reporting success with nothing on disk.
     private func save(_ name: String) {
         let shot = XCUIScreen.main.screenshot()
 
@@ -52,10 +63,17 @@ final class ScreenshotTests: XCTestCase {
         attachment.lifetime = .keepAlways
         add(attachment)
 
-        if let data = shot.image.pngData() {
-            try? data.write(to: outputDir.appendingPathComponent("\(name).png"))
-        } else {
+        guard let data = shot.image.pngData() else {
             XCTFail("Could not encode screenshot '\(name)' as PNG")
+            return
+        }
+
+        let url = outputDir.appendingPathComponent("\(name).png")
+        do {
+            try data.write(to: url)
+            print("SCREENSHOTS: wrote \(url.path) (\(data.count) bytes)")
+        } catch {
+            XCTFail("Could not write screenshot '\(name)' to \(url.path): \(error)")
         }
     }
 
@@ -124,5 +142,244 @@ final class ScreenshotTests: XCTestCase {
         segment.buttons.element(boundBy: 3).tap()
         Thread.sleep(forTimeInterval: 0.8)
         save("avatar-studio")
+    }
+
+    // MARK: - Profile extras
+
+    func test06_RewardsShop() {
+        let app = launchApp()
+        XCTAssertTrue(app.tabBars.buttons["tab.profile"].waitForExistence(timeout: 20))
+        app.tabBars.buttons["tab.profile"].tap()
+        let btn = app.buttons["profile.rewardsShop"]
+        XCTAssertTrue(btn.waitForExistence(timeout: 10))
+        btn.tap()
+        Thread.sleep(forTimeInterval: 0.8)
+        save("rewards-shop")
+    }
+
+    func test07_WorldProgress() {
+        let app = launchApp()
+        XCTAssertTrue(app.tabBars.buttons["tab.profile"].waitForExistence(timeout: 20))
+        app.tabBars.buttons["tab.profile"].tap()
+        let btn = app.buttons["profile.worldProgress"]
+        XCTAssertTrue(btn.waitForExistence(timeout: 10))
+        btn.tap()
+        Thread.sleep(forTimeInterval: 0.8)
+        save("world-progress")
+    }
+
+    func test08_ProgressAnalytics() {
+        let app = launchApp()
+        XCTAssertTrue(app.tabBars.buttons["tab.profile"].waitForExistence(timeout: 20))
+        app.tabBars.buttons["tab.profile"].tap()
+        let btn = app.buttons["profile.analytics"]
+        XCTAssertTrue(btn.waitForExistence(timeout: 10))
+        btn.tap()
+        Thread.sleep(forTimeInterval: 0.8)
+        save("progress-analytics")
+    }
+
+    // MARK: - Settings and legal/support screens
+    //
+    // All chained into one launch since they share one Settings table —
+    // Settings explicitly re-enables the native nav bar for itself and
+    // everything pushed from it (see SettingsViewController.swift), so
+    // the standard back button is used to step back between rows. A
+    // missing row or back button is logged and skipped rather than
+    // failing the whole chain, so one unexpected screen doesn't cost
+    // every screenshot after it.
+
+    func test09_SettingsAndLegal() {
+        let app = launchApp()
+        XCTAssertTrue(app.tabBars.buttons["tab.profile"].waitForExistence(timeout: 20))
+        app.tabBars.buttons["tab.profile"].tap()
+
+        let settingsBtn = app.buttons["profile.settings"]
+        guard settingsBtn.waitForExistence(timeout: 10) else {
+            XCTFail("Settings button never appeared")
+            return
+        }
+        settingsBtn.tap()
+        Thread.sleep(forTimeInterval: 0.6)
+        save("settings")
+
+        func goBack() {
+            let back = app.navigationBars.buttons.element(boundBy: 0)
+            if back.waitForExistence(timeout: 8) {
+                back.tap()
+                Thread.sleep(forTimeInterval: 0.3)
+            } else {
+                print("SCREENSHOTS: no back button found, settings chain may be stuck")
+            }
+        }
+
+        func openRow(_ label: String, saveAs name: String, thenBack: Bool = true) {
+            let cell = app.staticTexts[label]
+            guard cell.waitForExistence(timeout: 8) else {
+                print("SCREENSHOTS: settings row '\(label)' not found, skipping")
+                return
+            }
+            cell.tap()
+            Thread.sleep(forTimeInterval: 0.6)
+            save(name)
+            if thenBack { goBack() }
+        }
+
+        // Preferences has a nested Language Picker worth its own shot.
+        openRow("Preferences", saveAs: "preferences", thenBack: false)
+        let langRow = app.cells["pref.language.0"]
+        if langRow.waitForExistence(timeout: 8) {
+            langRow.tap()
+            Thread.sleep(forTimeInterval: 0.6)
+            save("language-picker")
+            goBack()
+        } else {
+            print("SCREENSHOTS: language picker row not found, skipping")
+        }
+        goBack() // out of Preferences
+
+        openRow("Notifications", saveAs: "notifications")
+        openRow("Privacy", saveAs: "privacy")
+        openRow("Subscription", saveAs: "subscription")
+        openRow("Help Center", saveAs: "help-center")
+        openRow("Your Feedback", saveAs: "feedback")
+        openRow("Terms of Service", saveAs: "terms-of-service", thenBack: false)
+        openRow("Privacy Policy", saveAs: "privacy-policy", thenBack: false)
+        openRow("Acknowledgements", saveAs: "acknowledgements", thenBack: false)
+    }
+
+    // MARK: - Subject hubs (all five islands — same template, distinct art)
+
+    func test10_MathHub() {
+        let app = launchApp()
+        XCTAssertTrue(app.tabBars.buttons["tab.home"].waitForExistence(timeout: 20))
+        let btn = app.buttons["home.island.math"]
+        XCTAssertTrue(btn.waitForExistence(timeout: 10))
+        btn.tap()
+        Thread.sleep(forTimeInterval: 1.0)
+        save("math-hub")
+    }
+
+    func test11_EnglishHub() {
+        let app = launchApp()
+        XCTAssertTrue(app.tabBars.buttons["tab.home"].waitForExistence(timeout: 20))
+        let btn = app.buttons["home.island.english"]
+        XCTAssertTrue(btn.waitForExistence(timeout: 10))
+        btn.tap()
+        Thread.sleep(forTimeInterval: 1.0)
+        save("english-hub")
+    }
+
+    func test12_GeographyHub() {
+        let app = launchApp()
+        XCTAssertTrue(app.tabBars.buttons["tab.home"].waitForExistence(timeout: 20))
+        let btn = app.buttons["home.island.geography"]
+        XCTAssertTrue(btn.waitForExistence(timeout: 10))
+        btn.tap()
+        Thread.sleep(forTimeInterval: 1.0)
+        save("geography-hub")
+    }
+
+    func test13_ScienceHub() {
+        let app = launchApp()
+        XCTAssertTrue(app.tabBars.buttons["tab.home"].waitForExistence(timeout: 20))
+        let btn = app.buttons["home.island.science"]
+        XCTAssertTrue(btn.waitForExistence(timeout: 10))
+        btn.tap()
+        Thread.sleep(forTimeInterval: 1.0)
+        save("science-hub")
+    }
+
+    func test14_HistoryHub() {
+        let app = launchApp()
+        XCTAssertTrue(app.tabBars.buttons["tab.home"].waitForExistence(timeout: 20))
+        let btn = app.buttons["home.island.history"]
+        XCTAssertTrue(btn.waitForExistence(timeout: 10))
+        btn.tap()
+        Thread.sleep(forTimeInterval: 1.0)
+        save("history-hub")
+    }
+
+    // MARK: - Diagnostic quiz (one representative — all five subjects
+    // share the same template)
+
+    func test15_MathDiagnostic() {
+        let app = XCUIApplication()
+        app.launchArguments = ["-UITestScreenshots", "-UITestShowDiagnostic"]
+        app.launch()
+        XCTAssertTrue(app.tabBars.buttons["tab.home"].waitForExistence(timeout: 20))
+        let btn = app.buttons["home.island.math"]
+        XCTAssertTrue(btn.waitForExistence(timeout: 10))
+        btn.tap()
+        Thread.sleep(forTimeInterval: 1.0)
+        save("diagnostic")
+    }
+
+    // MARK: - Subject-hub extras (minigames and side activities)
+
+    func test16_MathExam() {
+        let app = launchApp()
+        XCTAssertTrue(app.tabBars.buttons["tab.home"].waitForExistence(timeout: 20))
+        app.buttons["home.island.math"].tap()
+        let btn = app.buttons["math.examBtn"]
+        XCTAssertTrue(btn.waitForExistence(timeout: 10))
+        btn.tap()
+        Thread.sleep(forTimeInterval: 1.0)
+        save("math-exam")
+    }
+
+    func test17_MathRunner() {
+        let app = launchApp()
+        XCTAssertTrue(app.tabBars.buttons["tab.home"].waitForExistence(timeout: 20))
+        app.buttons["home.island.math"].tap()
+        let btn = app.buttons["math.runnerBtn"]
+        XCTAssertTrue(btn.waitForExistence(timeout: 10))
+        btn.tap()
+        Thread.sleep(forTimeInterval: 1.0)
+        save("math-runner")
+    }
+
+    func test18_MathComparisonHub() {
+        let app = launchApp()
+        XCTAssertTrue(app.tabBars.buttons["tab.home"].waitForExistence(timeout: 20))
+        app.buttons["home.island.math"].tap()
+        let btn = app.buttons["math.compareBtn"]
+        XCTAssertTrue(btn.waitForExistence(timeout: 10))
+        btn.tap()
+        Thread.sleep(forTimeInterval: 1.0)
+        save("math-comparison-hub")
+    }
+
+    func test19_GeographyPuzzleHub() {
+        let app = launchApp()
+        XCTAssertTrue(app.tabBars.buttons["tab.home"].waitForExistence(timeout: 20))
+        app.buttons["home.island.geography"].tap()
+        let btn = app.buttons["geo.puzzleBtn"]
+        XCTAssertTrue(btn.waitForExistence(timeout: 10))
+        btn.tap()
+        Thread.sleep(forTimeInterval: 1.0)
+        save("geography-puzzle-hub")
+    }
+
+    func test20_ScienceBodyLabHub() {
+        let app = launchApp()
+        XCTAssertTrue(app.tabBars.buttons["tab.home"].waitForExistence(timeout: 20))
+        app.buttons["home.island.science"].tap()
+        let btn = app.buttons["sci.bodyLabBtn"]
+        XCTAssertTrue(btn.waitForExistence(timeout: 10))
+        btn.tap()
+        Thread.sleep(forTimeInterval: 1.0)
+        save("science-body-lab-hub")
+    }
+
+    func test21_ScienceAlchemy() {
+        let app = launchApp()
+        XCTAssertTrue(app.tabBars.buttons["tab.home"].waitForExistence(timeout: 20))
+        app.buttons["home.island.science"].tap()
+        let btn = app.buttons["sci.alchemyBtn"]
+        XCTAssertTrue(btn.waitForExistence(timeout: 10))
+        btn.tap()
+        Thread.sleep(forTimeInterval: 1.0)
+        save("science-alchemy")
     }
 }

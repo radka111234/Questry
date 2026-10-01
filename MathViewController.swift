@@ -176,6 +176,7 @@ final class MathViewController: UIViewController {
         btn.layer.borderColor = UIColor.white.withAlphaComponent(0.4).cgColor
         btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
         btn.addTarget(self, action: #selector(didTapExam), for: .touchUpInside)
+        btn.accessibilityIdentifier = "math.examBtn"
         view.addSubview(btn)
         examBtn = btn
         NSLayoutConstraint.activate([
@@ -204,6 +205,7 @@ final class MathViewController: UIViewController {
         btn.layer.borderColor = UIColor.white.withAlphaComponent(0.4).cgColor
         btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
         btn.addTarget(self, action: #selector(didTapRunner), for: .touchUpInside)
+        btn.accessibilityIdentifier = "math.runnerBtn"
         view.addSubview(btn)
         runnerBtn = btn
         NSLayoutConstraint.activate([
@@ -911,6 +913,7 @@ final class MathViewController: UIViewController {
         btn.layer.borderColor  = UIColor.white.withAlphaComponent(0.35).cgColor
         btn.contentEdgeInsets  = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
         btn.addTarget(self, action: #selector(didTapMathLab), for: .touchUpInside)
+        btn.accessibilityIdentifier = "math.compareBtn"
         view.addSubview(btn)
         mathLabBtn = btn
 

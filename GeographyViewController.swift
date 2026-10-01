@@ -235,6 +235,7 @@ final class GeographyViewController: UIViewController {
         btn.layer.borderColor = UIColor.white.withAlphaComponent(0.4).cgColor
         btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
         btn.addTarget(self, action: #selector(didTapPuzzles), for: .touchUpInside)
+        btn.accessibilityIdentifier = "geo.puzzleBtn"
         view.addSubview(btn)
         puzzleBtn = btn
         NSLayoutConstraint.activate([
