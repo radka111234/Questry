@@ -2407,7 +2407,6 @@ Thanks to everyone who tested early versions and helped improve the app.</string
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="didTapFullPolicy:" destination="Kd0-8K-ihE" eventType="touchUpInside" id="g4k-rx-Ey1"/>
-                                    <action selector="didTapUpgrade:" destination="O3Z-ar-06Q" eventType="touchUpInside" id="gIZ-3u-LeV"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZrC-tX-NVE">

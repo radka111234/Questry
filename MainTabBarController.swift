@@ -200,12 +200,27 @@ final class MainTabBarController: UITabBarController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        tabBar.frame = CGRect(
+        let desiredFrame = CGRect(
             x: 20,
             y: view.frame.height - 100,
             width: view.frame.width - 40,
             height: 70
         )
+
+        // viewDidLayoutSubviews fires repeatedly during a push/pop transition
+        // (every intermediate frame of the animation). Re-assigning tabBar.frame
+        // on every single pass, inside whatever implicit/ambient animation
+        // context UIKit's transition coordinator has active at that moment,
+        // made the tab bar's own item labels pick up that animation and
+        // cross-fade from their old position to the new one — producing the
+        // "double exposure" ghosted text seen on screens reached by a push.
+        // Guarding against redundant sets, and forcing no-animation when a
+        // change IS needed, keeps the label layout a hard cut instead.
+        guard tabBar.frame != desiredFrame else { return }
+        UIView.performWithoutAnimation {
+            tabBar.frame = desiredFrame
+            tabBar.layoutIfNeeded()
+        }
         tabBar.layer.cornerRadius = 25
         tabBar.layer.masksToBounds = true
     }
